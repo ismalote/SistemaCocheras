@@ -79,9 +79,17 @@ public class SistemaCocheras {
 		if(dni.length() > 0) {
 			Cliente cliente = buscarCliente(dni);
 			
-			if(cliente != null){
-				cliente.darDeBaja();
-				return ExitCodes.OK;
+			if(cliente != null) {
+				Vector<Contrato> contratosVigentes = this.buscarContratosVigentes(dni);
+				
+				if (contratosVigentes == null)
+				{
+					cliente.darDeBaja();
+					return ExitCodes.OK;
+				}
+				else {
+					return ExitCodes.CLIENTE_CONTRATOS_VIGENTES;
+				}
 			} else {
 				return ExitCodes.NO_EXISTE_ENTIDAD;
 			}

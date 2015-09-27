@@ -402,6 +402,10 @@ public class MainSistemaCocheras {
 					System.out.println("Alguno de los argumentos es inválido.");
 					break;
 				}
+				case ExitCodes.CLIENTE_CONTRATOS_VIGENTES: {
+					System.out.println("El cliente posee contratos vigentes.");
+					break;
+				}
 				default: {
 					break;
 				}
