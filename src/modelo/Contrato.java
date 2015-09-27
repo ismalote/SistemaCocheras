@@ -1,4 +1,4 @@
-package controlador;
+package modelo;
 
 public class Contrato {
 	
@@ -34,7 +34,7 @@ public class Contrato {
 		this.abono = abono;
 	}
 
-	public boolean isEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
@@ -48,8 +48,5 @@ public class Contrato {
 
 	public Auto getAuto() {
 		return auto;
-	}
-	
-	
-	
+	}	
 }

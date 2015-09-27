@@ -1,6 +1,8 @@
-package controlador;
+package modelo;
 
 import java.util.Vector;
+
+import vista.ClienteView;
 
 public class Cliente {
 	
@@ -20,6 +22,12 @@ public class Cliente {
 		this.domicilio = domicilio;
 		this.mail = mail;
 		this.telefono = telefono;
+	}
+	
+	public ClienteView getView()
+	{
+		ClienteView clienteView = new ClienteView(this.dni, this.nombre, this.domicilio, this.mail, this.telefono);
+		return clienteView;
 	}
 
 	public String getNombre() {
@@ -74,4 +82,11 @@ public class Cliente {
 		return dni;
 	}
 	
+	public boolean sosCliente(String dni) {
+		return (this.dni.equals(dni));
+	}
+	
+	public void darDeBaja() {
+		this.estado = 0;
+	}
 }

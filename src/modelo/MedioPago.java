@@ -1,4 +1,4 @@
-package controlador;
+package modelo;
 
 public class MedioPago {
 	
@@ -6,20 +6,21 @@ public class MedioPago {
 	private String nombreArchivoEntrada;
 	private String nombreArchivoSalida;
 	private String direccionFTP;
-	
+	private boolean activo;
 	
 	public MedioPago(String nombreEntidad, String nombreArchivoEntrada,
-			String nombreArchivoSalida, String direccionFTP) {
+			String nombreArchivoSalida, String direccionFTP, boolean activo) {
 		super();
 		this.nombreEntidad = nombreEntidad;
 		this.nombreArchivoEntrada = nombreArchivoEntrada;
 		this.nombreArchivoSalida = nombreArchivoSalida;
 		this.direccionFTP = direccionFTP;
+		this.activo = activo;
 	}
 
 
 	public String getNombreEntidad() {
-		return nombreEntidad;
+		return this.nombreEntidad;
 	}
 
 
@@ -29,7 +30,7 @@ public class MedioPago {
 
 
 	public String getNombreArchivoEntrada() {
-		return nombreArchivoEntrada;
+		return this.nombreArchivoEntrada;
 	}
 
 
@@ -39,7 +40,7 @@ public class MedioPago {
 
 
 	public String getNombreArchivoSalida() {
-		return nombreArchivoSalida;
+		return this.nombreArchivoSalida;
 	}
 
 
@@ -49,7 +50,7 @@ public class MedioPago {
 
 
 	public String getDireccionFTP() {
-		return direccionFTP;
+		return this.direccionFTP;
 	}
 
 
@@ -57,5 +58,19 @@ public class MedioPago {
 		this.direccionFTP = direccionFTP;
 	}
 	
+	public boolean getActivo() {
+		return this.activo;
+	}
 	
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
+	public boolean sosMedioPago(String nombreEntidad) {
+		return (this.nombreEntidad.equals(nombreEntidad));
+	}
+	
+	public void darDeBaja() {
+		this.activo = false;
+	}
 }
