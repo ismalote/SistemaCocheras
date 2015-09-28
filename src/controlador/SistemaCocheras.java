@@ -1,5 +1,6 @@
 package controlador;
 
+import java.util.Hashtable;
 import java.util.Vector;
 
 import modelo.*;
@@ -140,7 +141,7 @@ public class SistemaCocheras {
 		
 		// Si encuentro contratos vigentes del cliente, retorno la colección;
 		// caso contrario, retorno null.
-		return (contratosVigentes.capacity() != 0 ? contratosVigentes : null);
+		return (contratosVigentes.size() != 0 ? contratosVigentes : null);
 	}
 	
 	/*********** Fin Región: CLIENTES ***********/ 
@@ -294,6 +295,71 @@ public class SistemaCocheras {
 	
 	/*********** Región: CONTRATOS ***********/ 
 	
+	public int crearContrato() {
+		
+		return -1;
+	}
+	
+	public int modificarContrato(int nroContrato, String abono) {
+		
+		Contrato contrato = buscarContrato(nroContrato);
+
+		if (contrato != null) {
+			Abono abonoNuevo = this.buscarAbono(abono);
+			
+			if (abonoNuevo != null) {
+				contrato.setAbono(abonoNuevo);
+				return ExitCodes.OK;
+			} else {
+				return ExitCodes.ARGUMENTOS_INVALIDOS;
+			}
+		} else {
+			return ExitCodes.NO_EXISTE_ENTIDAD;
+		}
+	}
+	
+	public Hashtable<Integer, ContratoView> buscarDatosContratosVigentes(String dni) {
+		Hashtable<Integer, ContratoView> contratosCliente = new Hashtable<Integer, ContratoView>();
+		Integer indice = 0;
+			
+		Vector<Contrato> contratosVigentes = this.buscarContratosVigentes(dni);
+		
+		if(contratosVigentes != null && contratosVigentes.size() > 0) {
+			for(Contrato contrato: contratosVigentes){
+				contratosCliente.put(++indice, contrato.getView());
+			}
+		}
+		
+		return (contratosCliente.size() != 0 ? contratosCliente : null);
+	}
+	
+	public int bajaContrato(int nroContrato) {
+		if (nroContrato > 0) {
+			Contrato contrato = buscarContrato(nroContrato);
+
+			if (contrato != null) {
+				contrato.darDeBaja();
+				return ExitCodes.OK;
+			} else {
+				return ExitCodes.NO_EXISTE_ENTIDAD;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}
+	}
+	
+	private Contrato buscarContrato(int nroContrato){
+		Contrato c = null;
+		
+		if(this.contratos != null && this.contratos.size() > 0) {
+			for(Contrato contrato: this.contratos){
+				if(contrato.getNroContrato() == nroContrato){
+					c = contrato;
+				}
+			}
+		}
+		return c;
+	}
 	
 	/*********** Fin Región: CONTRATOS ***********/ 
 	

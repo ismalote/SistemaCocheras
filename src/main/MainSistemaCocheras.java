@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.Hashtable;
 
 import controlador.*;
 import enums.*;
@@ -11,6 +12,7 @@ public class MainSistemaCocheras {
 	/*********** Región: INICIALIZACIÓN ***********/ 
 	
 	private SistemaCocheras sistemaCocheras;
+	private Hashtable<Integer, ContratoView> contratosVigentesCliente; 
 	
 	public MainSistemaCocheras() {
 		this.sistemaCocheras = new SistemaCocheras();
@@ -24,7 +26,7 @@ public class MainSistemaCocheras {
 		sistema.mostrarMenu();
 	}
 
-	public void mostrarMenu() {
+	private void mostrarMenu() {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	 	
 		//Imprimo menu de opciones
@@ -196,7 +198,7 @@ public class MainSistemaCocheras {
 			  		break;
 			  	}
 			  	case '3' : {
-			  		bajaAbono();
+			  		this.bajaAbono();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -236,15 +238,15 @@ public class MainSistemaCocheras {
 		  	switch (s)
 		  	{
 		  		case '1' : {
-		  			// Alta;
+		  			this.crearContrato();
 		  			break;
 		  		}
 			  	case '2' : {
-			  		// Modificacion
+			  		this.modificarContrato();
 			  		break;
 			  	}
 			  	case '3' : {
-			  		// Baja;
+			  		this.bajaContrato();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -271,7 +273,7 @@ public class MainSistemaCocheras {
 	
 	/*********** Región: CLIENTES ***********/ 
 	
-	public void crearCliente() 
+	private void crearCliente() 
 	{
 		try
 		{
@@ -318,7 +320,7 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void modificarCliente() 
+	private void modificarCliente() 
 	{
 		try
 		{
@@ -376,7 +378,7 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void bajaCliente() 
+	private void bajaCliente() 
 	{
 		try
 		{
@@ -424,7 +426,7 @@ public class MainSistemaCocheras {
 	
 	/*********** Región: MEDIOS DE PAGO ***********/ 
 	
-	public void crearMedioPago() 
+	private void crearMedioPago() 
 	{
 		try
 		{
@@ -470,7 +472,7 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void bajaMedioPago() 
+	private void bajaMedioPago() 
 	{
 		try
 		{
@@ -511,7 +513,7 @@ public class MainSistemaCocheras {
 	
 	/*********** Región: ABONOS ***********/ 
 	
-	public void crearAbono() 
+	private void crearAbono() 
 	{
 		try
 		{
@@ -558,7 +560,7 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void modificarAbono() 
+	private void modificarAbono() 
 	{
 		try
 		{
@@ -614,7 +616,7 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void bajaAbono() 
+	private void bajaAbono() 
 	{
 		try
 		{
@@ -662,6 +664,132 @@ public class MainSistemaCocheras {
 	
 	/*********** Región: CONTRATOS ***********/ 
 	
+	private void crearContrato() throws Exception {
+		throw new Exception("TO-DO: implementar");		
+	}
+	
+	private void modificarContrato() {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("MODIFICACION DE CONTRATO");
+			System.out.println("-----------------------");
+			System.out.print("DNI: ");
+			String dni = reader.readLine();
+			
+			if(this.listarContratosVigentesCliente(dni)) {
+				System.out.print("Ingresar #: ");
+				int indice = Integer.parseInt(reader.readLine());
+				
+				System.out.print("Ingresar abono: ");
+				String abono = reader.readLine();
+								
+				int exitCode = sistemaCocheras.modificarContrato(this.contratosVigentesCliente.get(indice).getNroContrato(), abono);
+				
+				switch(exitCode) {
+					case ExitCodes.OK: {
+						System.out.println("El contrato se ha modificado con éxito.");
+						break;
+					}
+					case ExitCodes.NO_EXISTE_ENTIDAD: {
+						System.out.println("El contrato no existe.");
+						break;
+					}
+					case ExitCodes.ARGUMENTOS_INVALIDOS: {
+						System.out.println("Alguno de los argumentos es inválido.");
+						break;
+					}
+					default: {
+						break;
+					}
+				}
+			}
+			else {
+				System.out.println("El cliente no cuenta con contratos vigentes.");
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void bajaContrato() {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("BAJA DE CONTRATO");
+			System.out.println("-----------------");
+			System.out.print("DNI: ");
+			String dni = reader.readLine();
+			
+			if(this.listarContratosVigentesCliente(dni)) {
+				System.out.print("Ingresar #: ");
+				int indice = Integer.parseInt(reader.readLine());
+								
+				int exitCode = sistemaCocheras.bajaContrato(this.contratosVigentesCliente.get(indice).getNroContrato());
+				
+				switch(exitCode) {
+					case ExitCodes.OK: {
+						System.out.println("El contrato se ha eliminado con éxito.");
+						break;
+					}
+					case ExitCodes.NO_EXISTE_ENTIDAD: {
+						System.out.println("El contrato no existe.");
+						break;
+					}
+					case ExitCodes.ARGUMENTOS_INVALIDOS: {
+						System.out.println("Alguno de los argumentos es inválido.");
+						break;
+					}
+					default: {
+						break;
+					}
+				}
+			}
+			else {
+				System.out.println("El cliente no cuenta con contratos vigentes.");
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private boolean listarContratosVigentesCliente(String dni) {
+		this.contratosVigentesCliente = this.sistemaCocheras.buscarDatosContratosVigentes(dni);
+		
+		if (this.contratosVigentesCliente != null && this.contratosVigentesCliente .size() > 0)
+		{
+			System.out.println("#\tCOCHERA\tFECHA\tABONO\tPATENTE");
+			System.out.println("----------------------------------");
+			
+			// Listo los contratos activos del cliente con un índice para elegirlo.
+			for(Integer key: this.contratosVigentesCliente .keySet()) {
+				ContratoView cv = this.contratosVigentesCliente .get(key);
+				String linea = String.format("%d\t%d\t%td/%tm/%ty\t%s\t%s", 
+						key,
+						cv.getNroCochera(),
+						cv.getFecha(),
+						cv.getAbono(),
+						cv.getPatenteAuto());
+				
+				System.out.println(linea);
+			}
+			
+			return true;
+		}
+		else {		
+			return false;
+		}
+	}
 	
 	/*********** Fin Región: CONTRATOS ***********/ 
 }
