@@ -188,15 +188,15 @@ public class MainSistemaCocheras {
 		  	switch (s)
 		  	{
 		  		case '1' : {
-		  			// Alta;
+		  			this.crearAbono();
 		  			break;
 		  		}
 			  	case '2' : {
-			  		// Modificacion
+			  		this.modificarAbono();
 			  		break;
 			  	}
 			  	case '3' : {
-			  		// Baja;
+			  		bajaAbono();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -511,6 +511,151 @@ public class MainSistemaCocheras {
 	
 	/*********** Región: ABONOS ***********/ 
 	
+	public void crearAbono() 
+	{
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("ALTA DE ABONO");
+			System.out.println("---------------");
+			System.out.print("Nombre: ");
+			String nombre = reader.readLine();
+			System.out.print("Cantidad de Dias: ");
+			int cantidadDias = Integer.parseInt(reader.readLine());
+			System.out.print("Precio Base: ");
+			float precioBase = Float.parseFloat(reader.readLine());
+			System.out.print("Descuento: ");
+			float descuento = Float.parseFloat(reader.readLine());
+			System.out.print("Tamaño cochera (1: pequeña, 2: mediana, 3: grande): ");
+			int tamanioCochera = Integer.parseInt(reader.readLine());
+			
+			int exitCode = sistemaCocheras.crearAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera);
+			
+			switch(exitCode) {
+				case ExitCodes.OK: {
+					System.out.println("El abono se ha creado con éxito.");	
+					break;
+				}
+				case ExitCodes.YA_EXISTE_ENTIDAD: {
+					System.out.println("El abono ya existe.");	
+					break;
+				}
+				case ExitCodes.ARGUMENTOS_INVALIDOS: {
+					System.out.println("Alguno de los argumentos es inválido.");	
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificarAbono() 
+	{
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("MODIFICACION DE ABONO");
+			System.out.println("-----------------------");
+			System.out.print("Nombre: ");
+			String nombre = reader.readLine();
+			
+			AbonoView abonoView = this.sistemaCocheras.buscarDatosAbono(nombre);
+			
+			if (abonoView != null)
+			{
+				System.out.print("Cantidad de Dias: ");
+				int cantidadDias = Integer.parseInt(reader.readLine());
+				System.out.print("Precio Base: ");
+				float precioBase = Float.parseFloat(reader.readLine());
+				System.out.print("Descuento: ");
+				float descuento = Float.parseFloat(reader.readLine());
+				System.out.print("Tamaño cochera (1: pequeña, 2: mediana, 3: grande): ");
+				int tamanioCochera = Integer.parseInt(reader.readLine());
+								
+				int exitCode = sistemaCocheras.modificarAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera);
+				
+				switch(exitCode) {
+					case ExitCodes.OK: {
+						System.out.println("El abono se ha modificado con éxito.");
+						break;
+					}
+					case ExitCodes.NO_EXISTE_ENTIDAD: {
+						System.out.println("El abono no existe.");
+						break;
+					}
+					case ExitCodes.ARGUMENTOS_INVALIDOS: {
+						System.out.println("Alguno de los argumentos es inválido.");
+						break;
+					}
+					default: {
+						break;
+					}
+				}
+			}
+			else {
+				System.out.println("El cliente no existe.");
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void bajaAbono() 
+	{
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("BAJA DE ABONO");
+			System.out.println("---------------");
+			System.out.print("Nombre: ");
+			String nombre = reader.readLine();
+			
+			int exitCode = sistemaCocheras.bajaAbono(nombre);
+			
+			switch(exitCode) {
+				case ExitCodes.OK: {
+					System.out.println("El abono se ha dado de baja con éxito.");	
+					break;
+				}
+				case ExitCodes.NO_EXISTE_ENTIDAD: {
+					System.out.println("El abono no existe.");
+					break;
+				}
+				case ExitCodes.ARGUMENTOS_INVALIDOS: {
+					System.out.println("Alguno de los argumentos es inválido.");
+					break;
+				}
+				case ExitCodes.CLIENTE_CONTRATOS_VIGENTES: {
+					System.out.println("El cliente posee contratos vigentes.");
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
 	/*********** Fin Región: ABONOS ***********/ 
 	

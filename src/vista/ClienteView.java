@@ -1,8 +1,7 @@
 package vista;
 
-import java.util.Vector;
-
-import modelo.Auto;
+//import java.util.Vector;
+//import modelo.Auto;
 
 public class ClienteView {
 
@@ -39,6 +38,6 @@ public class ClienteView {
 	}
 	
 	public String getTelefono() {
-		return this.domicilio;
+		return this.telefono;
 	}
 }

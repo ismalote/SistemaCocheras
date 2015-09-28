@@ -201,4 +201,100 @@ public class SistemaCocheras {
 	
 	/*********** Fin Región: MEDIOS DE PAGO ***********/ 
 
+	
+	/*********** Región: ABONOS ***********/ 
+	
+	public int crearAbono(String nombre, int cantidadDias, float precioBase, float descuento, int tamanioCochera){
+		
+		if(this.validarAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera)) {
+			Abono abono = buscarAbono(nombre);
+			
+			if(abono == null){
+				abono = new Abono(descuento, nombre, tamanioCochera, cantidadDias, precioBase, true);
+				this.abonos.add(abono);
+				return ExitCodes.OK;
+			} else {
+				return ExitCodes.YA_EXISTE_ENTIDAD;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}
+	}
+	
+	private boolean validarAbono(String nombre, int cantidadDias, float precioBase, 
+			float descuento, int tamanioCochera) {
+		return (nombre.length() > 0 && cantidadDias > 0 && precioBase > 0 &&
+				descuento > 0 && (tamanioCochera > 0 && tamanioCochera < 4)); 
+	}
+	
+	
+	public int modificarAbono(String nombre, int cantidadDias, float precioBase, float descuento, int tamanioCochera) {
+
+		Abono abono = buscarAbono(nombre);
+
+		if (abono != null) {
+			if (this.validarAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera)) {
+				abono.setCantidadDias(cantidadDias);
+				abono.setPrecioBase(precioBase);
+				abono.setTamanioCochera(tamanioCochera);
+				abono.setDescuento(descuento);
+				return ExitCodes.OK;
+			} else {
+				return ExitCodes.ARGUMENTOS_INVALIDOS;
+			}
+		} else {
+			return ExitCodes.NO_EXISTE_ENTIDAD;
+		}
+	}
+	
+	public int bajaAbono(String nombre) {
+
+		if (nombre.length() > 0) {
+			Abono abono = buscarAbono(nombre);
+
+			if (abono != null) {
+				abono.darDeBaja();
+				return ExitCodes.OK;
+			} else {
+				return ExitCodes.NO_EXISTE_ENTIDAD;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}
+	}
+
+	private Abono buscarAbono(String nombre){
+		Abono a = null;
+		
+		if(this.abonos != null && this.abonos.size() > 0) {
+			for(Abono abono: this.abonos){
+				if(abono.sosAbono(nombre)){
+					a = abono;
+				}
+			}
+		}
+		return a;
+	}
+	
+	public AbonoView buscarDatosAbono(String nombre) {
+		AbonoView abonoView = null;
+		
+		Abono abono = this.buscarAbono(nombre);
+		
+		if (abono != null)
+		{
+			abonoView = abono.getView();
+		}
+		
+		return abonoView;
+	}
+	
+	/*********** Fin Región: ABONOS ***********/ 
+	
+	
+	/*********** Región: CONTRATOS ***********/ 
+	
+	
+	/*********** Fin Región: CONTRATOS ***********/ 
+	
 }

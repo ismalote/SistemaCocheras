@@ -67,7 +67,7 @@ public class MedioPago {
 	}
 	
 	public boolean sosMedioPago(String nombreEntidad) {
-		return (this.nombreEntidad.equals(nombreEntidad));
+		return (this.nombreEntidad.equalsIgnoreCase(nombreEntidad));
 	}
 	
 	public void darDeBaja() {

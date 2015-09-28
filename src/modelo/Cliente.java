@@ -83,7 +83,7 @@ public class Cliente {
 	}
 	
 	public boolean sosCliente(String dni) {
-		return (this.dni.equals(dni));
+		return (this.dni.equalsIgnoreCase(dni));
 	}
 	
 	public void darDeBaja() {
