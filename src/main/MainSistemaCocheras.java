@@ -2,6 +2,7 @@ package main;
 
 import java.io.*;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import controlador.*;
 import enums.*;
@@ -37,6 +38,7 @@ public class MainSistemaCocheras {
 		System.out.println("2.- Medios de pago");
 		System.out.println("3.- Abonos");
 		System.out.println("4.- Contratos de cochera");
+		System.out.println("5.- Cocheras");
 		System.out.println("Q.- Salir");
 		System.out.println("-------------------------------------------------------");
 		System.out.print("Opcion: ");
@@ -60,6 +62,10 @@ public class MainSistemaCocheras {
 			  	}
 			  	case '4' :  {
 			  		this.mostrarMenuContratos();
+			  		break;
+			  	}
+			  	case '5' :  {
+			  		this.mostrarMenuCocheras();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -89,6 +95,7 @@ public class MainSistemaCocheras {
 		System.out.println("1.- Alta");
 		System.out.println("2.- Modificacion");
 		System.out.println("3.- Baja");
+		System.out.println("4.- Listar");
 		System.out.println("Q.- Volver");
 		System.out.println("-------------------------------------------------------");
 		System.out.print("Opcion: ");
@@ -107,7 +114,11 @@ public class MainSistemaCocheras {
 			  		break;
 			  	}
 			  	case '3' : {
-			  		bajaCliente();
+			  		this.bajaCliente();
+			  		break;
+			  	}
+			  	case '4' : {
+			  		this.listarClientes();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -136,6 +147,7 @@ public class MainSistemaCocheras {
 		System.out.println("-------------------------------------------------------");
 		System.out.println("1.- Alta");
 		System.out.println("2.- Baja");
+		System.out.println("3.- Listar");
 		System.out.println("Q.- Volver");
 		System.out.println("-------------------------------------------------------");
 		System.out.print("Opcion: ");
@@ -151,6 +163,10 @@ public class MainSistemaCocheras {
 		  		}
 			  	case '2' : {
 			  		this.bajaMedioPago();
+			  		break;
+			  	}
+			  	case '3' : {
+			  		this.listarMediosPago();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -180,6 +196,7 @@ public class MainSistemaCocheras {
 		System.out.println("1.- Alta");
 		System.out.println("2.- Modificacion");
 		System.out.println("3.- Baja");
+		System.out.println("4.- Listar");
 		System.out.println("Q.- Volver");
 		System.out.println("-------------------------------------------------------");
 		System.out.print("Opcion: ");
@@ -199,6 +216,10 @@ public class MainSistemaCocheras {
 			  	}
 			  	case '3' : {
 			  		this.bajaAbono();
+			  		break;
+			  	}
+			  	case '4' : {
+			  		this.listarAbonos();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -228,6 +249,7 @@ public class MainSistemaCocheras {
 		System.out.println("1.- Alta");
 		System.out.println("2.- Modificacion");
 		System.out.println("3.- Baja");
+		System.out.println("4.- Listar");
 		System.out.println("Q.- Volver");
 		System.out.println("-------------------------------------------------------");
 		System.out.print("Opcion: ");
@@ -247,6 +269,10 @@ public class MainSistemaCocheras {
 			  	}
 			  	case '3' : {
 			  		this.bajaContrato();
+			  		break;
+			  	}
+			  	case '4' : {
+			  		this.listarContratos();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -270,6 +296,58 @@ public class MainSistemaCocheras {
 		System.exit(0);
 	}
 	
+	private void mostrarMenuCocheras() {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	 	
+		//Imprimo menu de opciones
+		System.out.println();
+		System.out.println("COCHERAS: MENU DE OPCIONES");
+		System.out.println("-------------------------------------------------------");
+		System.out.println("1.- Alta");
+		System.out.println("2.- Modificacion");
+		System.out.println("3.- Baja");
+		System.out.println("4.- Listar");
+		System.out.println("Q.- Volver");
+		System.out.println("-------------------------------------------------------");
+		System.out.print("Opcion: ");
+		try
+		{
+			char s = (char)reader.read();
+			
+		  	switch (s)
+		  	{
+		  		case '1' : {
+		  			this.crearCochera();
+		  			break;
+		  		}
+			  	case '2' : {
+			  		this.modificarCochera();
+			  		break;
+			  	}
+			  	case '3' : {
+			  		this.bajaCochera();
+			  		break;
+			  	}
+			  	case '4': {
+			  		this.listarCocheras();
+			  		break;
+			  	}
+			  	case 'Q': 
+			  	case 'q': {
+			  		this.mostrarMenu();
+			  		break;
+			  	}
+			  	default: {
+			  		this.mostrarMenu();
+			  		break;
+			  	}
+		  	}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
 	/*********** Región: CLIENTES ***********/ 
 	
@@ -421,6 +499,33 @@ public class MainSistemaCocheras {
 		}
 	}
 	
+	public void listarClientes() {
+		try
+		{
+			Vector<ClienteView> clientesView = this.sistemaCocheras.listarClientes();	
+			
+			if (clientesView != null && clientesView.size() > 0) {
+				System.out.println("DNI\tNOMBRE\tDOMICILIO\tMAIL\tTELEFONO");
+				System.out.println("--------------------------");
+				
+				for (ClienteView cv: clientesView) {				
+					String linea = String.format("%s\t%s\t%s\t%s\t%s", cv.getDni(), cv.getNombre(), 
+							cv.getDomicilio(), cv.getMail(), cv.getTelefono());
+					System.out.println(linea);
+				}
+			}
+			else {
+				System.out.println("No hay clientes para mostrar.");
+			}
+			
+			this.mostrarMenu();
+			}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	/*********** Fin Región: CLIENTES ***********/ 
 	
 	
@@ -507,6 +612,33 @@ public class MainSistemaCocheras {
 		}
 	}
 	
+	public void listarMediosPago() {
+		try
+		{
+			Vector<MedioPagoView> mediosPagosView = this.sistemaCocheras.listarMediosPagos();	
+			
+			if (mediosPagosView != null && mediosPagosView.size() > 0) {
+				System.out.println("NOMBRE\tARCH.ENTRADA\tARCH.SALIDA\tFTP\tACTIVO");
+				System.out.println("--------------------------");
+				
+				for (MedioPagoView mpv: mediosPagosView) {				
+					String linea = String.format("%s\t%s\t%s\t%s\t%s", mpv.getNombreEntidad(),
+							mpv.getNombreArchivoEntrada(), mpv.getNombreArchivoSalida(), 
+							mpv.getDireccionFTP(), mpv.getActivo() ? "Activo" : "Inactivo");
+					System.out.println(linea);
+				}
+			}
+			else {
+				System.out.println("No hay medios de pago para mostrar.");
+			}
+			
+			this.mostrarMenu();
+			}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
 	/*********** Fin Región: MEDIOS DE PAGO ***********/ 
 	
@@ -529,7 +661,9 @@ public class MainSistemaCocheras {
 			float precioBase = Float.parseFloat(reader.readLine());
 			System.out.print("Descuento: ");
 			float descuento = Float.parseFloat(reader.readLine());
-			System.out.print("Tamaño cochera (1: pequeña, 2: mediana, 3: grande): ");
+			String tamCochera = String.format("Tamaño cochera (%d: pequeña, %d: mediana, %d: grande): ", 
+					Tamanios.PEQUENIA, Tamanios.MEDIANA, Tamanios.GRANDE);
+			System.out.print(tamCochera);
 			int tamanioCochera = Integer.parseInt(reader.readLine());
 			
 			int exitCode = sistemaCocheras.crearAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera);
@@ -581,7 +715,9 @@ public class MainSistemaCocheras {
 				float precioBase = Float.parseFloat(reader.readLine());
 				System.out.print("Descuento: ");
 				float descuento = Float.parseFloat(reader.readLine());
-				System.out.print("Tamaño cochera (1: pequeña, 2: mediana, 3: grande): ");
+				String tamCochera = String.format("Tamaño cochera (%d: pequeña, %d: mediana, %d: grande): ", 
+						Tamanios.PEQUENIA, Tamanios.MEDIANA, Tamanios.GRANDE);
+				System.out.println(tamCochera);
 				int tamanioCochera = Integer.parseInt(reader.readLine());
 								
 				int exitCode = sistemaCocheras.modificarAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera);
@@ -642,10 +778,6 @@ public class MainSistemaCocheras {
 					System.out.println("Alguno de los argumentos es inválido.");
 					break;
 				}
-				case ExitCodes.CLIENTE_CONTRATOS_VIGENTES: {
-					System.out.println("El cliente posee contratos vigentes.");
-					break;
-				}
 				default: {
 					break;
 				}
@@ -653,6 +785,56 @@ public class MainSistemaCocheras {
 			
 			this.mostrarMenu();
 		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void listarAbonos() {
+		try
+		{
+			Vector<AbonoView> abonosView = this.sistemaCocheras.listarAbonos();
+			
+			if (abonosView != null && abonosView.size() > 0) {
+				System.out.println("NOMBRE\tPRECIO BASE\tDIAS\tDESCUENTO\tTAM.COCHERA\tESTADO");
+				System.out.println("--------------------------");
+				
+				for (AbonoView av: abonosView) {
+					String tamanio;
+					String estado;
+					
+					switch(av.getTamanioCochera()) {
+						case Tamanios.PEQUENIA:
+							tamanio = "Pequeño";
+							break;
+						case Tamanios.MEDIANA:
+							tamanio = "Mediana";
+							break;
+						case Tamanios.GRANDE:
+							tamanio = "Grande";
+							break;
+						default:
+							tamanio = "";
+							break;
+					}
+					
+					estado = av.getActivo() ? "Activo" : "Inactivo";
+					
+					System.out.println("NOMBRE\tPRECIO BASE\tDIAS\tDESCUENTO\tTAM.COCHERA\tESTADO");
+					
+					String linea = String.format("%f\t%f\t%d\t%s\t%s", av.getNombre(), 
+							av.getPrecioBase(), av.getCantidadDias(), av.getDescuento(),
+							tamanio, estado);
+					System.out.println(linea);
+				}
+			}
+			else {
+				System.out.println("No hay abonos para mostrar.");
+			}
+			
+			this.mostrarMenu();
+			}
 		catch(Exception e)
 		{
 			e.printStackTrace();
@@ -791,5 +973,236 @@ public class MainSistemaCocheras {
 		}
 	}
 	
+	public void listarContratos() {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.print("DNI: ");
+			String dni = reader.readLine();
+			
+			Vector<ContratoView> contratosView = this.sistemaCocheras.listarContratos(dni);	
+			
+			if (contratosView != null && contratosView.size() > 0) {
+				System.out.println("NRO.CONTRATO\tFECHA\tPATENTE\tCOCHERA\tABONO\tESTADO");
+				System.out.println("--------------------------");
+				
+				for (ContratoView cv: contratosView) {				
+					String linea = String.format("%d\t%d\t%td/%tm/%ty\t%s\t%s", 
+							cv.getNroContrato(),
+							cv.getFecha(),
+							cv.getPatenteAuto(),
+							cv.getNroCochera(),
+							cv.getAbono(),
+							cv.getEstado() ? "Activo" : "Inactivo");
+					
+					System.out.println(linea);
+				}
+			}
+			else {
+				System.out.println("No hay contratos para mostrar.");
+			}
+			
+			this.mostrarMenu();
+			}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}	
+	}
+	
 	/*********** Fin Región: CONTRATOS ***********/ 
+	
+	
+	/*********** Región: COCHERA ***********/ 
+	
+	private void crearCochera() {
+		try 
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+			System.out.println("ALTA DE COCHERA");
+			System.out.println("-----------------------");
+			String tamVehiculo = String.format("Tamaño vehículo admitido (%d: pequeña, %d: mediana, %d: grande): ",
+							Tamanios.PEQUENIA, Tamanios.MEDIANA, Tamanios.GRANDE);
+			System.out.print(tamVehiculo);
+			int tamanio = Integer.parseInt(reader.readLine());
+
+			int exitCode = sistemaCocheras.crearCochera(tamanio);
+
+			switch (exitCode) {
+			case ExitCodes.OK: {
+				System.out.println("La cochera se ha creado con éxito.");
+				break;
+			}
+			case ExitCodes.NO_EXISTE_ENTIDAD: {
+				System.out.println("La cochera no existe.");
+				break;
+			}
+			case ExitCodes.ARGUMENTOS_INVALIDOS: {
+				System.out.println("Alguno de los argumentos es inválido.");
+				break;
+			}
+			default: {
+				break;
+			}
+			}
+
+			this.mostrarMenu();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	private void modificarCochera() {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("MODIFICACION DE COCHERA");
+			System.out.println("-----------------------");
+			System.out.print("DNI: ");
+			int numero = Integer.parseInt(reader.readLine());
+			
+			CocheraView cocheraView = this.sistemaCocheras.buscarDatosCochera(numero);
+			
+			if (cocheraView != null)
+			{
+				String tamVehiculo = String.format("Tamaño vehículo admitido (%d: pequeña, %d: mediana, %d: grande): ", 
+						Tamanios.PEQUENIA, Tamanios.MEDIANA, Tamanios.GRANDE);
+				System.out.print(tamVehiculo);
+				int tamanio = Integer.parseInt(reader.readLine());
+				System.out.print("Estado: ");
+				int estado = Integer.parseInt(reader.readLine());
+				
+				int exitCode = sistemaCocheras.modificarCochera(numero, tamanio, estado);
+				
+				switch(exitCode) {
+					case ExitCodes.OK: {
+						System.out.println("La cochera se ha modificado con éxito.");
+						break;
+					}
+					case ExitCodes.NO_EXISTE_ENTIDAD: {
+						System.out.println("La cochera no existe.");
+						break;
+					}
+					case ExitCodes.ARGUMENTOS_INVALIDOS: {
+						System.out.println("Alguno de los argumentos es inválido.");
+						break;
+					}
+					default: {
+						break;
+					}
+				}
+			}
+			else {
+				System.out.println("La cochera no existe.");
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void bajaCochera() {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("BAJA DE COCHERA");
+			System.out.println("---------------");
+			System.out.print("Numero: ");
+			int numero = Integer.parseInt(reader.readLine());
+			
+			int exitCode = sistemaCocheras.bajaCochera(numero);
+			
+			switch(exitCode) {
+				case ExitCodes.OK: {
+					System.out.println("La cochera se ha dado de baja con éxito.");	
+					break;
+				}
+				case ExitCodes.NO_EXISTE_ENTIDAD: {
+					System.out.println("La cochera no existe.");
+					break;
+				}
+				case ExitCodes.ARGUMENTOS_INVALIDOS: {
+					System.out.println("Alguno de los argumentos es inválido.");
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void listarCocheras() {
+		try
+		{
+			Vector<CocheraView> cocherasView = this.sistemaCocheras.listarCocheras();
+			
+			if (cocherasView != null && cocherasView.size() > 0) {
+				System.out.println("NUMERO\tTAMAÑO\tESTADO");
+				System.out.println("--------------------------");
+				
+				for (CocheraView cv: cocherasView) {
+					String tamanio;
+					String estado;
+					
+					switch(cv.getTamanioVechiculoAdmitido()) {
+						case Tamanios.PEQUENIA:
+							tamanio = "Pequeño";
+							break;
+						case Tamanios.MEDIANA:
+							tamanio = "Mediana";
+							break;
+						case Tamanios.GRANDE:
+							tamanio = "Grande";
+							break;
+						default:
+							tamanio = "";
+							break;
+					}
+					
+					switch(cv.getEstado()) {
+					case EstadosCochera.LIBRE:
+						estado = "Libre";
+						break;
+					case EstadosCochera.OCUPADA:
+						estado = "Ocupada";
+						break;
+					case EstadosCochera.INACTIVA:
+						estado = "Inactiva";
+						break;
+					default:
+						estado = "";
+						break;
+				}
+						
+					String linea = String.format("%d\t%s\t%s", cv.getNumero(), tamanio, estado);
+					System.out.println(linea);
+				}
+			}
+			else {
+				System.out.println("No hay cocheras para mostrar.");
+			}
+			
+			this.mostrarMenu();
+			}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	/*********** Fin Región: COCHERA ***********/ 
 }

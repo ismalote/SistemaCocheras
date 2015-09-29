@@ -26,7 +26,7 @@ public class SistemaCocheras {
 	}
 	
 	/*********** Fin Región: INICIALIZACIÓN ***********/ 
-	
+		
 
 	/*********** Región: CLIENTES ***********/ 
 	
@@ -81,7 +81,7 @@ public class SistemaCocheras {
 			Cliente cliente = buscarCliente(dni);
 			
 			if(cliente != null) {
-				Vector<Contrato> contratosVigentes = this.buscarContratosVigentes(dni);
+				Vector<Contrato> contratosVigentes = this.buscarContratos(dni, true);
 				
 				if (contratosVigentes == null)
 				{
@@ -125,23 +125,38 @@ public class SistemaCocheras {
 		return clienteView;
 	}
 	
-	public Vector<Contrato> buscarContratosVigentes(String dni){
-		Vector<Contrato> contratosVigentes = new Vector<Contrato>();
+	public Vector<ClienteView> listarClientes(){
+		Vector<ClienteView> clientesView = new Vector<ClienteView>();
+
+		if(this.clientes != null && this.clientes.size() > 0){
+			for (Cliente c: this.clientes) {
+				clientesView.add(c.getView());
+			}
+		}
+		
+		return clientesView;
+	}
+	
+	public Vector<Contrato> buscarContratos(String dni, boolean vigentes){
+		Vector<Contrato> contratosCliente = new Vector<Contrato>();
 		
 		if (this.contratos != null && this.contratos.size() > 0) {
 			for(Contrato c: this.contratos) {
 					Cliente cte = c.getCliente();
 					if (cte != null && cte.sosCliente(dni)) {
-						if (c.getEstado()) {
-							contratosVigentes.add(c);
+						if (vigentes) {
+							if (c.getEstado()) {
+								contratosCliente.add(c);
+							}
+						}
+						else {
+							contratosCliente.add(c);
 						}
 					}
 				}
 		}
-		
-		// Si encuentro contratos vigentes del cliente, retorno la colección;
-		// caso contrario, retorno null.
-		return (contratosVigentes.size() != 0 ? contratosVigentes : null);
+
+		return (contratosCliente.size() != 0 ? contratosCliente : null);
 	}
 	
 	/*********** Fin Región: CLIENTES ***********/ 
@@ -198,6 +213,18 @@ public class SistemaCocheras {
 		else {
 			return ExitCodes.NO_EXISTE_ENTIDAD;
 		}
+	}
+	
+	public Vector<MedioPagoView> listarMediosPagos(){
+		Vector<MedioPagoView> mediosPagoView = new Vector<MedioPagoView>();
+
+		if(this.mediosPagos != null && this.mediosPagos.size() > 0){
+			for (MedioPago mp: this.mediosPagos) {
+				mediosPagoView.add(mp.getView());
+			}
+		}
+		
+		return mediosPagoView;
 	}
 	
 	/*********** Fin Región: MEDIOS DE PAGO ***********/ 
@@ -290,6 +317,18 @@ public class SistemaCocheras {
 		return abonoView;
 	}
 	
+	public Vector<AbonoView> listarAbonos(){
+		Vector<AbonoView> abonosView = new Vector<AbonoView>();
+
+		if(this.abonos != null && this.abonos.size() > 0){
+			for (Abono a: this.abonos) {
+				abonosView.add(a.getView());
+			}
+		}
+		
+		return abonosView;
+	}
+	
 	/*********** Fin Región: ABONOS ***********/ 
 	
 	
@@ -322,7 +361,7 @@ public class SistemaCocheras {
 		Hashtable<Integer, ContratoView> contratosCliente = new Hashtable<Integer, ContratoView>();
 		Integer indice = 0;
 			
-		Vector<Contrato> contratosVigentes = this.buscarContratosVigentes(dni);
+		Vector<Contrato> contratosVigentes = this.buscarContratos(dni, true);
 		
 		if(contratosVigentes != null && contratosVigentes.size() > 0) {
 			for(Contrato contrato: contratosVigentes){
@@ -361,6 +400,111 @@ public class SistemaCocheras {
 		return c;
 	}
 	
+	public Vector<ContratoView> listarContratos(String dni){
+		Vector<ContratoView> contratosView = new Vector<ContratoView>();
+		
+		Vector<Contrato> contratosCliente = this.buscarContratos(dni, false);
+		
+		if(contratosCliente != null && contratosCliente.size() > 0) {
+			for (Contrato c: contratosCliente) {
+				contratosView.add(c.getView());
+			}
+		}
+		
+		return contratosView;
+	}
+	
 	/*********** Fin Región: CONTRATOS ***********/ 
 	
+	
+	/*********** Región: COCHERAS ***********/ 
+	
+	public int crearCochera(int tamanioVehiculoAdmitido) {
+		
+		if(this.validarCochera(tamanioVehiculoAdmitido, EstadosCochera.LIBRE)) {
+				Cochera cochera = new Cochera(tamanioVehiculoAdmitido, EstadosCochera.LIBRE);
+				this.cocheras.add(cochera);
+				return ExitCodes.OK;
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}
+	}
+	
+	private boolean validarCochera(int tamanioVehiculoAdmitido, int estado) {
+		return ((tamanioVehiculoAdmitido > 0 && tamanioVehiculoAdmitido  < 4)
+				&& (estado > 0 && estado < 4)); 
+	}
+	
+	public int modificarCochera(int numero, int tamanioVehiculoAdmitido, int estado) {
+
+		Cochera cochera = buscarCochera(numero);
+
+		if (cochera != null) {
+			if (this.validarCochera(tamanioVehiculoAdmitido, estado)) {
+				cochera.setTamanioVehiculoAdmitido(tamanioVehiculoAdmitido);
+				cochera.setEstado(estado);
+				return ExitCodes.OK;
+			} else {
+				return ExitCodes.ARGUMENTOS_INVALIDOS;
+			}
+		} else {
+			return ExitCodes.NO_EXISTE_ENTIDAD;
+		}
+	}
+	
+	public int bajaCochera(int numero) {
+		
+		if(numero > 0) {
+			Cochera cochera = buscarCochera(numero);
+			
+			if(cochera != null) {
+					cochera.darDeBaja();
+					return ExitCodes.OK;
+			} else {
+				return ExitCodes.NO_EXISTE_ENTIDAD;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}
+	}
+	
+	public Vector<CocheraView> listarCocheras(){
+		Vector<CocheraView> cocherasView = new Vector<CocheraView>();
+
+		if(this.cocheras != null && this.cocheras.size() > 0){
+			for (Cochera c: this.cocheras) {
+				cocherasView.add(c.getView());
+			}
+		}
+		
+		return cocherasView;
+	}
+	
+	private Cochera buscarCochera(int numero){
+		Cochera c = null;
+		
+		if(this.cocheras != null && this.cocheras.size() > 0) {
+			for(Cochera cochera: this.cocheras){
+				if(cochera.sosCochera(numero)){
+					c = cochera;
+				}
+			}
+		}
+		return c;
+	}
+	
+	public CocheraView buscarDatosCochera(int numero) {
+		CocheraView cocheraView = null;
+		
+		Cochera cochera = this.buscarCochera(numero);
+		
+		if (cochera != null)
+		{
+			cocheraView = cochera.getView();
+		}
+		
+		return cocheraView;
+	}
+	
+	/*********** Fin Región: COCHERAS ***********/ 
 }

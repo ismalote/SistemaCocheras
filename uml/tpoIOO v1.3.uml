@@ -1835,8 +1835,6 @@
 <XPD:REF name="BehavioralFeature">/EgzavT1oEe9RcOiX6B6VgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#TypedFeatures" type="integer">1</XPD:ATTR>
-<XPD:REF name="TypedFeatures[0]">ftT72OcQHUSm7lMQhRBh4QAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">5</XPD:ATTR>
 <XPD:REF name="Associations[0]">EIKMNjh8OkikYVpdVQa4aAAA</XPD:REF>
 <XPD:REF name="Associations[1]">DLEpWI28rUGoT61TWTxonwAA</XPD:REF>
@@ -1947,27 +1945,20 @@
 <XPD:REF name="Associations[1]">M3sHH4SOw0qxSrAALgKw1gAA</XPD:REF>
 <XPD:REF name="Associations[2]">08zcSph4NEWHAZGBw7TyhgAA</XPD:REF>
 <XPD:REF name="Associations[3]">iVMF8bb4+0ycKIytp46wZAAA</XPD:REF>
-<XPD:ATTR name="#Attributes" type="integer">4</XPD:ATTR>
+<XPD:ATTR name="#Attributes" type="integer">3</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="eqq4jtLQEUu16WmmUIzHXQAA">
 <XPD:ATTR name="Name" type="string">tamanioVehiculoAdmitido</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">int</XPD:ATTR>
 <XPD:REF name="Owner">dnos7Ptza0WTIwLLZ41m7gAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Attributes[1]" type="UMLAttribute" guid="ftT72OcQHUSm7lMQhRBh4QAA">
-<XPD:ATTR name="Name" type="string">abono</XPD:ATTR>
-<XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">Abono</XPD:ATTR>
-<XPD:REF name="Type_">gm5VJSFRfkq0HwkA7CVTjQAA</XPD:REF>
-<XPD:REF name="Owner">dnos7Ptza0WTIwLLZ41m7gAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="Attributes[2]" type="UMLAttribute" guid="7xq7+M9RfUCh14eG7bvXMQAA">
+<XPD:OBJ name="Attributes[1]" type="UMLAttribute" guid="7xq7+M9RfUCh14eG7bvXMQAA">
 <XPD:ATTR name="Name" type="string">ocupada</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">boolean</XPD:ATTR>
 <XPD:REF name="Owner">dnos7Ptza0WTIwLLZ41m7gAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Attributes[3]" type="UMLAttribute" guid="KYlO+h5SYEmzJ/a5BZSEowAA">
+<XPD:OBJ name="Attributes[2]" type="UMLAttribute" guid="KYlO+h5SYEmzJ/a5BZSEowAA">
 <XPD:ATTR name="Name" type="string">numero</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">int</XPD:ATTR>

@@ -1,11 +1,13 @@
 package modelo;
 
+import vista.CocheraView;
+import enums.EstadosCochera;
+
 public class Cochera {
 	
-	private int tamanioVehiculoAdmitido;
-	private Abono abono;
-	private boolean ocupada;
 	private int numero;
+	private int tamanioVehiculoAdmitido;
+	private int estado;
 	
 	private static int proxNumeroCochera;
 	
@@ -13,12 +15,17 @@ public class Cochera {
 		return ++proxNumeroCochera;
 	}
 
-	public Cochera(int tamanioVehiculoAdmitido, Abono abono, boolean ocupada) {
-		super();
-		this.tamanioVehiculoAdmitido = tamanioVehiculoAdmitido;
-		this.abono = abono;
-		this.ocupada = ocupada;
+	public Cochera(int tamanioVehiculoAdmitido, int estado) {
 		this.numero = getProxNumeroCochera();
+		this.tamanioVehiculoAdmitido = tamanioVehiculoAdmitido;
+		this.estado = estado;
+	}
+	
+	public CocheraView getView()
+	{
+		CocheraView cocheraView = new CocheraView(this.numero, this.tamanioVehiculoAdmitido,
+				this.estado);
+		return cocheraView;
 	}
 
 	public int getTamanioVehiculoAdmitido() {
@@ -29,24 +36,27 @@ public class Cochera {
 		this.tamanioVehiculoAdmitido = tamanioVehiculoAdmitido;
 	}
 
-	public Abono getAbono() {
-		return abono;
+	public boolean estaOcupada() {
+		return (this.estado == EstadosCochera.OCUPADA);
+	}
+	
+	public int getEstado() {
+		return this.estado;
 	}
 
-	public void setAbono(Abono abono) {
-		this.abono = abono;
-	}
-
-	public boolean isOcupada() {
-		return ocupada;
-	}
-
-	public void setOcupada(boolean ocupada) {
-		this.ocupada = ocupada;
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public int getNumero() {
 		return numero;
 	}
 	
+	public boolean sosCochera(int numero) {
+		return (this.numero == numero);
+	}
+	
+	public void darDeBaja() {
+		this.estado = 0;
+	}
 }

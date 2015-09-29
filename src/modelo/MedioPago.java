@@ -1,5 +1,7 @@
 package modelo;
 
+import vista.MedioPagoView;
+
 public class MedioPago {
 	
 	private String nombreEntidad;
@@ -10,7 +12,6 @@ public class MedioPago {
 	
 	public MedioPago(String nombreEntidad, String nombreArchivoEntrada,
 			String nombreArchivoSalida, String direccionFTP, boolean activo) {
-		super();
 		this.nombreEntidad = nombreEntidad;
 		this.nombreArchivoEntrada = nombreArchivoEntrada;
 		this.nombreArchivoSalida = nombreArchivoSalida;
@@ -18,11 +19,16 @@ public class MedioPago {
 		this.activo = activo;
 	}
 
+	public MedioPagoView getView()
+	{
+		MedioPagoView medioPagoView = new MedioPagoView(this.nombreEntidad, this.nombreArchivoEntrada, 
+				this.nombreArchivoSalida, this.direccionFTP, this.activo);
+		return medioPagoView;
+	}
 
 	public String getNombreEntidad() {
 		return this.nombreEntidad;
 	}
-
 
 	public void setNombreEntidad(String nombreEntidad) {
 		this.nombreEntidad = nombreEntidad;
