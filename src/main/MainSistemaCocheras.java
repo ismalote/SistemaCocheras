@@ -1,7 +1,6 @@
 package main;
 
 import java.io.*;
-import java.util.Hashtable;
 import java.util.Vector;
 
 import controlador.*;
@@ -13,8 +12,7 @@ public class MainSistemaCocheras {
 	/*********** Región: INICIALIZACIÓN ***********/ 
 	
 	private SistemaCocheras sistemaCocheras;
-	private Hashtable<Integer, ContratoView> contratosVigentesCliente; 
-	
+
 	public MainSistemaCocheras() {
 		this.sistemaCocheras = new SistemaCocheras();
 	}
@@ -860,14 +858,32 @@ public class MainSistemaCocheras {
 			System.out.print("DNI: ");
 			String dni = reader.readLine();
 			
-			if(this.listarContratosVigentesCliente(dni)) {
-				System.out.print("Ingresar #: ");
-				int indice = Integer.parseInt(reader.readLine());
+			Vector<ContratoView> contratosVigentes = this.sistemaCocheras.listarContratos(dni, true);
+			
+			if(contratosVigentes != null && contratosVigentes.size() > 0) {				
+				
+				System.out.println("NRO.CONTRATO\tFECHA\tPATENTE\tCOCHERA\tABONO\tESTADO");
+				System.out.println("--------------------------");
+				
+				for (ContratoView cv: contratosVigentes) {				
+					String linea = String.format("%d\t%td/%tm/%ty\t%s\t%d\t%s\t%s", 
+							cv.getNroContrato(),
+							cv.getFecha(),
+							cv.getPatenteAuto(),
+							cv.getNroCochera(),
+							cv.getAbono(),
+							cv.getEstado() ? "Activo" : "Inactivo");
+					
+					System.out.println(linea);
+				}
+				
+				System.out.print("Ingresar numero de contrato: ");
+				int numero = Integer.parseInt(reader.readLine());
 				
 				System.out.print("Ingresar abono: ");
 				String abono = reader.readLine();
 								
-				int exitCode = sistemaCocheras.modificarContrato(this.contratosVigentesCliente.get(indice).getNroContrato(), abono);
+				int exitCode = sistemaCocheras.modificarContrato(numero, abono);
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
@@ -909,11 +925,29 @@ public class MainSistemaCocheras {
 			System.out.print("DNI: ");
 			String dni = reader.readLine();
 			
-			if(this.listarContratosVigentesCliente(dni)) {
-				System.out.print("Ingresar #: ");
-				int indice = Integer.parseInt(reader.readLine());
-								
-				int exitCode = sistemaCocheras.bajaContrato(this.contratosVigentesCliente.get(indice).getNroContrato());
+			Vector<ContratoView> contratosVigentes = this.sistemaCocheras.listarContratos(dni, true);
+			
+			if(contratosVigentes != null && contratosVigentes.size() > 0) {
+				
+				System.out.println("NRO.CONTRATO\tFECHA\tPATENTE\tCOCHERA\tABONO\tESTADO");
+				System.out.println("--------------------------");
+				
+				for (ContratoView cv: contratosVigentes) {				
+					String linea = String.format("%d\t%td/%tm/%ty\t%s\t%d\t%s\t%s", 
+							cv.getNroContrato(),
+							cv.getFecha(),
+							cv.getPatenteAuto(),
+							cv.getNroCochera(),
+							cv.getAbono(),
+							cv.getEstado() ? "Activo" : "Inactivo");
+					
+					System.out.println(linea);
+				}
+				
+				System.out.print("Ingresar numero de contrato: ");
+				int numero = Integer.parseInt(reader.readLine());
+				
+				int exitCode = sistemaCocheras.bajaContrato(numero);
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
@@ -945,34 +979,6 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	private boolean listarContratosVigentesCliente(String dni) {
-		this.contratosVigentesCliente = this.sistemaCocheras.buscarDatosContratosVigentes(dni);
-		
-		if (this.contratosVigentesCliente != null && this.contratosVigentesCliente .size() > 0)
-		{
-			System.out.println("#\tCOCHERA\tFECHA\tABONO\tPATENTE");
-			System.out.println("----------------------------------");
-			
-			// Listo los contratos activos del cliente con un índice para elegirlo.
-			for(Integer key: this.contratosVigentesCliente .keySet()) {
-				ContratoView cv = this.contratosVigentesCliente .get(key);
-				String linea = String.format("%d\t%d\t%td/%tm/%ty\t%s\t%s", 
-						key,
-						cv.getNroCochera(),
-						cv.getFecha(),
-						cv.getAbono(),
-						cv.getPatenteAuto());
-				
-				System.out.println(linea);
-			}
-			
-			return true;
-		}
-		else {		
-			return false;
-		}
-	}
-	
 	public void listarContratos() {
 		try
 		{
@@ -981,7 +987,7 @@ public class MainSistemaCocheras {
 			System.out.print("DNI: ");
 			String dni = reader.readLine();
 			
-			Vector<ContratoView> contratosView = this.sistemaCocheras.listarContratos(dni);	
+			Vector<ContratoView> contratosView = this.sistemaCocheras.listarContratos(dni, false);	
 			
 			if (contratosView != null && contratosView.size() > 0) {
 				System.out.println("NRO.CONTRATO\tFECHA\tPATENTE\tCOCHERA\tABONO\tESTADO");

@@ -1,6 +1,5 @@
 package controlador;
 
-import java.util.Hashtable;
 import java.util.Vector;
 
 import modelo.*;
@@ -357,21 +356,6 @@ public class SistemaCocheras {
 		}
 	}
 	
-	public Hashtable<Integer, ContratoView> buscarDatosContratosVigentes(String dni) {
-		Hashtable<Integer, ContratoView> contratosCliente = new Hashtable<Integer, ContratoView>();
-		Integer indice = 0;
-			
-		Vector<Contrato> contratosVigentes = this.buscarContratos(dni, true);
-		
-		if(contratosVigentes != null && contratosVigentes.size() > 0) {
-			for(Contrato contrato: contratosVigentes){
-				contratosCliente.put(++indice, contrato.getView());
-			}
-		}
-		
-		return (contratosCliente.size() != 0 ? contratosCliente : null);
-	}
-	
 	public int bajaContrato(int nroContrato) {
 		if (nroContrato > 0) {
 			Contrato contrato = buscarContrato(nroContrato);
@@ -400,10 +384,10 @@ public class SistemaCocheras {
 		return c;
 	}
 	
-	public Vector<ContratoView> listarContratos(String dni){
+	public Vector<ContratoView> listarContratos(String dni, boolean vigentes){
 		Vector<ContratoView> contratosView = new Vector<ContratoView>();
 		
-		Vector<Contrato> contratosCliente = this.buscarContratos(dni, false);
+		Vector<Contrato> contratosCliente = this.buscarContratos(dni, vigentes);
 		
 		if(contratosCliente != null && contratosCliente.size() > 0) {
 			for (Contrato c: contratosCliente) {
