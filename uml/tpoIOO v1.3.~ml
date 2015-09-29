@@ -4732,7 +4732,7 @@
 <XPD:ATTR name="Left" type="integer">64</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">12</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">70</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">445</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">437</XPD:ATTR>
 <XPD:REF name="Model">FbnGDTHphkeU+jdX5l2hOAAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="7pos+CGj60236+R5Ww0P0QAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="lhsvtDRWZkqf+vPdoz8F8QAA">
@@ -4843,8 +4843,8 @@
 <XPD:REF name="Head">Hv6olvwhrEmN6vtCfR5ymwAA</XPD:REF>
 <XPD:REF name="Tail">Hv6olvwhrEmN6vtCfR5ymwAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="rDbIXRMUZU2yABuw/BWpVwAA">
-<XPD:ATTR name="Alpha" type="real">1,5707953267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">79</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1,60375042079038</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">91,0494371207203</XPD:ATTR>
 <XPD:ATTR name="Text" type="string">contrato=buscarContratoValido(nroContrato)</XPD:ATTR>
 <XPD:REF name="Model">yRadhg5k2UqI9EPsRCjZDAAA</XPD:REF>
 <XPD:REF name="HostEdge">RD31WNNyT0mAutBg/kvNRgAA</XPD:REF>
