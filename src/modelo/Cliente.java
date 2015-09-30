@@ -27,7 +27,7 @@ public class Cliente {
 	
 	public ClienteView getView()
 	{
-		ClienteView clienteView = new ClienteView(this.dni, this.nombre, this.domicilio, this.mail, this.telefono);
+		ClienteView clienteView = new ClienteView(this.dni, this.nombre, this.domicilio, this.mail, this.telefono, this.estado);
 		return clienteView;
 	}
 

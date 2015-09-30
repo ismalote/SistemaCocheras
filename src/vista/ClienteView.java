@@ -11,14 +11,15 @@ public class ClienteView {
 	private String mail;
 	private String telefono;
 	//private Vector<AutoView> autos;
-	//private int estado;
+	private int estado;
 	
-	public ClienteView(String dni, String nombre, String domicilio, String mail, String telefono) {
+	public ClienteView(String dni, String nombre, String domicilio, String mail, String telefono, int estado) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.domicilio = domicilio;
 		this.mail = mail;
 		this.telefono = telefono;
+		this.estado = estado;
 	}
 	
 	public String getDni() {
@@ -39,5 +40,9 @@ public class ClienteView {
 	
 	public String getTelefono() {
 		return this.telefono;
+	}
+
+	public int getEstado() {
+		return this.estado;
 	}
 }

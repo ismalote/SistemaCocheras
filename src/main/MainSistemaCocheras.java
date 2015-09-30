@@ -1,7 +1,8 @@
 package main;
 
 import java.io.*;
-import java.util.Vector;
+import java.text.*;
+import java.util.*;
 
 import controlador.*;
 import enums.*;
@@ -23,6 +24,13 @@ public class MainSistemaCocheras {
 	public static void main(String[] args) {
 		MainSistemaCocheras sistema = new MainSistemaCocheras();
 		sistema.mostrarMenu();
+	}
+	
+	private Date parsearFecha(String fecha) throws ParseException {
+		Date fechaFormateada = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		fechaFormateada = formato.parse(fecha);
+		return fechaFormateada;
 	}
 
 	private void mostrarMenu() {
@@ -94,6 +102,7 @@ public class MainSistemaCocheras {
 		System.out.println("2.- Modificacion");
 		System.out.println("3.- Baja");
 		System.out.println("4.- Listar");
+		System.out.println("5.- Autos");
 		System.out.println("Q.- Volver");
 		System.out.println("-------------------------------------------------------");
 		System.out.print("Opcion: ");
@@ -117,6 +126,67 @@ public class MainSistemaCocheras {
 			  	}
 			  	case '4' : {
 			  		this.listarClientes();
+			  		break;
+			  	}
+			  	case '5' : {
+			  		this.mostrarMenuAutos();
+			  		break;
+			  	}
+			  	case 'Q': 
+			  	case 'q': {
+			  		this.mostrarMenu();
+			  		break;
+			  	}
+			  	default: {
+			  		this.mostrarMenu();
+			  		break;
+			  	}
+		  	}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void mostrarMenuAutos() {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	 	
+		//Imprimo menu de opciones
+		System.out.println();
+		System.out.println("AUTOS: MENU DE OPCIONES");
+		System.out.println("-------------------------------------------------------");
+		System.out.println("1.- Alta");
+		System.out.println("2.- Modificacion");
+		System.out.println("3.- Baja");
+		System.out.println("4.- Listar");
+		System.out.println("Q.- Volver");
+		System.out.println("-------------------------------------------------------");
+		System.out.print("Opcion: ");
+		try
+		{
+			char s = (char)reader.read();
+			
+		  	switch (s)
+		  	{
+		  		case '1' : {
+		  			this.crearAuto();
+		  			break;
+		  		}
+			  	case '2' : {
+			  		this.modificarAuto();
+			  		break;
+			  	}
+			  	case '3' : {
+			  		this.bajaAuto();
+			  		break;
+			  	}
+			  	case '4' : {
+			  		this.listarAutos();
+			  		break;
+			  	}
+			  	case '5' : {
+			  		this.mostrarMenuAutos();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -290,10 +360,6 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	private void salir() {
-		System.exit(0);
-	}
-	
 	private void mostrarMenuCocheras() {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	 	
@@ -345,6 +411,10 @@ public class MainSistemaCocheras {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	private void salir() {
+		System.exit(0);
 	}
 	
 	/*********** Región: CLIENTES ***********/ 
@@ -505,12 +575,30 @@ public class MainSistemaCocheras {
 			Vector<ClienteView> clientesView = this.sistemaCocheras.listarClientes();	
 			
 			if (clientesView != null && clientesView.size() > 0) {
-				System.out.println("DNI\tNOMBRE\tDOMICILIO\tMAIL\tTELEFONO");
+				System.out.println("DNI\tNOMBRE\tDOMICILIO\tMAIL\tTELEFONO\tESTADO");
 				System.out.println("--------------------------");
 				
-				for (ClienteView cv: clientesView) {				
+				for (ClienteView cv: clientesView) {
+						
+					String estado;
+						
+					switch(cv.getEstado()) {
+						case EstadosCliente.ACTIVO:
+							estado = "Activo";
+							break;
+						case EstadosCliente.INACTIVO:
+							estado = "Inactivo";
+							break;
+						case EstadosCliente.CON_DEUDA:
+							estado = "Deuda";
+							break;
+						default:
+							estado = "";
+							break;
+					}
+								
 					String linea = String.format("%s\t%s\t%s\t%s\t%s", cv.getDni(), cv.getNombre(), 
-							cv.getDomicilio(), cv.getMail(), cv.getTelefono());
+							cv.getDomicilio(), cv.getMail(), cv.getTelefono(), estado);
 					System.out.println(linea);
 				}
 			}
@@ -856,7 +944,7 @@ public class MainSistemaCocheras {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			
 			System.out.println("MODIFICACION DE CONTRATO");
-			System.out.println("-----------------------");
+			System.out.println("------------------------");
 			System.out.print("DNI: ");
 			String dni = reader.readLine();
 			
@@ -906,7 +994,7 @@ public class MainSistemaCocheras {
 				}
 			}
 			else {
-				System.out.println("El cliente no cuenta con contratos vigentes.");
+				System.out.println("El cliente no posee contratos vigentes.");
 			}
 			
 			this.mostrarMenu();
@@ -970,7 +1058,7 @@ public class MainSistemaCocheras {
 				}
 			}
 			else {
-				System.out.println("El cliente no cuenta con contratos vigentes.");
+				System.out.println("El cliente no posee contratos vigentes.");
 			}
 			
 			this.mostrarMenu();
@@ -1213,4 +1301,221 @@ public class MainSistemaCocheras {
 	}
 	
 	/*********** Fin Región: COCHERA ***********/ 
+	
+	
+	/*********** Región: AUTOS ***********/ 
+	
+	private void crearAuto() throws Exception {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("ALTA DE AUTO");
+			System.out.println("-------------");
+			System.out.print("DNI");
+			String dni = reader.readLine();
+			System.out.print("Patente: ");
+			String patente = reader.readLine();	
+			System.out.print("Marca: ");
+			String marca = reader.readLine();
+			System.out.print("Modelo: ");
+			String modelo = reader.readLine();
+			System.out.print("Fecha de entrada: ");
+			Date fechaEntrada = this.parsearFecha(reader.readLine());
+			
+			int exitCode = sistemaCocheras.crearAuto(dni, patente, marca, fechaEntrada, modelo);
+			
+			switch(exitCode) {
+				case ExitCodes.OK: {
+					System.out.println("El auto se ha creado con éxito.");	
+					break;
+				}
+				case ExitCodes.YA_EXISTE_ENTIDAD: {
+					System.out.println("El auto ya existe.");	
+					break;
+				}
+				case ExitCodes.ARGUMENTOS_INVALIDOS: {
+					System.out.println("Alguno de los argumentos es inválido.");	
+					break;
+				}
+				case ExitCodes.NO_EXISTE_ENTIDAD: {
+					System.out.println("El cliente no existe.");	
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void modificarAuto() {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("MODIFICACION DE AUTO");
+			System.out.println("---------------------");
+			System.out.print("DNI: ");
+			String dni = reader.readLine();
+			
+			Vector<AutoView> autosView = this.sistemaCocheras.listarAutos(dni);
+			
+			if(autosView != null && autosView.size() > 0) {				
+				
+				System.out.println("PATENTE\tMARCA\tMODELO\tF.ENTRADA\tESTADO");
+				System.out.println("--------------------------");
+				
+				for (AutoView av: autosView) {				
+					String linea = String.format("%s\t%s\t\t%s\t%td/%tm/%ty\t%s", 
+							av.getPatente(),
+							av.getMarca(),
+							av.getModelo(),
+							av.getFechaEntrada(),
+							av.getActivo() ? "Activo" : "Inactivo");
+					
+					System.out.println(linea);
+				}
+				
+				System.out.print("Ingresar patente: ");
+				String patente = reader.readLine();
+				
+				System.out.print("Ingresar marca: ");
+				String marca = reader.readLine();
+				
+				System.out.print("Ingresar modelo: ");
+				String modelo = reader.readLine();
+				
+				System.out.print("Ingresar fecha de entrada: ");
+				Date fechaEntrada = this.parsearFecha(reader.readLine());
+								
+				int exitCode = sistemaCocheras.modificarAuto(dni, patente, marca, fechaEntrada, modelo, true);
+				
+				switch(exitCode) {
+					case ExitCodes.OK: {
+						System.out.println("El auto se ha modificado con éxito.");
+						break;
+					}
+					case ExitCodes.NO_EXISTE_ENTIDAD: {
+						System.out.println("El cliente no existe.");
+						break;
+					}
+					case ExitCodes.ARGUMENTOS_INVALIDOS: {
+						System.out.println("Alguno de los argumentos es inválido.");
+						break;
+					}
+					case ExitCodes.NO_EXISTE_AUTO: {
+						System.out.println("El auto no existe.");
+						break;
+					}
+					default: {
+						break;
+					}
+				}
+			}
+			else {
+				System.out.println("El cliente no posee autos.");
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void bajaAuto() {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("BAJA DE AUTO");
+			System.out.println("---------------");
+			System.out.print("DNI: ");
+			String dni = reader.readLine();
+			System.out.print("Patente: ");
+			String patente = reader.readLine();
+			
+			int exitCode = sistemaCocheras.bajaAuto(dni, patente);
+			
+			switch(exitCode) {
+				case ExitCodes.OK: {
+					System.out.println("El auto se ha dado de baja con éxito.");	
+					break;
+				}
+				case ExitCodes.NO_EXISTE_ENTIDAD: {
+					System.out.println("El cliente no existe.");
+					break;
+				}
+				case ExitCodes.ARGUMENTOS_INVALIDOS: {
+					System.out.println("Alguno de los argumentos es inválido.");
+					break;
+				}
+				case ExitCodes.AUTO_CONTRATO_VIGENTE: {
+					System.out.println("El auto está asociado a un contrato vigente.");
+					break;
+				}
+				case ExitCodes.NO_EXISTE_AUTO: {
+					System.out.println("El auto no existe.");
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+			
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}	
+	}
+	
+	private void listarAutos() {
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.print("DNI: ");
+			String dni = reader.readLine();
+			
+			Vector<AutoView> autosView = this.sistemaCocheras.listarAutos(dni);	
+			
+			if (autosView != null && autosView.size() > 0) {
+				System.out.println("PATENTE\tMARCA\tMODELO\tF.ENTRADA\tESTADO");
+				System.out.println("--------------------------");
+				
+				for (AutoView av: autosView) {				
+					String linea = String.format("%s\t%s\t\t%s\t%td/%tm/%ty\t%s", 
+							av.getPatente(),
+							av.getMarca(),
+							av.getModelo(),
+							av.getFechaEntrada(),
+							av.getActivo() ? "Activo" : "Inactivo");
+					
+					System.out.println(linea);
+				}
+			}
+			else {
+				System.out.println("No hay contratos para mostrar.");
+			}
+			
+			this.mostrarMenu();
+			}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/*********** Fin Región: AUTOS ***********/ 
 }

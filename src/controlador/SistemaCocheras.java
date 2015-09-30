@@ -638,30 +638,42 @@ public class SistemaCocheras {
 					return ExitCodes.ARGUMENTOS_INVALIDOS;
 				}
 			}else {
-				return ExitCodes.CLIENTE_NO_EXISTE_AUTO;
+				return ExitCodes.NO_EXISTE_AUTO;
 			} 
 		} else {
 			return ExitCodes.NO_EXISTE_ENTIDAD;
 		}
 	}
 	
-	public int eliminarAuto(String dniCliente, String patente){
-		Cliente cliente = buscarCliente(dniCliente);
-
-		if (cliente != null) {
-			Auto auto = cliente.buscarAuto(patente);
+	public int bajaAuto(String dniCliente, String patente){
 		
-			if(auto != null) {
-				auto.darDeBaja();
+		if (dniCliente.length() > 0 && patente.length() > 0) {
 			
-				return ExitCodes.OK;
+			Cliente cliente = buscarCliente(dniCliente);
+	
+			if (cliente != null) {
+				Auto auto = cliente.buscarAuto(patente);
+			
+				if(auto != null) {
+					
+					Vector<Contrato> contratosVigentes = this.buscarContratos(dniCliente, true);
+					
+					if (contratosVigentes == null || contratosVigentes.size() > 0) {
+						auto.darDeBaja();
+						return ExitCodes.OK;
+					} else {
+						return ExitCodes.AUTO_CONTRATO_VIGENTE;
+					}
+				}
+				else {
+					return ExitCodes.NO_EXISTE_AUTO;
+				}
 			}
 			else {
-				return ExitCodes.CLIENTE_NO_EXISTE_AUTO;
+				return ExitCodes.NO_EXISTE_ENTIDAD;
 			}
-		}
-		else {
-			return ExitCodes.NO_EXISTE_ENTIDAD;
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
 		}
 	}
 	
