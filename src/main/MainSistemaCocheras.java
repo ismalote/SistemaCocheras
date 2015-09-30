@@ -934,8 +934,84 @@ public class MainSistemaCocheras {
 	
 	/*********** Región: CONTRATOS ***********/ 
 	
-	private void crearContrato() throws Exception {
-		throw new Exception("TO-DO: implementar");		
+	private void crearContrato() {
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("MODIFICACION DE CONTRATO");
+			System.out.println("------------------------");
+			System.out.print("DNI: ");
+			String dni = reader.readLine();
+			System.out.print("Patente: ");
+			String patente = reader.readLine();
+			System.out.print("Numero cochera: ");
+			int nroCochera = Integer.parseInt(reader.readLine());
+			System.out.print("Abono: ");
+			String nombreAbono = reader.readLine();
+			System.out.print("Fecha: ");
+			Date fecha = this.parsearFecha(reader.readLine());
+			
+			String lineaMedioPagoCliente = String.format("Seleccione el medio de pago (%s: efectivo, %s: cheque, %s: debito tarjeta de credito, %s: debito CBU): ", 
+					MediosPagoCliente.EFECTIVO, MediosPagoCliente.CHEQUE, MediosPagoCliente.DEBITO_TARJETA_CREDITO,
+					MediosPagoCliente.DEBITO_CBU);
+			System.out.print(lineaMedioPagoCliente);
+			String medioPagoCliente = reader.readLine();
+			
+			int exitCode = -1;
+			
+			if(medioPagoCliente.equalsIgnoreCase(MediosPagoCliente.EFECTIVO))
+			{
+				exitCode = this.sistemaCocheras.crearContratoEfectivo(dni, patente, nroCochera, nombreAbono, fecha);
+			}
+			else if(medioPagoCliente.equalsIgnoreCase(MediosPagoCliente.CHEQUE))
+			{
+				exitCode = this.sistemaCocheras.crearContratoCheque(dni, patente, nroCochera, nombreAbono, fecha);
+			}
+			else if (medioPagoCliente.equalsIgnoreCase(MediosPagoCliente.DEBITO_TARJETA_CREDITO))
+			{
+				System.out.print("Numero tarjeta: ");
+				String nroTarjeta = reader.readLine();
+				System.out.print("Fecha de vencimiento de la tarjeta: ");
+				Date vencimientoTarjeta = this.parsearFecha(reader.readLine());
+				System.out.print("Entidad emisora de la tarjeta: ");
+				String entidadEmisoraTarjeta = reader.readLine();
+				
+				exitCode = this.sistemaCocheras.crearContratoTarjetaCredito(dni, patente, nroCochera, nombreAbono, fecha, nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta);
+			}
+			else if (medioPagoCliente.equalsIgnoreCase(MediosPagoCliente.DEBITO_CBU))
+			{
+				System.out.print("CBU: ");
+				String cbu = reader.readLine();
+				System.out.print("Entidad bancaria: ");
+				String entidadBancaria = reader.readLine();
+				
+				exitCode = this.sistemaCocheras.crearContratoDebitoAutomatico(dni, patente, nroCochera, nombreAbono, fecha, cbu, entidadBancaria);
+			}	
+			else
+			{
+				System.out.println("La opción ingresada es inválida.");
+			}
+			
+			switch(exitCode) {
+			case ExitCodes.OK: {
+				System.out.println("El contrato se ha creado con éxito.");
+				break;
+			}
+			case ExitCodes.ARGUMENTOS_INVALIDOS: {
+				System.out.println("Alguno de los argumentos es inválido.");
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+		
+			this.mostrarMenu();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	private void modificarContrato() {
@@ -1037,7 +1113,7 @@ public class MainSistemaCocheras {
 				System.out.print("Ingresar numero de contrato: ");
 				int numero = Integer.parseInt(reader.readLine());
 				
-				int exitCode = sistemaCocheras.bajaContrato(numero);
+				int exitCode = this.sistemaCocheras.bajaContrato(numero);
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
@@ -1311,7 +1387,7 @@ public class MainSistemaCocheras {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			
 			System.out.println("ALTA DE AUTO");
-			System.out.println("-------------");
+			System.out.println("------------");
 			System.out.print("DNI");
 			String dni = reader.readLine();
 			System.out.print("Patente: ");
