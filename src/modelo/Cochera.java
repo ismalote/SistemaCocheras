@@ -15,10 +15,10 @@ public class Cochera {
 		return ++proxNumeroCochera;
 	}
 
-	public Cochera(int tamanioVehiculoAdmitido, int estado) {
+	public Cochera(int tamanioVehiculoAdmitido) {
 		this.numero = getProxNumeroCochera();
 		this.tamanioVehiculoAdmitido = tamanioVehiculoAdmitido;
-		this.estado = estado;
+		this.estado = EstadosCochera.LIBRE;
 	}
 	
 	public CocheraView getView()

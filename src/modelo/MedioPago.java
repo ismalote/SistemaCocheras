@@ -11,12 +11,12 @@ public class MedioPago {
 	private boolean activo;
 	
 	public MedioPago(String nombreEntidad, String nombreArchivoEntrada,
-			String nombreArchivoSalida, String direccionFTP, boolean activo) {
+			String nombreArchivoSalida, String direccionFTP) {
 		this.nombreEntidad = nombreEntidad;
 		this.nombreArchivoEntrada = nombreArchivoEntrada;
 		this.nombreArchivoSalida = nombreArchivoSalida;
 		this.direccionFTP = direccionFTP;
-		this.activo = activo;
+		this.activo = true;
 	}
 
 	public MedioPagoView getView()

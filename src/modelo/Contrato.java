@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import vista.ContratoView;
@@ -20,15 +21,14 @@ public abstract class Contrato {
 		return ++proxNroContrato;
 	}
 	
-	public Contrato(Cliente cliente, Auto auto, Cochera cochera, Abono abono,
-			boolean estado, Date fecha) {
+	public Contrato(Cliente cliente, Auto auto, Cochera cochera, Abono abono) {
 		this.nroContrato = getProxNroContrato();
 		this.cliente = cliente;
 		this.auto = auto;
 		this.cochera = cochera;
 		this.abono = abono;
-		this.estado = estado;
-		this.fecha = fecha;
+		this.estado = true;
+		this.fecha = Calendar.getInstance().getTime();
 	}
 	
 	public ContratoView getView()

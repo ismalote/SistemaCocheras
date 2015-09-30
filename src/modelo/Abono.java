@@ -13,7 +13,6 @@ public class Abono {
 	
 	public Abono(float descuento, String nombre, int tamanioCochera,
 			int cantidadDias, float precioBase, boolean activo) {
-		super();
 		this.descuento = descuento;
 		this.nombre = nombre;
 		this.tamanioCochera = tamanioCochera;

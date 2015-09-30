@@ -11,12 +11,12 @@ public class Auto {
 	private String modelo;
 	private boolean activo;
 	
-	public Auto(String patente, String marca, Date fechaEntrada, String modelo, boolean activo) {
+	public Auto(String patente, String marca, Date fechaEntrada, String modelo) {
 		this.patente = patente;
 		this.marca = marca;
 		this.fechaEntrada = fechaEntrada;
 		this.modelo = modelo;
-		this.activo = activo;
+		this.activo = true;
 	}
 	
 	public AutoView getView() {

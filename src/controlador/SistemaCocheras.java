@@ -171,7 +171,7 @@ public class SistemaCocheras {
 			MedioPago medioPago = buscarMedioPago(nombreEntidad);
 			
 			if(medioPago == null){
-				medioPago = new MedioPago(nombreEntidad, nombreArchivoEntrada, nombreArchivoSalida, direccionFTP, true);
+				medioPago = new MedioPago(nombreEntidad, nombreArchivoEntrada, nombreArchivoSalida, direccionFTP);
 				this.mediosPagos.add(medioPago);
 				return ExitCodes.OK;
 			} else {
@@ -346,7 +346,7 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);
 			
 			if (auto != null && cochera != null && abono != null) {
-				contrato = new ContratoEfectivo(cliente, auto, cochera, abono, true, fecha);
+				contrato = new ContratoEfectivo(cliente, auto, cochera, abono);
 				this.contratos.add(contrato);
 				return ExitCodes.OK;
 			}
@@ -371,7 +371,7 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);
 			
 			if (auto != null && cochera != null && abono != null) {
-				contrato = new ContratoCheque(cliente, auto, cochera, abono, true, fecha, 
+				contrato = new ContratoCheque(cliente, auto, cochera, abono, 
 						nroCuentaCorriente, entidadBancaria);
 				this.contratos.add(contrato);
 				return ExitCodes.OK;
@@ -398,7 +398,7 @@ public class SistemaCocheras {
 			
 			if (auto != null && cochera != null && abono != null) {
 				contrato = new ContratoTarjetaCredito(cliente, auto, cochera, abono, 
-						true, fecha, nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta);
+						nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta);
 				this.contratos.add(contrato);
 				return ExitCodes.OK;
 			}
@@ -423,7 +423,7 @@ public class SistemaCocheras {
 			
 			if (auto != null && cochera != null && abono != null) {
 				contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, 
-						true, fecha, cbu, entidadBancaria);
+						cbu, entidadBancaria);
 				this.contratos.add(contrato);
 				return ExitCodes.OK;
 			}
@@ -504,7 +504,7 @@ public class SistemaCocheras {
 		// Se usa Integer.MAX_VALUE como valor provisorio; se asignará el número de la cochera
 		// en el constructor.
 		if(this.validarCochera(Integer.MAX_VALUE, tamanioVehiculoAdmitido, EstadosCochera.LIBRE)) {
-				Cochera cochera = new Cochera(tamanioVehiculoAdmitido, EstadosCochera.LIBRE);
+				Cochera cochera = new Cochera(tamanioVehiculoAdmitido);
 				this.cocheras.add(cochera);
 				return ExitCodes.OK;
 		} else {
@@ -603,7 +603,7 @@ public class SistemaCocheras {
 				Auto auto = cliente.buscarAuto(patente);
 
 				if (auto == null) {
-					auto = new Auto(patente, marca, fechaEntrada, modelo, true);
+					auto = new Auto(patente, marca, fechaEntrada, modelo);
 					cliente.agregarAuto(auto);
 					return ExitCodes.OK;
 				} else {

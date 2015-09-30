@@ -1,15 +1,13 @@
 package modelo;
 
-import java.util.Date;
-
 public class ContratoCheque extends Contrato {
 
 	private String nroCuentaCorriente;
 	private String entidadBancaria;
 	
-	public ContratoCheque(Cliente cliente, Auto auto, Cochera cochera,
-			Abono abono, boolean estado, Date fecha, String nroCuentaCorriente, String entidadBancaria) {
-		super(cliente, auto, cochera, abono, estado, fecha);
+	public ContratoCheque(Cliente cliente, Auto auto, Cochera cochera, Abono abono, 
+			String nroCuentaCorriente, String entidadBancaria) {
+		super(cliente, auto, cochera, abono);
 		this.setNroCuentaCorriente(nroCuentaCorriente);
 		this.setEntidadBancaria(entidadBancaria);
 	}
