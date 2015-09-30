@@ -70,7 +70,12 @@ public class Abono {
 	}
 	
 	public float calcularPrecio(){
-		return (this.precioBase - this.descuento);
+		// Precio base es por hora
+		// 24 son las horas de 1 día
+		// cantidadDias es la cantidad de días que dura el abono
+		float precio = this.precioBase * 24 * this.cantidadDias;
+		// Menos el descuento
+		return precio - (precio * this.descuento);
 	}
 	
 	public boolean getActivo() {

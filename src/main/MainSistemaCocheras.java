@@ -419,7 +419,9 @@ public class MainSistemaCocheras {
 				String mail = reader.readLine();
 				System.out.print("Telefono: ");
 				String telefono = reader.readLine();
-				System.out.print("Estado: ");
+				String lineaEstado = String.format("Estado (%d: activo, %d: inactivo, %d: con deuda): ", 
+						EstadosCliente.ACTIVO, EstadosCliente.INACTIVO, EstadosCliente.CON_DEUDA);
+				System.out.print(lineaEstado);
 				int estado = Integer.parseInt(reader.readLine());
 				
 				int exitCode = sistemaCocheras.modificarCliente(dni, nombre, domicilio, mail, telefono, estado);

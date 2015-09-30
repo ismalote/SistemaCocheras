@@ -1,7 +1,7 @@
 package modelo;
 
 import java.util.Vector;
-
+import enums.EstadosCliente;
 import vista.ClienteView;
 
 public class Cliente {
@@ -16,12 +16,12 @@ public class Cliente {
 	
 	public Cliente(String dni, String nombre, String domicilio, String mail,
 			String telefono) {
-		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.domicilio = domicilio;
 		this.mail = mail;
 		this.telefono = telefono;
+		this.estado = EstadosCliente.ACTIVO;
 		this.autos = new Vector<Auto>();
 	}
 	
@@ -88,7 +88,7 @@ public class Cliente {
 	}
 	
 	public void darDeBaja() {
-		this.estado = 0;
+		this.estado = EstadosCliente.INACTIVO;
 	}
 	
 	public Auto buscarAuto(String patente) {

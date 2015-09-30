@@ -32,7 +32,7 @@ public class SistemaCocheras {
 	
 	public int crearCliente(String dni, String nombre, String domicilio, String mail, String telefono){
 		
-		if(this.validarCliente(dni, nombre, domicilio, mail, telefono)) {
+		if(this.validarCliente(dni, nombre, domicilio, mail, telefono, EstadosCliente.ACTIVO)) {
 			Cliente cliente = buscarCliente(dni);
 			
 			if(cliente == null){
@@ -48,9 +48,9 @@ public class SistemaCocheras {
 	}
 	
 	private boolean validarCliente(String dni, String nombre, String domicilio, String mail, 
-			String telefono) {
+			String telefono, int estado) {
 		return (dni.length() > 0 && nombre.length() > 0 && 
-				domicilio.length() > 0 && mail.length() > 0); 
+				domicilio.length() > 0 && mail.length() > 0 && estado > 0 && estado < 4); 
 	}
 	
 	
@@ -60,7 +60,7 @@ public class SistemaCocheras {
 		Cliente cliente = buscarCliente(dni);
 
 		if (cliente != null) {
-			if (this.validarCliente(dni, nombre, domicilio, mail, telefono)) {
+			if (this.validarCliente(dni, nombre, domicilio, mail, telefono, estado)) {
 				cliente.setNombre(nombre);
 				cliente.setDomicilio(domicilio);
 				cliente.setMail(mail);
