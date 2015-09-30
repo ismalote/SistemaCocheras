@@ -1,5 +1,6 @@
 package controlador;
 
+import java.util.Date;
 import java.util.Vector;
 
 import modelo.*;
@@ -136,7 +137,7 @@ public class SistemaCocheras {
 		return clientesView;
 	}
 	
-	public Vector<Contrato> buscarContratos(String dni, boolean vigentes){
+	private  Vector<Contrato> buscarContratos(String dni, boolean vigentes){
 		Vector<Contrato> contratosCliente = new Vector<Contrato>();
 		
 		if (this.contratos != null && this.contratos.size() > 0) {
@@ -174,7 +175,7 @@ public class SistemaCocheras {
 				this.mediosPagos.add(medioPago);
 				return ExitCodes.OK;
 			} else {
-				return ExitCodes.NO_EXISTE_ENTIDAD;
+				return ExitCodes.YA_EXISTE_ENTIDAD;
 			}
 		} else {
 			return ExitCodes.ARGUMENTOS_INVALIDOS;
@@ -333,9 +334,104 @@ public class SistemaCocheras {
 	
 	/*********** Región: CONTRATOS ***********/ 
 	
-	public int crearContrato() {
+	public int crearContratoEfectivo(String dni, String patente, int nroCochera, String nombreAbono,
+			Date fecha) {
+		ContratoEfectivo contrato = null;
 		
-		return -1;
+		Cliente cliente = buscarCliente(dni);
+		
+		if (cliente != null) {
+			Auto auto = cliente.buscarAuto(patente);
+			Cochera cochera = this.buscarCochera(nroCochera);
+			Abono abono = this.buscarAbono(nombreAbono);
+			
+			if (auto != null && cochera != null && abono != null) {
+				contrato = new ContratoEfectivo(cliente, auto, cochera, abono, true, fecha);
+				this.contratos.add(contrato);
+				return ExitCodes.OK;
+			}
+			else {
+				return ExitCodes.ARGUMENTOS_INVALIDOS;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}  
+	}
+	
+	
+	public int crearContratoCheque(String dni, String patente, int nroCochera, String nombreAbono,
+			Date fecha) {
+		ContratoCheque contrato = null;
+		
+		Cliente cliente = buscarCliente(dni);
+		
+		if (cliente != null) {
+			Auto auto = cliente.buscarAuto(patente);
+			Cochera cochera = this.buscarCochera(nroCochera);
+			Abono abono = this.buscarAbono(nombreAbono);
+			
+			if (auto != null && cochera != null && abono != null) {
+				contrato = new ContratoCheque(cliente, auto, cochera, abono, true, fecha);
+				this.contratos.add(contrato);
+				return ExitCodes.OK;
+			}
+			else {
+				return ExitCodes.ARGUMENTOS_INVALIDOS;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}  
+	}
+	
+	public int crearContratoTarjetaCredito(String dni, String patente, int nroCochera, String nombreAbono,
+			Date fecha, String nroTarjeta, Date vencimientoTarjeta, 
+			String entidadEmisoraTarjeta) {
+		ContratoTarjetaCredito contrato = null;
+		
+		Cliente cliente = buscarCliente(dni);
+		
+		if (cliente != null) {
+			Auto auto = cliente.buscarAuto(patente);
+			Cochera cochera = this.buscarCochera(nroCochera);
+			Abono abono = this.buscarAbono(nombreAbono);
+			
+			if (auto != null && cochera != null && abono != null) {
+				contrato = new ContratoTarjetaCredito(cliente, auto, cochera, abono, 
+						true, fecha, nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta);
+				this.contratos.add(contrato);
+				return ExitCodes.OK;
+			}
+			else {
+				return ExitCodes.ARGUMENTOS_INVALIDOS;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}  
+	}
+	
+	public int crearContratoDebitoAutomatico(String dni, String patente, int nroCochera, String nombreAbono,
+			Date fecha, String cbu, String entidadBancaria) {
+		ContratoDebitoAutomatico contrato = null;
+		
+		Cliente cliente = buscarCliente(dni);
+		
+		if (cliente != null) {
+			Auto auto = cliente.buscarAuto(patente);
+			Cochera cochera = this.buscarCochera(nroCochera);
+			Abono abono = this.buscarAbono(nombreAbono);
+			
+			if (auto != null && cochera != null && abono != null) {
+				contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, 
+						true, fecha, cbu, entidadBancaria);
+				this.contratos.add(contrato);
+				return ExitCodes.OK;
+			}
+			else {
+				return ExitCodes.ARGUMENTOS_INVALIDOS;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}  
 	}
 	
 	public int modificarContrato(int nroContrato, String abono) {
@@ -491,4 +587,102 @@ public class SistemaCocheras {
 	}
 	
 	/*********** Fin Región: COCHERAS ***********/ 
+	
+	
+	/*********** Región: AUTOS ***********/ 
+	
+	public int crearAuto(String dniCliente, String patente, String marca,
+			Date fechaEntrada, String modelo) {
+		if (this.validarAuto(patente, marca, fechaEntrada, modelo, true)) {
+
+			Cliente cliente = buscarCliente(dniCliente);
+
+			if (cliente != null) {
+				Auto auto = cliente.buscarAuto(patente);
+
+				if (auto == null) {
+					auto = new Auto(patente, marca, fechaEntrada, modelo, true);
+					cliente.agregarAuto(auto);
+					return ExitCodes.OK;
+				} else {
+					return ExitCodes.YA_EXISTE_ENTIDAD;
+				}
+			} else {
+				return ExitCodes.NO_EXISTE_ENTIDAD;
+			}
+		} else {
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
+		}
+	}
+	
+	private boolean validarAuto(String patente, String marca, Date fechaEntrada, 
+			String modelo, boolean activo) {
+		return (patente.length() > 0 && marca.length() > 0 &&  fechaEntrada != null && modelo.length() > 0); 
+	}
+	
+	public int modificarAuto(String dniCliente, String patente, String marca,
+			Date fechaEntrada, String modelo, boolean activo) {
+		Cliente cliente = buscarCliente(dniCliente);
+
+		if (cliente != null) {
+			Auto auto = cliente.buscarAuto(patente);
+
+			if (auto != null) {
+				if (this.validarAuto(patente, marca, fechaEntrada, modelo, activo)) {
+					auto.setMarca(marca);
+					auto.setActivo(activo);
+					auto.setFechaEntrada(fechaEntrada);
+					auto.setModelo(modelo);
+					return ExitCodes.OK;
+				} else {
+					return ExitCodes.ARGUMENTOS_INVALIDOS;
+				}
+			}else {
+				return ExitCodes.CLIENTE_NO_EXISTE_AUTO;
+			} 
+		} else {
+			return ExitCodes.NO_EXISTE_ENTIDAD;
+		}
+	}
+	
+	public int eliminarAuto(String dniCliente, String patente){
+		Cliente cliente = buscarCliente(dniCliente);
+
+		if (cliente != null) {
+			Auto auto = cliente.buscarAuto(patente);
+		
+			if(auto != null) {
+				auto.darDeBaja();
+			
+				return ExitCodes.OK;
+			}
+			else {
+				return ExitCodes.CLIENTE_NO_EXISTE_AUTO;
+			}
+		}
+		else {
+			return ExitCodes.NO_EXISTE_ENTIDAD;
+		}
+	}
+	
+	public Vector<AutoView> listarAutos(String dniCliente) {
+		Vector<AutoView> autosView = new Vector<AutoView>();
+
+		Cliente cliente = buscarCliente(dniCliente);
+
+		if (cliente != null) {
+			Vector<Auto> autos  = cliente.getAutos();
+		
+			if(autos != null && autos.size() > 0){
+				for (Auto a: autos) {
+					autosView.add(a.getView());
+				}
+			}
+		}
+		
+		return autosView;
+	}
+	
+	/*********** Fin Región: AUTOS ***********/ 
 }
+

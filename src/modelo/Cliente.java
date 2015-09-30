@@ -22,6 +22,7 @@ public class Cliente {
 		this.domicilio = domicilio;
 		this.mail = mail;
 		this.telefono = telefono;
+		this.autos = new Vector<Auto>();
 	}
 	
 	public ClienteView getView()
@@ -88,5 +89,23 @@ public class Cliente {
 	
 	public void darDeBaja() {
 		this.estado = 0;
+	}
+	
+	public Auto buscarAuto(String patente) {
+		Auto auto = null;
+		
+		if (this.autos != null && this.autos.size() > 0) {
+			for (Auto a: this.autos) {
+				if (a.sosAuto(patente)) {
+					auto = a;
+				}
+			}
+		}
+		
+		return auto;
+	}
+	
+	public void agregarAuto(Auto auto) {
+		this.autos.add(auto);
 	}
 }

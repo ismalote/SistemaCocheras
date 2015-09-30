@@ -7,4 +7,5 @@ public final class ExitCodes {
 	public final static int ARGUMENTOS_INVALIDOS = 3;
 	public final static int FALLA_BAJA = 4;
 	public final static int CLIENTE_CONTRATOS_VIGENTES = 5;
+	public final static int CLIENTE_NO_EXISTE_AUTO = 6;
 }
