@@ -56,11 +56,11 @@ public class SistemaCocheras {
 	
 	public int modificarCliente(String dni, String nombre, String domicilio, String mail, 
 			String telefono, int estado) {
-
-		Cliente cliente = buscarCliente(dni);
-
-		if (cliente != null) {
-			if (this.validarCliente(dni, nombre, domicilio, mail, telefono, estado)) {
+		
+		if (this.validarCliente(dni, nombre, domicilio, mail, telefono, estado)) {
+				Cliente cliente = buscarCliente(dni);
+		
+				if (cliente != null) {
 				cliente.setNombre(nombre);
 				cliente.setDomicilio(domicilio);
 				cliente.setMail(mail);
@@ -258,10 +258,10 @@ public class SistemaCocheras {
 	
 	public int modificarAbono(String nombre, int cantidadDias, float precioBase, float descuento, int tamanioCochera) {
 
-		Abono abono = buscarAbono(nombre);
-
-		if (abono != null) {
-			if (this.validarAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera)) {
+		if (this.validarAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera)) {
+			Abono abono = buscarAbono(nombre);
+	
+			if (abono != null) {
 				abono.setCantidadDias(cantidadDias);
 				abono.setPrecioBase(precioBase);
 				abono.setTamanioCochera(tamanioCochera);
@@ -360,7 +360,7 @@ public class SistemaCocheras {
 	
 	
 	public int crearContratoCheque(String dni, String patente, int nroCochera, String nombreAbono,
-			Date fecha) {
+			Date fecha, String nroCuentaCorriente, String entidadBancaria) {
 		ContratoCheque contrato = null;
 		
 		Cliente cliente = buscarCliente(dni);
@@ -371,7 +371,8 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);
 			
 			if (auto != null && cochera != null && abono != null) {
-				contrato = new ContratoCheque(cliente, auto, cochera, abono, true, fecha);
+				contrato = new ContratoCheque(cliente, auto, cochera, abono, true, fecha, 
+						nroCuentaCorriente, entidadBancaria);
 				this.contratos.add(contrato);
 				return ExitCodes.OK;
 			}
@@ -500,8 +501,9 @@ public class SistemaCocheras {
 	/*********** Región: COCHERAS ***********/ 
 	
 	public int crearCochera(int tamanioVehiculoAdmitido) {
-		
-		if(this.validarCochera(tamanioVehiculoAdmitido, EstadosCochera.LIBRE)) {
+		// Se usa Integer.MAX_VALUE como valor provisorio; se asignará el número de la cochera
+		// en el constructor.
+		if(this.validarCochera(Integer.MAX_VALUE, tamanioVehiculoAdmitido, EstadosCochera.LIBRE)) {
 				Cochera cochera = new Cochera(tamanioVehiculoAdmitido, EstadosCochera.LIBRE);
 				this.cocheras.add(cochera);
 				return ExitCodes.OK;
@@ -510,17 +512,17 @@ public class SistemaCocheras {
 		}
 	}
 	
-	private boolean validarCochera(int tamanioVehiculoAdmitido, int estado) {
-		return ((tamanioVehiculoAdmitido > 0 && tamanioVehiculoAdmitido  < 4)
+	private boolean validarCochera(int numero, int tamanioVehiculoAdmitido, int estado) {
+		return ((numero > 0) && (tamanioVehiculoAdmitido > 0 && tamanioVehiculoAdmitido  < 4)
 				&& (estado > 0 && estado < 4)); 
 	}
 	
 	public int modificarCochera(int numero, int tamanioVehiculoAdmitido, int estado) {
 
-		Cochera cochera = buscarCochera(numero);
+		if (this.validarCochera(numero, tamanioVehiculoAdmitido, estado)) {
+			Cochera cochera = buscarCochera(numero);
 
-		if (cochera != null) {
-			if (this.validarCochera(tamanioVehiculoAdmitido, estado)) {
+			if (cochera != null) {
 				cochera.setTamanioVehiculoAdmitido(tamanioVehiculoAdmitido);
 				cochera.setEstado(estado);
 				return ExitCodes.OK;
@@ -622,13 +624,14 @@ public class SistemaCocheras {
 	
 	public int modificarAuto(String dniCliente, String patente, String marca,
 			Date fechaEntrada, String modelo, boolean activo) {
-		Cliente cliente = buscarCliente(dniCliente);
-
-		if (cliente != null) {
-			Auto auto = cliente.buscarAuto(patente);
-
-			if (auto != null) {
-				if (this.validarAuto(patente, marca, fechaEntrada, modelo, activo)) {
+		
+		if (this.validarAuto(patente, marca, fechaEntrada, modelo, activo)) {
+			Cliente cliente = buscarCliente(dniCliente);
+	
+			if (cliente != null) {
+				Auto auto = cliente.buscarAuto(patente);
+	
+				if (auto != null) {
 					auto.setMarca(marca);
 					auto.setActivo(activo);
 					auto.setFechaEntrada(fechaEntrada);

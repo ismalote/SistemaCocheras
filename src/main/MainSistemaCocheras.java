@@ -961,11 +961,18 @@ public class MainSistemaCocheras {
 			
 			if(medioPagoCliente.equalsIgnoreCase(MediosPagoCliente.EFECTIVO))
 			{
-				exitCode = this.sistemaCocheras.crearContratoEfectivo(dni, patente, nroCochera, nombreAbono, fecha);
+				exitCode = this.sistemaCocheras.crearContratoEfectivo(dni, patente, nroCochera, 
+						nombreAbono, fecha);
 			}
 			else if(medioPagoCliente.equalsIgnoreCase(MediosPagoCliente.CHEQUE))
 			{
-				exitCode = this.sistemaCocheras.crearContratoCheque(dni, patente, nroCochera, nombreAbono, fecha);
+				System.out.print("Numero cuenta corriente: ");
+				String nroCuentaCorriente = reader.readLine();
+				System.out.print("Entidad bancaria: ");
+				String entidadBancaria = reader.readLine();
+				
+				exitCode = this.sistemaCocheras.crearContratoCheque(dni, patente, nroCochera, 
+						nombreAbono, fecha, nroCuentaCorriente, entidadBancaria);
 			}
 			else if (medioPagoCliente.equalsIgnoreCase(MediosPagoCliente.DEBITO_TARJETA_CREDITO))
 			{
