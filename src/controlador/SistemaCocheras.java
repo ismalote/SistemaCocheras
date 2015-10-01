@@ -641,13 +641,13 @@ public class SistemaCocheras {
 					auto.setModelo(modelo);
 					return ExitCodes.OK;
 				} else {
-					return ExitCodes.ARGUMENTOS_INVALIDOS;
+					return ExitCodes.NO_EXISTE_AUTO;
 				}
 			}else {
-				return ExitCodes.NO_EXISTE_AUTO;
+				return ExitCodes.NO_EXISTE_ENTIDAD;
 			} 
 		} else {
-			return ExitCodes.NO_EXISTE_ENTIDAD;
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
 		}
 	}
 	
