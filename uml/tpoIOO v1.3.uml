@@ -3757,11 +3757,10 @@
 </XPD:OBJ>
 <XPD:ATTR name="#TypedFeatures" type="integer">1</XPD:ATTR>
 <XPD:REF name="TypedFeatures[0]">fnv2ISWlaka90UDoFMCIfAAA</XPD:REF>
-<XPD:ATTR name="#TypedParameters" type="integer">4</XPD:ATTR>
+<XPD:ATTR name="#TypedParameters" type="integer">3</XPD:ATTR>
 <XPD:REF name="TypedParameters[0]">6RHI1KsRcUCanNZI/dpNCAAA</XPD:REF>
 <XPD:REF name="TypedParameters[1]">BcagUaIjfE6AD9owvAlZHgAA</XPD:REF>
-<XPD:REF name="TypedParameters[2]">R7hIshrTN0Ka3vbTrb1OUAAA</XPD:REF>
-<XPD:REF name="TypedParameters[3]">GTuucpUHtUu5YlWV4q2S/QAA</XPD:REF>
+<XPD:REF name="TypedParameters[2]">GTuucpUHtUu5YlWV4q2S/QAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">7</XPD:ATTR>
 <XPD:REF name="Associations[0]">nLWDS/3uV02hRBF3IXAprwAA</XPD:REF>
 <XPD:REF name="Associations[1]">/D4CIqrQJk6IpiBygF2WTwAA</XPD:REF>
@@ -3997,12 +3996,9 @@
 <XPD:REF name="BehavioralFeature">h5SHI7VGBkWUX9hiiS/z8AAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#TypedParameters" type="integer">5</XPD:ATTR>
+<XPD:ATTR name="#TypedParameters" type="integer">2</XPD:ATTR>
 <XPD:REF name="TypedParameters[0]">ggARLunwEEe2rg6mVbEeUgAA</XPD:REF>
-<XPD:REF name="TypedParameters[1]">FxsN4CbSMESnVGCVFeYc4QAA</XPD:REF>
-<XPD:REF name="TypedParameters[2]">5IHf6VMcBkes3UVYE7jAogAA</XPD:REF>
-<XPD:REF name="TypedParameters[3]">v2+RgdUF80CF5S2YzzO1ygAA</XPD:REF>
-<XPD:REF name="TypedParameters[4]">MINsYWdVeUWIVOSZUAEWgAAA</XPD:REF>
+<XPD:REF name="TypedParameters[1]">MINsYWdVeUWIVOSZUAEWgAAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">16</XPD:ATTR>
 <XPD:REF name="Associations[0]">goSZRXD2TUq4xdhRaiyCRQAA</XPD:REF>
 <XPD:REF name="Associations[1]">gBZIRFwOEkerwIqHBJDccAAA</XPD:REF>
@@ -6623,8 +6619,8 @@
 <XPD:REF name="Participant">d7Quh+k9p02Im2VdjnblGgAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">RjYrfJlHYUKoGXFJ+0WMpwAA</XPD:REF>
-<XPD:REF name="Views[1]">FKCWnzN53EOLktAK4hEg3gAA</XPD:REF>
-<XPD:REF name="Views[2]">LoKtyhWZskG8YtRFAPfJagAA</XPD:REF>
+<XPD:REF name="Views[1]">LoKtyhWZskG8YtRFAPfJagAA</XPD:REF>
+<XPD:REF name="Views[2]">FKCWnzN53EOLktAK4hEg3gAA</XPD:REF>
 <XPD:REF name="Views[3]">f6MNM02jTUWhnstUwznXEgAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Connections[1]" type="UMLAssociationEnd" guid="Pjpq6phfjUmFPeysD+7AzwAA">
@@ -6632,8 +6628,8 @@
 <XPD:REF name="Participant">nhRClHfir06XJuxQ802VwwAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">wQJ4trNILESkaqH0lIUHeAAA</XPD:REF>
-<XPD:REF name="Views[1]">WkWK5HcB1EeDcPfGzoVnOgAA</XPD:REF>
-<XPD:REF name="Views[2]">WNAzDUw6EUux/V8jW1bO6gAA</XPD:REF>
+<XPD:REF name="Views[1]">WNAzDUw6EUux/V8jW1bO6gAA</XPD:REF>
+<XPD:REF name="Views[2]">WkWK5HcB1EeDcPfGzoVnOgAA</XPD:REF>
 <XPD:REF name="Views[3]">Evz/XCwtrkSDhVn0jx4vrQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -10670,7 +10666,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="YTPIatNtyESDvxkhXx4dywAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">listarMedioPago(): Collection</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">listarMediosPago(): Collection</XPD:ATTR>
 <XPD:REF name="Model">NAG4nPYSak+WdzZ53NzEmQAA</XPD:REF>
 <XPD:REF name="HostEdge">ZUWWhhP0A0eaY0cX6kO6CAAA</XPD:REF>
 </XPD:OBJ>
@@ -18337,7 +18333,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="TSZQrD7ONUy4551Sj6+akwAA">
 <XPD:ATTR name="Alpha" type="real">1,58361513562441</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">78,0064099930256</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">cte = buscarCliente(dni)</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">cte = buscarCliente(dniCliente)</XPD:ATTR>
 <XPD:REF name="Model">+U7nTtrPS028+AKG1053ggAA</XPD:REF>
 <XPD:REF name="HostEdge">1i9s48W/1kmNe9dgNo4UOAAA</XPD:REF>
 </XPD:OBJ>
@@ -18652,7 +18648,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[2]" type="UMLStimulus" guid="+U7nTtrPS028+AKG1053ggAA">
 <XPD:ATTR name="Name" type="string">cte = buscarCliente</XPD:ATTR>
-<XPD:ATTR name="Arguments" type="string">dni</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">dniCliente</XPD:ATTR>
 <XPD:REF name="Sender">toiUS9U+j023sVd8bQTEeQAA</XPD:REF>
 <XPD:REF name="Receiver">toiUS9U+j023sVd8bQTEeQAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="tqSy6HyLW0q9N34X9xZ8ggAA">
@@ -19094,7 +19090,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="WX/kmtR6UE2U/usSJJpoawAA">
 <XPD:ATTR name="Alpha" type="real">1,58361513562441</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">78,0064099930256</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">cte = buscarCliente(dni)</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">cte = buscarCliente(dniCliente)</XPD:ATTR>
 <XPD:REF name="Model">5Zms/3LkP0qZILVdgdQcOQAA</XPD:REF>
 <XPD:REF name="HostEdge">cxGzcPJ1lUOVZcFOPoeAJgAA</XPD:REF>
 </XPD:OBJ>
@@ -19481,7 +19477,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[2]" type="UMLStimulus" guid="5Zms/3LkP0qZILVdgdQcOQAA">
 <XPD:ATTR name="Name" type="string">cte = buscarCliente</XPD:ATTR>
-<XPD:ATTR name="Arguments" type="string">dni</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">dniCliente</XPD:ATTR>
 <XPD:REF name="Sender">5n6zNHKGx0aY5v0fe3dCyQAA</XPD:REF>
 <XPD:REF name="Receiver">5n6zNHKGx0aY5v0fe3dCyQAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="s/tP+7Tf5EWWw588ZMdWBAAA">
@@ -19846,7 +19842,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">736</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">76</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">72</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">70</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">753</XPD:ATTR>
 <XPD:REF name="Model">9V5O2pFhMU+ILgqYdJjf9gAA</XPD:REF>
@@ -19937,7 +19933,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="BT7RV4cY+0SRBJGiW073GAAA">
 <XPD:ATTR name="Alpha" type="real">1,58361513562441</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">78,0064099930256</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">cte = buscarCliente(dni)</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">cte = buscarCliente(dniCliente)</XPD:ATTR>
 <XPD:REF name="Model">T7R5SWOdP06AZAnDxLoyNAAA</XPD:REF>
 <XPD:REF name="HostEdge">SpHG8M6x5UC1eJ5sNAvJawAA</XPD:REF>
 </XPD:OBJ>
@@ -20274,7 +20270,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[1]" type="UMLStimulus" guid="T7R5SWOdP06AZAnDxLoyNAAA">
 <XPD:ATTR name="Name" type="string">cte = buscarCliente</XPD:ATTR>
-<XPD:ATTR name="Arguments" type="string">dni</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">dniCliente</XPD:ATTR>
 <XPD:REF name="Sender">ba+w/uNo3kWGxBwmak2niwAA</XPD:REF>
 <XPD:REF name="Receiver">ba+w/uNo3kWGxBwmak2niwAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="+h0gsV6PDkKqocp64sjBkQAA">
