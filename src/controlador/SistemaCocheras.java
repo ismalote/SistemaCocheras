@@ -12,7 +12,7 @@ import vista.*;
 
 public class SistemaCocheras {
 	
-	/*********** Región: INICIALIZACIÓN ***********/ 
+	/*********** Regiï¿½n: INICIALIZACIï¿½N ***********/ 
 	
 	private Vector<Contrato> contratos;
 	private Vector<Cliente> clientes;
@@ -28,10 +28,10 @@ public class SistemaCocheras {
 		this.abonos = new Vector<Abono>();
 	}
 	
-	/*********** Fin Región: INICIALIZACIÓN ***********/ 
+	/*********** Fin Regiï¿½n: INICIALIZACIï¿½N ***********/ 
 		
 
-	/*********** Región: CLIENTES ***********/ 
+	/*********** Regiï¿½n: CLIENTES ***********/ 
 	
 	public int crearCliente(String dni, String nombre, String domicilio, String mail, String telefono){
 		
@@ -63,7 +63,7 @@ public class SistemaCocheras {
 		if (this.validarCliente(dni, nombre, domicilio, mail, telefono, estado)) {
 				Cliente cliente = buscarCliente(dni);
 		
-				if (cliente != null) {
+			if (cliente != null) {
 				cliente.setNombre(nombre);
 				cliente.setDomicilio(domicilio);
 				cliente.setMail(mail);
@@ -162,10 +162,10 @@ public class SistemaCocheras {
 		return (contratosCliente.size() != 0 ? contratosCliente : null);
 	}
 	
-	/*********** Fin Región: CLIENTES ***********/ 
+	/*********** Fin Regiï¿½n: CLIENTES ***********/ 
 	
 	
-	/*********** Región: MEDIOS DE PAGO ***********/ 
+	/*********** Regiï¿½n: MEDIOS DE PAGO ***********/ 
 	
 	public int crearMedioPago(String nombreEntidad, String nombreArchivoEntrada,
 			String nombreArchivoSalida, String direccionFTP) {
@@ -230,10 +230,10 @@ public class SistemaCocheras {
 		return mediosPagoView;
 	}
 	
-	/*********** Fin Región: MEDIOS DE PAGO ***********/ 
+	/*********** Fin Regiï¿½n: MEDIOS DE PAGO ***********/ 
 
 	
-	/*********** Región: ABONOS ***********/ 
+	/*********** Regiï¿½n: ABONOS ***********/ 
 	
 	public int crearAbono(String nombre, int cantidadDias, float precioBase, float descuento, int tamanioCochera){
 		
@@ -332,10 +332,10 @@ public class SistemaCocheras {
 		return abonosView;
 	}
 	
-	/*********** Fin Región: ABONOS ***********/ 
+	/*********** Fin Regiï¿½n: ABONOS ***********/ 
 	
 	
-	/*********** Región: CONTRATOS ***********/ 
+	/*********** Regiï¿½n: CONTRATOS ***********/ 
 	
 	public int crearContratoEfectivo(String dni, String patente, int nroCochera, String nombreAbono,
 			Date fecha) {
@@ -498,13 +498,13 @@ public class SistemaCocheras {
 		return contratosView;
 	}
 	
-	/*********** Fin Región: CONTRATOS ***********/ 
+	/*********** Fin Regiï¿½n: CONTRATOS ***********/ 
 	
 	
-	/*********** Región: COCHERAS ***********/ 
+	/*********** Regiï¿½n: COCHERAS ***********/ 
 	
 	public int crearCochera(int tamanioVehiculoAdmitido) {
-		// Se usa Integer.MAX_VALUE como valor provisorio; se asignará el número de la cochera
+		// Se usa Integer.MAX_VALUE como valor provisorio; se asignarï¿½ el nï¿½mero de la cochera
 		// en el constructor.
 		if(this.validarCochera(Integer.MAX_VALUE, tamanioVehiculoAdmitido, EstadosCochera.LIBRE)) {
 				Cochera cochera = new Cochera(tamanioVehiculoAdmitido);
@@ -591,10 +591,10 @@ public class SistemaCocheras {
 		return cocheraView;
 	}
 	
-	/*********** Fin Región: COCHERAS ***********/ 
+	/*********** Fin Regiï¿½n: COCHERAS ***********/ 
 	
 	
-	/*********** Región: AUTOS ***********/ 
+	/*********** Regiï¿½n: AUTOS ***********/ 
 	
 	public int crearAuto(String dniCliente, String patente, String marca,
 			Date fechaEntrada, String modelo) {
@@ -701,10 +701,10 @@ public class SistemaCocheras {
 		return autosView;
 	}
 	
-	/*********** Fin Región: AUTOS ***********/ 
+	/*********** Fin Regiï¿½n: AUTOS ***********/ 
 	
 	
-	/*********** Región: DATOS PRUEBA ***********/ 
+	/*********** Regiï¿½n: DATOS PRUEBA ***********/ 
 	
 	public void generarDatosPrueba(int cantidadDatosAGenerar) {
 		DatosPrueba datosPrueba = new DatosPrueba(cantidadDatosAGenerar);
@@ -770,6 +770,6 @@ public class SistemaCocheras {
 		this.contratos.add(contratoDA);
 	}
 	
-	/*********** Fin Región: DATOS PRUEBA ***********/ 
+	/*********** Fin Regiï¿½n: DATOS PRUEBA ***********/ 
 }
 
