@@ -27,9 +27,16 @@ public class MainSistemaCocheras {
 	}
 	
 	private Date parsearFecha(String fecha) throws ParseException {
-		Date fechaFormateada = null;
+		Date fechaParseada = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		fechaFormateada = formato.parse(fecha);
+		fechaParseada = formato.parse(fecha);
+		return fechaParseada;
+	}
+	
+	private String formatearFecha(Date fecha) throws ParseException {
+		String fechaFormateada = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		fechaFormateada = formato.format(fecha);
 		return fechaFormateada;
 	}
 
@@ -43,8 +50,9 @@ public class MainSistemaCocheras {
 		System.out.println("1.- Clientes");
 		System.out.println("2.- Medios de pago");
 		System.out.println("3.- Abonos");
-		System.out.println("4.- Contratos de cochera");
+		System.out.println("4.- Contratos");
 		System.out.println("5.- Cocheras");
+		System.out.println("6.- Generar datos de prueba");
 		System.out.println("Q.- Salir");
 		System.out.println("-------------------------------------------------------");
 		System.out.print("Opcion: ");
@@ -72,6 +80,10 @@ public class MainSistemaCocheras {
 			  	}
 			  	case '5' :  {
 			  		this.mostrarMenuCocheras();
+			  		break;
+			  	}
+			  	case '6' :  {
+			  		this.mostrarMenuGenerarDatosPrueba();
 			  		break;
 			  	}
 			  	case 'Q': 
@@ -569,14 +581,13 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void listarClientes() {
+	private void listarClientes() {
 		try
 		{
 			Vector<ClienteView> clientesView = this.sistemaCocheras.listarClientes();	
 			
 			if (clientesView != null && clientesView.size() > 0) {
-				System.out.println("DNI\tNOMBRE\tDOMICILIO\tMAIL\tTELEFONO\tESTADO");
-				System.out.println("--------------------------");
+				System.out.println("DNI\tNOMBRE\t\tDOMICILIO\t\tMAIL\t\tTELEFONO\t\tESTADO");
 				
 				for (ClienteView cv: clientesView) {
 						
@@ -597,7 +608,7 @@ public class MainSistemaCocheras {
 							break;
 					}
 								
-					String linea = String.format("%s\t%s\t%s\t%s\t%s", cv.getDni(), cv.getNombre(), 
+					String linea = String.format("%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s", cv.getDni(), cv.getNombre(), 
 							cv.getDomicilio(), cv.getMail(), cv.getTelefono(), estado);
 					System.out.println(linea);
 				}
@@ -700,14 +711,13 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void listarMediosPago() {
+	private void listarMediosPago() {
 		try
 		{
 			Vector<MedioPagoView> mediosPagosView = this.sistemaCocheras.listarMediosPagos();	
 			
 			if (mediosPagosView != null && mediosPagosView.size() > 0) {
 				System.out.println("NOMBRE\tARCH.ENTRADA\tARCH.SALIDA\tFTP\tACTIVO");
-				System.out.println("--------------------------");
 				
 				for (MedioPagoView mpv: mediosPagosView) {				
 					String linea = String.format("%s\t%s\t%s\t%s\t%s", mpv.getNombreEntidad(),
@@ -879,14 +889,13 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void listarAbonos() {
+	private void listarAbonos() {
 		try
 		{
 			Vector<AbonoView> abonosView = this.sistemaCocheras.listarAbonos();
 			
 			if (abonosView != null && abonosView.size() > 0) {
-				System.out.println("NOMBRE\tPRECIO BASE\tDIAS\tDESCUENTO\tTAM.COCHERA\tESTADO");
-				System.out.println("--------------------------");
+				System.out.println("NOMBRE\tPRECIO BASE\tDIAS\tDESCUENTO\tTAM.COCHERA\t\tESTADO");
 				
 				for (AbonoView av: abonosView) {
 					String tamanio;
@@ -909,9 +918,7 @@ public class MainSistemaCocheras {
 					
 					estado = av.getActivo() ? "Activo" : "Inactivo";
 					
-					System.out.println("NOMBRE\tPRECIO BASE\tDIAS\tDESCUENTO\tTAM.COCHERA\tESTADO");
-					
-					String linea = String.format("%f\t%f\t%d\t%s\t%s", av.getNombre(), 
+					String linea = String.format("%s\t%.2f\t%d\t%.2f\t%s\t\t%s", av.getNombre(), 
 							av.getPrecioBase(), av.getCantidadDias(), av.getDescuento(),
 							tamanio, estado);
 					System.out.println(linea);
@@ -1039,9 +1046,9 @@ public class MainSistemaCocheras {
 				System.out.println("--------------------------");
 				
 				for (ContratoView cv: contratosVigentes) {				
-					String linea = String.format("%d\t%td/%tm/%ty\t%s\t%d\t%s\t%s", 
+					String linea = String.format("%d\t%s\t%s\t%d\t%s\t%s", 
 							cv.getNroContrato(),
-							cv.getFecha(),
+							this.formatearFecha(cv.getFecha()),
 							cv.getPatenteAuto(),
 							cv.getNroCochera(),
 							cv.getAbono(),
@@ -1106,9 +1113,9 @@ public class MainSistemaCocheras {
 				System.out.println("--------------------------");
 				
 				for (ContratoView cv: contratosVigentes) {				
-					String linea = String.format("%d\t%td/%tm/%ty\t%s\t%d\t%s\t%s", 
+					String linea = String.format("%d\t%s\t%s\t%d\t%s\t%s", 
 							cv.getNroContrato(),
-							cv.getFecha(),
+							this.formatearFecha(cv.getFecha()),
 							cv.getPatenteAuto(),
 							cv.getNroCochera(),
 							cv.getAbono(),
@@ -1152,7 +1159,7 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void listarContratos() {
+	private void listarContratos() {
 		try
 		{
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -1164,12 +1171,11 @@ public class MainSistemaCocheras {
 			
 			if (contratosView != null && contratosView.size() > 0) {
 				System.out.println("NRO.CONTRATO\tFECHA\tPATENTE\tCOCHERA\tABONO\tESTADO");
-				System.out.println("--------------------------");
 				
 				for (ContratoView cv: contratosView) {				
-					String linea = String.format("%d\t%d\t%td/%tm/%ty\t%s\t%s", 
+					String linea = String.format("%d\t%s\t%s\t%s\t%s\t%s", 
 							cv.getNroContrato(),
-							cv.getFecha(),
+							this.formatearFecha(cv.getFecha()),
 							cv.getPatenteAuto(),
 							cv.getNroCochera(),
 							cv.getAbono(),
@@ -1324,14 +1330,13 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	public void listarCocheras() {
+	private void listarCocheras() {
 		try
 		{
 			Vector<CocheraView> cocherasView = this.sistemaCocheras.listarCocheras();
 			
 			if (cocherasView != null && cocherasView.size() > 0) {
 				System.out.println("NUMERO\tTAMAÑO\tESTADO");
-				System.out.println("--------------------------");
 				
 				for (CocheraView cv: cocherasView) {
 					String tamanio;
@@ -1456,11 +1461,11 @@ public class MainSistemaCocheras {
 				System.out.println("--------------------------");
 				
 				for (AutoView av: autosView) {				
-					String linea = String.format("%s\t%s\t\t%s\t%td/%tm/%ty\t%s", 
+					String linea = String.format("%s\t%s\t\t%s\t%s\t%s", 
 							av.getPatente(),
 							av.getMarca(),
 							av.getModelo(),
-							av.getFechaEntrada(),
+							this.formatearFecha(av.getFechaEntrada()),
 							av.getActivo() ? "Activo" : "Inactivo");
 					
 					System.out.println(linea);
@@ -1573,15 +1578,15 @@ public class MainSistemaCocheras {
 			Vector<AutoView> autosView = this.sistemaCocheras.listarAutos(dni);	
 			
 			if (autosView != null && autosView.size() > 0) {
-				System.out.println("PATENTE\tMARCA\tMODELO\tF.ENTRADA\tESTADO");
+				System.out.println("PATENTE\tMARCA\t\tMODELO\t\tF.ENTRADA\tESTADO");
 				System.out.println("--------------------------");
 				
 				for (AutoView av: autosView) {				
-					String linea = String.format("%s\t%s\t\t%s\t%td/%tm/%ty\t%s", 
+					String linea = String.format("%s\t%s\t\t%s\t\t%s\t%s", 
 							av.getPatente(),
 							av.getMarca(),
 							av.getModelo(),
-							av.getFechaEntrada(),
+							this.formatearFecha(av.getFechaEntrada()),
 							av.getActivo() ? "Activo" : "Inactivo");
 					
 					System.out.println(linea);
@@ -1601,4 +1606,30 @@ public class MainSistemaCocheras {
 	
 	
 	/*********** Fin Región: AUTOS ***********/ 
+	
+	
+	/*********** Región: DATOS PRUEBA ***********/ 
+	
+	private void mostrarMenuGenerarDatosPrueba() {
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		 	
+			//Imprimo menu de opciones
+			System.out.println();
+			System.out.println("GENERAR DATOS DE PRUEBA");
+			System.out.println("------------------------");
+			System.out.print("Cantidad de datos a generar: ");
+			int cantidad = Integer.parseInt(reader.readLine());
+			
+			this.sistemaCocheras.generarDatosPrueba(cantidad);
+			
+			this.mostrarMenu();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	/*********** Fin Región: DATOS PRUEBA ***********/ 
 }

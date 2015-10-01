@@ -1,6 +1,7 @@
 package tests;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 import enums.*;
@@ -72,7 +73,7 @@ public class DatosPrueba {
 					String.format("Nombre %d", i),
 					String.format("Domicilio %d", i),
 					String.format("mail%d@mail.com", i),
-					String.format("%d-%d", i)
+					String.format("%d-%d", i, i)
 					);
 
 			Vector<Auto> autos = new Vector<Auto>();
@@ -165,22 +166,22 @@ public class DatosPrueba {
 	}
 	
 	public ContratoTarjetaCredito generarContratoTarjetaCredito(Cliente cliente, Auto auto, Cochera cochera, Abono abono,
-			String nroCuentaCorriente, String entidadBancaria) 
+			String nroTarjeta, Date vencimientoTarjeta, String entidadTarjeta) 
 			throws IllegalArgumentException {
 
 		ContratoTarjetaCredito contrato = null;
 		
 		if (cliente != null && auto != null && cochera != null && abono != null
-				&& nroCuentaCorriente.length() > 0 && entidadBancaria.length() > 0) {
+				&& nroTarjeta.length() > 0 && vencimientoTarjeta != null && entidadTarjeta.length() > 0) {
 		
 			contrato = new ContratoTarjetaCredito(
 					cliente,
 					auto,
 					cochera,
 					abono,
-					nroCuentaCorriente,
-					Calendar.getInstance().getTime(),
-					entidadBancaria
+					nroTarjeta,
+					vencimientoTarjeta,
+					entidadTarjeta
 					);
 		} else {
 			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");

@@ -1,10 +1,13 @@
 package controlador;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.Vector;
 
 import modelo.*;
 import enums.*;
+import tests.DatosPrueba;
 import vista.*;
 
 public class SistemaCocheras {
@@ -68,10 +71,10 @@ public class SistemaCocheras {
 				cliente.setEstado(estado);
 				return ExitCodes.OK;
 			} else {
-				return ExitCodes.ARGUMENTOS_INVALIDOS;
+				return ExitCodes.NO_EXISTE_ENTIDAD;
 			}
 		} else {
-			return ExitCodes.NO_EXISTE_ENTIDAD;
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
 		}
 	}
 	
@@ -699,5 +702,74 @@ public class SistemaCocheras {
 	}
 	
 	/*********** Fin Región: AUTOS ***********/ 
+	
+	
+	/*********** Región: DATOS PRUEBA ***********/ 
+	
+	public void generarDatosPrueba(int cantidadDatosAGenerar) {
+		DatosPrueba datosPrueba = new DatosPrueba(cantidadDatosAGenerar);
+		
+		this.abonos.addAll(datosPrueba.generarAbonos());
+		this.clientes.addAll(datosPrueba.generarClientes());
+		this.cocheras.addAll(datosPrueba.generarCocheras());
+		this.mediosPagos.addAll(datosPrueba.generarMediosPagos());
+		
+		int min = 0;
+		int max = cantidadDatosAGenerar - 1;
+		Random random = new Random();
+		
+		int i = random.nextInt(max - min + 1) + min;
+		
+		ContratoEfectivo contratoE = new ContratoEfectivo(
+				this.clientes.elementAt(i),
+				this.clientes.elementAt(i).getAutos().firstElement(),
+				this.cocheras.elementAt(i),
+				this.abonos.elementAt(i)
+				);
+		
+		this.contratos.add(contratoE);
+		
+		i = random.nextInt(max - min + 1) + min;
+		
+		ContratoCheque contratoC = new ContratoCheque(
+				this.clientes.elementAt(i),
+				this.clientes.elementAt(i).getAutos().firstElement(),
+				this.cocheras.elementAt(i),
+				this.abonos.elementAt(i),
+				Integer.toString(i),
+				String.format("Entidad %d", i)
+				);
+		
+		this.contratos.add(contratoC);
+		
+		i = random.nextInt(max - min + 1) + min;
+		
+		ContratoTarjetaCredito contratoTC = new ContratoTarjetaCredito(
+				this.clientes.elementAt(i),
+				this.clientes.elementAt(i).getAutos().firstElement(),
+				this.cocheras.elementAt(i),
+				this.abonos.elementAt(i),
+				Integer.toString(i),
+				Calendar.getInstance().getTime(),
+				String.format("Entidad %d", i)
+				);
+		
+		this.contratos.add(contratoTC);
+		
+		i = random.nextInt(max - min + 1) + min;
+		
+		ContratoDebitoAutomatico contratoDA = new ContratoDebitoAutomatico(
+				this.clientes.elementAt(i),
+				this.clientes.elementAt(i).getAutos().firstElement(),
+				this.cocheras.elementAt(i),
+				this.abonos.elementAt(i),
+				Integer.toString(i),
+				String.format("Entidad %d", i)
+				);
+		
+		this.contratos.add(contratoDA);
+	}
+	
+	/*********** Fin Región: DATOS PRUEBA ***********/ 
 }
 
