@@ -10,7 +10,7 @@ import vista.*;
 
 public class MainSistemaCocheras {
 
-	/*********** Región: INICIALIZACIÓN ***********/ 
+	/*********** Regiï¿½n: INICIALIZACIï¿½N ***********/ 
 	
 	private SistemaCocheras sistemaCocheras;
 
@@ -18,7 +18,7 @@ public class MainSistemaCocheras {
 		this.sistemaCocheras = new SistemaCocheras();
 	}
 	
-	/*********** Fin Región: INICIALIZACIÓN ***********/ 
+	/*********** Fin Regiï¿½n: INICIALIZACIï¿½N ***********/ 
 	
 	
 	public static void main(String[] args) {
@@ -429,7 +429,7 @@ public class MainSistemaCocheras {
 		System.exit(0);
 	}
 	
-	/*********** Región: CLIENTES ***********/ 
+	/*********** Regiï¿½n: CLIENTES ***********/ 
 	
 	private void crearCliente() 
 	{
@@ -454,7 +454,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("El cliente se ha creado con éxito.");	
+					System.out.println("El cliente se ha creado con ï¿½xito.");	
 					break;
 				}
 				case ExitCodes.YA_EXISTE_ENTIDAD: {
@@ -462,7 +462,7 @@ public class MainSistemaCocheras {
 					break;
 				}
 				case ExitCodes.ARGUMENTOS_INVALIDOS: {
-					System.out.println("Alguno de los argumentos es inválido.");	
+					System.out.println("Alguno de los argumentos es invï¿½lido.");	
 					break;
 				}
 				default: {
@@ -510,7 +510,7 @@ public class MainSistemaCocheras {
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
-						System.out.println("El cliente se ha modificado con éxito.");
+						System.out.println("El cliente se ha modificado con ï¿½xito.");
 						break;
 					}
 					case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -518,7 +518,7 @@ public class MainSistemaCocheras {
 						break;
 					}
 					case ExitCodes.ARGUMENTOS_INVALIDOS: {
-						System.out.println("Alguno de los argumentos es inválido.");
+						System.out.println("Alguno de los argumentos es invï¿½lido.");
 						break;
 					}
 					default: {
@@ -553,7 +553,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("El cliente se ha dado de baja con éxito.");	
+					System.out.println("El cliente se ha dado de baja con ï¿½xito.");	
 					break;
 				}
 				case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -561,7 +561,7 @@ public class MainSistemaCocheras {
 					break;
 				}
 				case ExitCodes.ARGUMENTOS_INVALIDOS: {
-					System.out.println("Alguno de los argumentos es inválido.");
+					System.out.println("Alguno de los argumentos es invï¿½lido.");
 					break;
 				}
 				case ExitCodes.CLIENTE_CONTRATOS_VIGENTES: {
@@ -625,10 +625,10 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	/*********** Fin Región: CLIENTES ***********/ 
+	/*********** Fin Regiï¿½n: CLIENTES ***********/ 
 	
 	
-	/*********** Región: MEDIOS DE PAGO ***********/ 
+	/*********** Regiï¿½n: MEDIOS DE PAGO ***********/ 
 	
 	private void crearMedioPago() 
 	{
@@ -652,7 +652,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("El medio de pago se ha creado con éxito.");
+					System.out.println("El medio de pago se ha creado con ï¿½xito.");
 					break;
 				}
 				case ExitCodes.YA_EXISTE_ENTIDAD: {
@@ -660,7 +660,7 @@ public class MainSistemaCocheras {
 					break;
 				}
 				case ExitCodes.ARGUMENTOS_INVALIDOS: {
-					System.out.println("Alguno de los argumentos es inválido.");
+					System.out.println("Alguno de los argumentos es invï¿½lido.");
 					break;
 				}
 				default: {
@@ -691,7 +691,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("El medio de pago se ha dado de baja con éxito.");	
+					System.out.println("El medio de pago se ha dado de baja con ï¿½xito.");	
 					break;
 				}
 				case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -738,10 +738,10 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	/*********** Fin Región: MEDIOS DE PAGO ***********/ 
+	/*********** Fin Regiï¿½n: MEDIOS DE PAGO ***********/ 
 	
 	
-	/*********** Región: ABONOS ***********/ 
+	/*********** Regiï¿½n: ABONOS ***********/ 
 	
 	private void crearAbono() 
 	{
@@ -759,7 +759,7 @@ public class MainSistemaCocheras {
 			float precioBase = Float.parseFloat(reader.readLine());
 			System.out.print("Descuento: ");
 			float descuento = Float.parseFloat(reader.readLine());
-			String tamCochera = String.format("Tamaño cochera (%d: pequeña, %d: mediana, %d: grande): ", 
+			String tamCochera = String.format("Tamaï¿½o cochera (%d: pequeï¿½a, %d: mediana, %d: grande): ", 
 					Tamanios.PEQUENIA, Tamanios.MEDIANA, Tamanios.GRANDE);
 			System.out.print(tamCochera);
 			int tamanioCochera = Integer.parseInt(reader.readLine());
@@ -768,7 +768,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("El abono se ha creado con éxito.");	
+					System.out.println("El abono se ha creado con ï¿½xito.");	
 					break;
 				}
 				case ExitCodes.YA_EXISTE_ENTIDAD: {
@@ -776,7 +776,7 @@ public class MainSistemaCocheras {
 					break;
 				}
 				case ExitCodes.ARGUMENTOS_INVALIDOS: {
-					System.out.println("Alguno de los argumentos es inválido.");	
+					System.out.println("Alguno de los argumentos es invï¿½lido.");	
 					break;
 				}
 				default: {
@@ -813,7 +813,7 @@ public class MainSistemaCocheras {
 				float precioBase = Float.parseFloat(reader.readLine());
 				System.out.print("Descuento: ");
 				float descuento = Float.parseFloat(reader.readLine());
-				String tamCochera = String.format("Tamaño cochera (%d: pequeña, %d: mediana, %d: grande): ", 
+				String tamCochera = String.format("Tamaï¿½o cochera (%d: pequeï¿½a, %d: mediana, %d: grande): ", 
 						Tamanios.PEQUENIA, Tamanios.MEDIANA, Tamanios.GRANDE);
 				System.out.println(tamCochera);
 				int tamanioCochera = Integer.parseInt(reader.readLine());
@@ -822,7 +822,7 @@ public class MainSistemaCocheras {
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
-						System.out.println("El abono se ha modificado con éxito.");
+						System.out.println("El abono se ha modificado con ï¿½xito.");
 						break;
 					}
 					case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -830,7 +830,7 @@ public class MainSistemaCocheras {
 						break;
 					}
 					case ExitCodes.ARGUMENTOS_INVALIDOS: {
-						System.out.println("Alguno de los argumentos es inválido.");
+						System.out.println("Alguno de los argumentos es invï¿½lido.");
 						break;
 					}
 					default: {
@@ -865,7 +865,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("El abono se ha dado de baja con éxito.");	
+					System.out.println("El abono se ha dado de baja con ï¿½xito.");	
 					break;
 				}
 				case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -873,7 +873,7 @@ public class MainSistemaCocheras {
 					break;
 				}
 				case ExitCodes.ARGUMENTOS_INVALIDOS: {
-					System.out.println("Alguno de los argumentos es inválido.");
+					System.out.println("Alguno de los argumentos es invï¿½lido.");
 					break;
 				}
 				default: {
@@ -903,7 +903,7 @@ public class MainSistemaCocheras {
 					
 					switch(av.getTamanioCochera()) {
 						case Tamanios.PEQUENIA:
-							tamanio = "Pequeño";
+							tamanio = "Pequeï¿½o";
 							break;
 						case Tamanios.MEDIANA:
 							tamanio = "Mediana";
@@ -936,10 +936,10 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	/*********** Fin Región: ABONOS ***********/ 
+	/*********** Fin Regiï¿½n: ABONOS ***********/ 
 	
 	
-	/*********** Región: CONTRATOS ***********/ 
+	/*********** Regiï¿½n: CONTRATOS ***********/ 
 	
 	private void crearContrato() {
 		try {
@@ -1003,16 +1003,20 @@ public class MainSistemaCocheras {
 			}	
 			else
 			{
-				System.out.println("La opción ingresada es inválida.");
+				System.out.println("La opciï¿½n ingresada es invï¿½lida.");
 			}
 			
 			switch(exitCode) {
 			case ExitCodes.OK: {
-				System.out.println("El contrato se ha creado con éxito.");
+				System.out.println("El contrato se ha creado con ï¿½xito.");
 				break;
 			}
 			case ExitCodes.ARGUMENTOS_INVALIDOS: {
-				System.out.println("Alguno de los argumentos es inválido.");
+				System.out.println("Alguno de los argumentos es invï¿½lido.");
+				break;
+			}
+			case ExitCodes.COCHERA_NO_DISPONIBLE: {
+				System.out.println("La cochera no esta disponible.");
 				break;
 			}
 			default: {
@@ -1067,7 +1071,7 @@ public class MainSistemaCocheras {
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
-						System.out.println("El contrato se ha modificado con éxito.");
+						System.out.println("El contrato se ha modificado con ï¿½xito.");
 						break;
 					}
 					case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -1075,7 +1079,7 @@ public class MainSistemaCocheras {
 						break;
 					}
 					case ExitCodes.ARGUMENTOS_INVALIDOS: {
-						System.out.println("Alguno de los argumentos es inválido.");
+						System.out.println("Alguno de los argumentos es invï¿½lido.");
 						break;
 					}
 					default: {
@@ -1131,7 +1135,7 @@ public class MainSistemaCocheras {
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
-						System.out.println("El contrato se ha eliminado con éxito.");
+						System.out.println("El contrato se ha eliminado con ï¿½xito.");
 						break;
 					}
 					case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -1139,7 +1143,7 @@ public class MainSistemaCocheras {
 						break;
 					}
 					case ExitCodes.ARGUMENTOS_INVALIDOS: {
-						System.out.println("Alguno de los argumentos es inválido.");
+						System.out.println("Alguno de los argumentos es invï¿½lido.");
 						break;
 					}
 					default: {
@@ -1196,10 +1200,10 @@ public class MainSistemaCocheras {
 		}	
 	}
 	
-	/*********** Fin Región: CONTRATOS ***********/ 
+	/*********** Fin Regiï¿½n: CONTRATOS ***********/ 
 	
 	
-	/*********** Región: COCHERA ***********/ 
+	/*********** Regiï¿½n: COCHERA ***********/ 
 	
 	private void crearCochera() {
 		try 
@@ -1208,7 +1212,7 @@ public class MainSistemaCocheras {
 
 			System.out.println("ALTA DE COCHERA");
 			System.out.println("-----------------------");
-			String tamVehiculo = String.format("Tamaño vehículo admitido (%d: pequeña, %d: mediana, %d: grande): ",
+			String tamVehiculo = String.format("Tamaï¿½o vehï¿½culo admitido (%d: pequeï¿½a, %d: mediana, %d: grande): ",
 							Tamanios.PEQUENIA, Tamanios.MEDIANA, Tamanios.GRANDE);
 			System.out.print(tamVehiculo);
 			int tamanio = Integer.parseInt(reader.readLine());
@@ -1217,7 +1221,7 @@ public class MainSistemaCocheras {
 
 			switch (exitCode) {
 			case ExitCodes.OK: {
-				System.out.println("La cochera se ha creado con éxito.");
+				System.out.println("La cochera se ha creado con ï¿½xito.");
 				break;
 			}
 			case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -1225,7 +1229,7 @@ public class MainSistemaCocheras {
 				break;
 			}
 			case ExitCodes.ARGUMENTOS_INVALIDOS: {
-				System.out.println("Alguno de los argumentos es inválido.");
+				System.out.println("Alguno de los argumentos es invï¿½lido.");
 				break;
 			}
 			default: {
@@ -1253,7 +1257,7 @@ public class MainSistemaCocheras {
 			
 			if (cocheraView != null)
 			{
-				String tamVehiculo = String.format("Tamaño vehículo admitido (%d: pequeña, %d: mediana, %d: grande): ", 
+				String tamVehiculo = String.format("Tamaï¿½o vehï¿½culo admitido (%d: pequeï¿½a, %d: mediana, %d: grande): ", 
 						Tamanios.PEQUENIA, Tamanios.MEDIANA, Tamanios.GRANDE);
 				System.out.print(tamVehiculo);
 				int tamanio = Integer.parseInt(reader.readLine());
@@ -1264,7 +1268,7 @@ public class MainSistemaCocheras {
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
-						System.out.println("La cochera se ha modificado con éxito.");
+						System.out.println("La cochera se ha modificado con ï¿½xito.");
 						break;
 					}
 					case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -1272,7 +1276,7 @@ public class MainSistemaCocheras {
 						break;
 					}
 					case ExitCodes.ARGUMENTOS_INVALIDOS: {
-						System.out.println("Alguno de los argumentos es inválido.");
+						System.out.println("Alguno de los argumentos es invï¿½lido.");
 						break;
 					}
 					default: {
@@ -1306,7 +1310,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("La cochera se ha dado de baja con éxito.");	
+					System.out.println("La cochera se ha dado de baja con ï¿½xito.");	
 					break;
 				}
 				case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -1314,7 +1318,7 @@ public class MainSistemaCocheras {
 					break;
 				}
 				case ExitCodes.ARGUMENTOS_INVALIDOS: {
-					System.out.println("Alguno de los argumentos es inválido.");
+					System.out.println("Alguno de los argumentos es invï¿½lido.");
 					break;
 				}
 				default: {
@@ -1336,7 +1340,7 @@ public class MainSistemaCocheras {
 			Vector<CocheraView> cocherasView = this.sistemaCocheras.listarCocheras();
 			
 			if (cocherasView != null && cocherasView.size() > 0) {
-				System.out.println("NUMERO\tTAMAÑO\tESTADO");
+				System.out.println("NUMERO\tTAMAï¿½O\tESTADO");
 				
 				for (CocheraView cv: cocherasView) {
 					String tamanio;
@@ -1344,7 +1348,7 @@ public class MainSistemaCocheras {
 					
 					switch(cv.getTamanioVechiculoAdmitido()) {
 						case Tamanios.PEQUENIA:
-							tamanio = "Pequeño";
+							tamanio = "Pequeï¿½o";
 							break;
 						case Tamanios.MEDIANA:
 							tamanio = "Mediana";
@@ -1388,10 +1392,10 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	/*********** Fin Región: COCHERA ***********/ 
+	/*********** Fin Regiï¿½n: COCHERA ***********/ 
 	
 	
-	/*********** Región: AUTOS ***********/ 
+	/*********** Regiï¿½n: AUTOS ***********/ 
 	
 	private void crearAuto() throws Exception {
 		try
@@ -1415,7 +1419,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("El auto se ha creado con éxito.");	
+					System.out.println("El auto se ha creado con ï¿½xito.");	
 					break;
 				}
 				case ExitCodes.YA_EXISTE_ENTIDAD: {
@@ -1423,7 +1427,7 @@ public class MainSistemaCocheras {
 					break;
 				}
 				case ExitCodes.ARGUMENTOS_INVALIDOS: {
-					System.out.println("Alguno de los argumentos es inválido.");	
+					System.out.println("Alguno de los argumentos es invï¿½lido.");	
 					break;
 				}
 				case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -1487,7 +1491,7 @@ public class MainSistemaCocheras {
 				
 				switch(exitCode) {
 					case ExitCodes.OK: {
-						System.out.println("El auto se ha modificado con éxito.");
+						System.out.println("El auto se ha modificado con ï¿½xito.");
 						break;
 					}
 					case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -1495,7 +1499,7 @@ public class MainSistemaCocheras {
 						break;
 					}
 					case ExitCodes.ARGUMENTOS_INVALIDOS: {
-						System.out.println("Alguno de los argumentos es inválido.");
+						System.out.println("Alguno de los argumentos es invï¿½lido.");
 						break;
 					}
 					case ExitCodes.NO_EXISTE_AUTO: {
@@ -1535,7 +1539,7 @@ public class MainSistemaCocheras {
 			
 			switch(exitCode) {
 				case ExitCodes.OK: {
-					System.out.println("El auto se ha dado de baja con éxito.");	
+					System.out.println("El auto se ha dado de baja con ï¿½xito.");	
 					break;
 				}
 				case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -1543,11 +1547,11 @@ public class MainSistemaCocheras {
 					break;
 				}
 				case ExitCodes.ARGUMENTOS_INVALIDOS: {
-					System.out.println("Alguno de los argumentos es inválido.");
+					System.out.println("Alguno de los argumentos es invï¿½lido.");
 					break;
 				}
 				case ExitCodes.AUTO_CONTRATO_VIGENTE: {
-					System.out.println("El auto está asociado a un contrato vigente.");
+					System.out.println("El auto estï¿½ asociado a un contrato vigente.");
 					break;
 				}
 				case ExitCodes.NO_EXISTE_AUTO: {
@@ -1605,10 +1609,10 @@ public class MainSistemaCocheras {
 	}
 	
 	
-	/*********** Fin Región: AUTOS ***********/ 
+	/*********** Fin Regiï¿½n: AUTOS ***********/ 
 	
 	
-	/*********** Región: DATOS PRUEBA ***********/ 
+	/*********** Regiï¿½n: DATOS PRUEBA ***********/ 
 	
 	private void mostrarMenuGenerarDatosPrueba() {
 		try {
@@ -1631,5 +1635,5 @@ public class MainSistemaCocheras {
 		}
 	}
 	
-	/*********** Fin Región: DATOS PRUEBA ***********/ 
+	/*********** Fin Regiï¿½n: DATOS PRUEBA ***********/ 
 }

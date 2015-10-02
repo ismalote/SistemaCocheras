@@ -57,6 +57,6 @@ public class Cochera {
 	}
 	
 	public void darDeBaja() {
-		this.estado = 0;
+		this.estado = EstadosCochera.INACTIVA;
 	}
 }

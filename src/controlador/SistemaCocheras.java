@@ -337,28 +337,33 @@ public class SistemaCocheras {
 	
 	/*********** Regi�n: CONTRATOS ***********/ 
 	
-	public int crearContratoEfectivo(String dni, String patente, int nroCochera, String nombreAbono,
-			Date fecha) {
+	public int crearContratoEfectivo(String dni,
+			String patente, int nroCochera,
+			String nombreAbono, Date fecha) {
 		ContratoEfectivo contrato = null;
-		
+
 		Cliente cliente = buscarCliente(dni);
-		
+
 		if (cliente != null) {
+			
 			Auto auto = cliente.buscarAuto(patente);
 			Cochera cochera = this.buscarCochera(nroCochera);
 			Abono abono = this.buscarAbono(nombreAbono);
-			
+
 			if (auto != null && cochera != null && abono != null) {
-				contrato = new ContratoEfectivo(cliente, auto, cochera, abono);
-				this.contratos.add(contrato);
-				return ExitCodes.OK;
-			}
-			else {
+				if (cochera.getEstado() == EstadosCochera.LIBRE) {
+					contrato = new ContratoEfectivo(cliente, auto, cochera, abono);
+					this.contratos.add(contrato);
+					return ExitCodes.OK;
+				} else {
+					return ExitCodes.COCHERA_NO_DISPONIBLE;
+				}
+			} else {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
 			}
 		} else {
 			return ExitCodes.ARGUMENTOS_INVALIDOS;
-		}  
+		}
 	}
 	
 	
@@ -374,10 +379,13 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);
 			
 			if (auto != null && cochera != null && abono != null) {
-				contrato = new ContratoCheque(cliente, auto, cochera, abono, 
-						nroCuentaCorriente, entidadBancaria);
-				this.contratos.add(contrato);
-				return ExitCodes.OK;
+				if (cochera.getEstado() == EstadosCochera.LIBRE) {
+					contrato = new ContratoCheque(cliente, auto, cochera, abono, nroCuentaCorriente, entidadBancaria);
+					this.contratos.add(contrato);
+					return ExitCodes.OK;
+				} else {
+					return ExitCodes.COCHERA_NO_DISPONIBLE;
+				}
 			}
 			else {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
@@ -400,10 +408,14 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);
 			
 			if (auto != null && cochera != null && abono != null) {
-				contrato = new ContratoTarjetaCredito(cliente, auto, cochera, abono, 
-						nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta);
-				this.contratos.add(contrato);
-				return ExitCodes.OK;
+				if (cochera.getEstado() == EstadosCochera.LIBRE) {
+					contrato = new ContratoTarjetaCredito(cliente, auto, cochera, abono, 
+					nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta);
+					this.contratos.add(contrato);
+					return ExitCodes.OK;
+				} else {
+					return ExitCodes.COCHERA_NO_DISPONIBLE; 
+				}
 			}
 			else {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
@@ -425,10 +437,13 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);
 			
 			if (auto != null && cochera != null && abono != null) {
-				contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, 
-						cbu, entidadBancaria);
-				this.contratos.add(contrato);
-				return ExitCodes.OK;
+				if (cochera.getEstado() == EstadosCochera.LIBRE) {
+					contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, cbu, entidadBancaria);
+					this.contratos.add(contrato);
+					return ExitCodes.OK;
+				} else {
+					return ExitCodes.COCHERA_NO_DISPONIBLE;
+				}
 			}
 			else {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;

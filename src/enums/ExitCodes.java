@@ -9,4 +9,5 @@ public final class ExitCodes {
 	public final static int CLIENTE_CONTRATOS_VIGENTES = 5;
 	public final static int NO_EXISTE_AUTO = 6;
 	public final static int AUTO_CONTRATO_VIGENTE = 7;
+	public final static int COCHERA_NO_DISPONIBLE = 8;
 }
