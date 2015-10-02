@@ -530,10 +530,10 @@ public class SistemaCocheras {
 				cochera.setEstado(estado);
 				return ExitCodes.OK;
 			} else {
-				return ExitCodes.ARGUMENTOS_INVALIDOS;
+				return ExitCodes.NO_EXISTE_ENTIDAD;
 			}
 		} else {
-			return ExitCodes.NO_EXISTE_ENTIDAD;
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
 		}
 	}
 	
