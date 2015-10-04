@@ -945,7 +945,7 @@ public class MainSistemaCocheras {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			
-			System.out.println("Crear Contrato");
+			System.out.println("ALTA DE CONTRATO");
 			System.out.println("------------------------");
 			System.out.print("DNI: ");
 			String dni = reader.readLine();
