@@ -15,7 +15,7 @@ import enums.EstadosCliente;
 import enums.ExitCodes;
 
 
-public class ModificarCliente extends javax.swing.JFrame {
+public class EliminarCliente extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel titulo;
@@ -26,7 +26,7 @@ public class ModificarCliente extends javax.swing.JFrame {
 	private JLabel jLabel5;
 	private JLabel jLabel6;
 	private JButton buscar;
-	private JButton modificar;
+	private JButton baja;
 	private JTextField dniCliente;
 	private JTextField dni;	
 	private JTextField telefono;
@@ -42,24 +42,24 @@ public class ModificarCliente extends javax.swing.JFrame {
 		inst.setVisible(true);
 	}
 	
-	public ModificarCliente ()
+	public EliminarCliente ()
 	{
 		
 	}
-	public ModificarCliente(SistemaCocheras s) {
+	public EliminarCliente(SistemaCocheras s) {
 		super();
 		sistemaCocheras = s;
 		initGUI();		
 	}
 	
 	private void initGUI() {
-		try {						
+		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("MODIFICACION CLIENTE");
+				titulo.setText("ELIMINAR CLIENTE");
 				titulo.setBounds(150, 20, 148, 28);
 			}
 			{
@@ -128,20 +128,20 @@ public class ModificarCliente extends javax.swing.JFrame {
 				telefono.setVisible(false);
 			}
 			{
-				modificar = new JButton();
-				getContentPane().add(modificar);
-				modificar.setText("CONFIRMAR");
-				modificar.setBounds(119, 363, 113, 28);
-				modificar.setVisible(false);
-				modificar.addActionListener(new ActionListener()
+				baja = new JButton();
+				getContentPane().add(baja);
+				baja.setText("CONFIRMAR");
+				baja.setBounds(119, 363, 113, 28);
+				baja.setVisible(false);
+				baja.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.modificarCliente(dni.getText(), nombre.getText(), domicilio.getText(), mail.getText(), telefono.getText(), EstadosCliente.ACTIVO);
+						int rdo = sistemaCocheras.bajaCliente(dni.getText());
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
-								mensaje = "El cliente se ha modificado con exito.";
+								mensaje = "El cliente se ha dado de baja con exito.";	
 								break;
 							}
 							case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -150,6 +150,10 @@ public class ModificarCliente extends javax.swing.JFrame {
 							}
 							case ExitCodes.ARGUMENTOS_INVALIDOS: {
 								mensaje = "Alguno de los argumentos es invalido.";
+								break;
+							}
+							case ExitCodes.CLIENTE_CONTRATOS_VIGENTES: {
+								mensaje = "El cliente posee contratos vigentes.";
 								break;
 							}
 							default: {
@@ -169,7 +173,7 @@ public class ModificarCliente extends javax.swing.JFrame {
 							domicilio.setVisible(false);
 							mail.setVisible(false);
 							telefono.setVisible(false);
-							modificar.setVisible(false);
+							baja.setVisible(false);
 						}
 					}
 				});
@@ -202,11 +206,15 @@ public class ModificarCliente extends javax.swing.JFrame {
 							jLabel5.setVisible(true);
 							dni.setVisible(true);
 							dni.setEnabled(false);
-							nombre.setVisible(true);							
+							nombre.setVisible(true);
+							nombre.setEnabled(false);
 							domicilio.setVisible(true);
+							domicilio.setEnabled(false);
 							telefono.setVisible(true);
+							telefono.setEnabled(false);
 							mail.setVisible(true);
-							modificar.setVisible(true);
+							mail.setEnabled(false);
+							baja.setVisible(true);
 							dni.setText(cliente.getDni());
 							nombre.setText(cliente.getNombre());
 							domicilio.setText(cliente.getDomicilio());
@@ -224,14 +232,14 @@ public class ModificarCliente extends javax.swing.JFrame {
 							domicilio.setVisible(false);
 							telefono.setVisible(false);
 							mail.setVisible(false);
-							modificar.setVisible(false);
+							baja.setVisible(false);
 						}
 					}
 				});
 			}
 			pack();
 			setSize(400, 600);
-			setTitle("Sistema de Cocheras - Modificar Cliente");
+			setTitle("Sistema de Cocheras - Eliminar Cliente");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

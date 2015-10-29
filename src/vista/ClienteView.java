@@ -1,7 +1,6 @@
 package vista;
 
-//import java.util.Vector;
-//import modelo.Auto;
+import java.util.Vector;
 
 public class ClienteView {
 
@@ -44,5 +43,17 @@ public class ClienteView {
 
 	public int getEstado() {
 		return this.estado;
+	}
+	
+	public Vector<String> toVector()
+	{
+		Vector<String> v = new Vector<String>();
+		v.add(dni);		
+		v.add(nombre);		
+		v.add(domicilio);
+		v.add(mail);
+		v.add(telefono);
+		v.add(estado == 1 ? "Activo" : "Inactivo");
+		return v;
 	}
 }

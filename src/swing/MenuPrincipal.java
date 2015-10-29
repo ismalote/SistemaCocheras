@@ -3,12 +3,6 @@ package swing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/*
-import AltaAlumno;
-import MenuPrincipal;
-import ModificarAlumno;
-import Sistema;
- */
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -84,12 +78,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					{
 						jMenuItem1 = new JMenuItem();
 						jMenu1.add(jMenuItem1);
-						jMenuItem1.setText("Alta");
+						jMenuItem1.setText("Agregar");
 						jMenuItem1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								AltaCliente a = new AltaCliente(sistemaCocheras);
-								System.out.println( "Apreto Alta");
+								AltaCliente a = new AltaCliente(sistemaCocheras);								
 								a.setVisible(true);
 							}
 						});
@@ -99,7 +92,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					{
 						jMenuItem2 = new JMenuItem();
 						jMenu1.add(jMenuItem2);
-						jMenuItem2.setText("Modificación");
+						jMenuItem2.setText("Modificar");
 						jMenuItem2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
@@ -111,11 +104,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					{
 						jMenuItem3 = new JMenuItem();
 						jMenu1.add(jMenuItem3);
-						jMenuItem3.setText("Baja");
+						jMenuItem3.setText("Eliminar");
 						jMenuItem3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								//System.out.println( "Apreto Baja");
+								EliminarCliente e = new EliminarCliente(sistemaCocheras);
+								e.setVisible(true);
 							}
 						});
 					}
@@ -126,7 +120,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 						jMenuItem4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								//System.out.println( "Apreto Baja");
+								ListarCliente l = new ListarCliente(sistemaCocheras);
+								l.setVisible(true);
 							}
 						});
 					}
@@ -137,7 +132,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 						jMenuItem5.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								//System.out.println( "Apreto Baja");
+								AutosCliente a = new AutosCliente(sistemaCocheras);
+								a.setVisible(true);
 							}
 						});
 					}
@@ -225,7 +221,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					{
 						jMenuItem10 = new JMenuItem();
 						jMenu3.add(jMenuItem10);
-						jMenuItem10.setText("Modificación");
+						jMenuItem10.setText("Modificacion");
 						jMenuItem10.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
@@ -293,7 +289,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					{
 						jMenuItem14 = new JMenuItem();
 						jMenu4.add(jMenuItem14);
-						jMenuItem14.setText("Modificación");
+						jMenuItem14.setText("Modificaciï¿½n");
 						jMenuItem14.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
@@ -361,7 +357,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					{
 						jMenuItem18 = new JMenuItem();
 						jMenu5.add(jMenuItem18);
-						jMenuItem18.setText("Modificación");
+						jMenuItem18.setText("Modificaciï¿½n");
 						jMenuItem18.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
@@ -421,7 +417,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			
 			pack();
 			setSize(800, 600);
-			setTitle("Sistema de Cocheras - Menú Principal");
+			setTitle("Sistema de Cocheras - Menu Principal");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

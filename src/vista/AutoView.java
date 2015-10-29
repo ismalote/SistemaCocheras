@@ -1,6 +1,7 @@
 package vista;
 
 import java.util.Date;
+import java.util.Vector;
 
 public class AutoView {
 	
@@ -36,5 +37,15 @@ public class AutoView {
 	
 	public boolean getActivo() {
 		return this.activo;
-	}	
+	}
+	
+	public Vector<String> toVector()
+	{
+		Vector<String> v = new Vector<String>();
+		v.add(patente);		
+		v.add(marca);		
+		v.add(modelo);				
+		v.add(activo ? "Activo" : "Inactivo");
+		return v;
+	}
 }	

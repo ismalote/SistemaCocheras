@@ -154,7 +154,7 @@ public class AltaCliente extends javax.swing.JFrame {
 			}
 			pack();
 			setSize(400, 400);
-			setTitle("Sistema de Cocheras - Alta Cliente");
+			setTitle("Sistema de Cocheras - Agregar Cliente");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
