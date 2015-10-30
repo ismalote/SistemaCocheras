@@ -23,6 +23,7 @@ public class AutosCliente extends javax.swing.JFrame {
 	private JButton buscar;
 	private JButton alta;
 	private JButton modificar;
+	private JButton eliminar;
 	private JLabel titulo;
 	private JLabel jLabel1;
 	private JTextField dniCliente;
@@ -94,6 +95,20 @@ public class AutosCliente extends javax.swing.JFrame {
 				});				
 			}
 			{
+				eliminar = new JButton();
+				getContentPane().add(eliminar);
+				eliminar.setVisible(false);
+				eliminar.setText("ELIMINAR AUTO");
+				eliminar.setBounds(113, 267, 137, 28);
+				eliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) 
+					{
+						EliminarAuto a = new EliminarAuto(sistemaCocheras, dni.getText());
+						a.setVisible(true);
+					}
+				});				
+			}
+			{
 				jLabel1 = new JLabel();
 				getContentPane().add(jLabel1);
 				jLabel1.setText("Ingrese DNI:");
@@ -118,6 +133,7 @@ public class AutosCliente extends javax.swing.JFrame {
 							dni.setVisible(true);
 							alta.setVisible(true);
 							modificar.setVisible(true);
+							eliminar.setVisible(true);
 						}else{
 							JOptionPane.showMessageDialog(null, "El cliente no existe.");
 						}
