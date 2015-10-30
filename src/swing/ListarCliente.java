@@ -25,16 +25,6 @@ public class ListarCliente extends javax.swing.JFrame {
 	
 	private SistemaCocheras sistemaCocheras;
 	
-	public static void main(String[] args) {
-		ListarCliente inst = new ListarCliente();
-		inst.setVisible(true);
-	}	
-	
-	public ListarCliente()
-	{
-		
-	}
-	
 	public ListarCliente(SistemaCocheras s) {
 		super();
 		sistemaCocheras = s;
@@ -84,8 +74,10 @@ public class ListarCliente extends javax.swing.JFrame {
 			ImageIcon img = new ImageIcon("src/swing/persona.png");
 			setIconImage(img.getImage());
 			pack();
-			setSize(600, 600);
+			setSize(750, 450);
 			setTitle("Listar Clientes");
+			setLocationRelativeTo(null);
+			setResizable(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

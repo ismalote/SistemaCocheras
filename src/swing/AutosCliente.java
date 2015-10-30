@@ -34,16 +34,6 @@ public class AutosCliente extends javax.swing.JFrame {
 	
 	private SistemaCocheras sistemaCocheras;
 	
-	public static void main(String[] args) {
-		ListarCliente inst = new ListarCliente();
-		inst.setVisible(true);
-	}	
-	
-	public AutosCliente()
-	{
-		
-	}
-	
 	public AutosCliente(SistemaCocheras s) {
 		super();
 		sistemaCocheras = s;
@@ -165,8 +155,10 @@ public class AutosCliente extends javax.swing.JFrame {
 			ImageIcon img = new ImageIcon("src/swing/auto.png");
 			setIconImage(img.getImage());
 			pack();
-			setSize(400, 600);
+			setSize(400, 410);
 			setTitle("Autos por Cliente");
+			setLocationRelativeTo(null);
+			setResizable(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

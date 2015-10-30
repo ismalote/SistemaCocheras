@@ -1,5 +1,7 @@
 package vista;
 
+import java.util.Vector;
+
 public class AbonoView {
 	private float descuento;
 	private String nombre;
@@ -41,4 +43,17 @@ public class AbonoView {
 	public boolean getActivo() {
 		return this.activo;
 	}
+	
+	public Vector<String> toVector()
+	{
+		Vector<String> v = new Vector<String>();
+		v.add(nombre);
+		v.add(Integer.toString(cantidadDias));
+		v.add(Float.toString(precioBase));
+		v.add(Float.toString(descuento));		
+		v.add(Integer.toString(tamanioCochera));
+		v.add(activo ? "Activo" : "Inactivo");
+		return v;
+	}
+	
 }

@@ -15,66 +15,64 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import controlador.SistemaCocheras;
-import vista.AutoView;
+import vista.MedioPagoView;
 
-public class ListarAuto extends javax.swing.JFrame {
+public class ListarMedioPago extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTable autos;
+	private JTable mediosPago;
 	private TableModel jTable1Model;
 		
 	private SistemaCocheras sistemaCocheras;
-	private String dniCliente;
 	
-	public ListarAuto(SistemaCocheras s, String d) {
+	public ListarMedioPago(SistemaCocheras s) {
 		super();
 		sistemaCocheras = s;
-		dniCliente = d;
-		initGUI(dniCliente);		
+		initGUI();		
 	}
 	
-	private void initGUI(final String dniCliente) {
+	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{				
-				Vector<AutoView> autosView = sistemaCocheras.listarAutos(dniCliente);
+				Vector<MedioPagoView> mediosPagoView = sistemaCocheras.listarMediosPagos();
 				Vector<Object> vectorOfVectors = new Vector<Object>();
-				for (int i= 0; i < autosView.size(); i++)
+				for (int i= 0; i < mediosPagoView.size(); i++)
 				{
-					vectorOfVectors.add((autosView.elementAt(i)).toVector());
+					vectorOfVectors.add((mediosPagoView.elementAt(i)).toVector());
 				}				
 				Vector<String> columnas = new Vector<String>();
-				columnas.add("Patente");
-				columnas.add("Marca");				
-				columnas.add("Modelo");
-				columnas.add("Fecha");					
+				columnas.add("Entidad");
+				columnas.add("Entrada");				
+				columnas.add("Salida");
+				columnas.add("Direccion FTP");					
 				columnas.add("Estado");
 				
 				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas);
-				autos = new JTable();				
-				autos.setModel(jTable1Model);				
+				mediosPago = new JTable();				
+				mediosPago.setModel(jTable1Model);				
 				
 				//Centrar la fila del DNI y el ESTADO
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-				autos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				autos.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+				mediosPago.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				mediosPago.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
 				
 				//Tamaño de las columnas
-				resizeColumnWidth(autos);
+				resizeColumnWidth(mediosPago);
 				
 				//Borde Negro
-				autos.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+				mediosPago.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
 				
-				JScrollPane scrollPane = new JScrollPane(autos);
+				JScrollPane scrollPane = new JScrollPane(mediosPago);
 				
 				getContentPane().add(scrollPane);
 			}			
-			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			ImageIcon img = new ImageIcon("src/swing/pago.png");
 			setIconImage(img.getImage());
 			pack();
 			setSize(750, 450);
-			setTitle("Autos del Cliente: " + dniCliente);
+			setTitle("Listar Medios de Pago");
 			setLocationRelativeTo(null);
 			setResizable(false);
 		} catch (Exception e) {

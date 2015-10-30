@@ -38,15 +38,6 @@ public class EliminarCliente extends javax.swing.JFrame {
 	private SistemaCocheras sistemaCocheras;
 	private ClienteView cliente;
 
-	public static void main(String[] args) {
-		ModificarCliente inst = new ModificarCliente();
-		inst.setVisible(true);
-	}
-	
-	public EliminarCliente ()
-	{
-		
-	}
 	public EliminarCliente(SistemaCocheras s) {
 		super();
 		sistemaCocheras = s;
@@ -241,8 +232,10 @@ public class EliminarCliente extends javax.swing.JFrame {
 			ImageIcon img = new ImageIcon("src/swing/persona.png");
 			setIconImage(img.getImage());
 			pack();
-			setSize(400, 600);
+			setSize(400, 455);
 			setTitle("Eliminar Cliente");
+			setLocationRelativeTo(null);
+			setResizable(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

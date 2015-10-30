@@ -1,5 +1,7 @@
 package vista;
 
+import java.util.Vector;
+
 public class MedioPagoView {
 	private String nombreEntidad;
 	private String nombreArchivoEntrada;
@@ -35,4 +37,16 @@ public class MedioPagoView {
 	public boolean getActivo() {
 		return this.activo;
 	}
+	
+	public Vector<String> toVector()
+	{
+		Vector<String> v = new Vector<String>();
+		v.add(nombreEntidad);		
+		v.add(nombreArchivoEntrada);		
+		v.add(nombreArchivoSalida);
+		v.add(direccionFTP);
+		v.add(activo ? "Activo" : "Inactivo");
+		return v;
+	}
+	
 }

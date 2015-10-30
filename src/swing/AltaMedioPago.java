@@ -4,9 +4,6 @@ import controlador.SistemaCocheras;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,7 +14,7 @@ import javax.swing.WindowConstants;
 
 import enums.ExitCodes;
 
-public class AltaAuto extends javax.swing.JFrame {
+public class AltaMedioPago extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel titulo;
@@ -26,113 +23,95 @@ public class AltaAuto extends javax.swing.JFrame {
 	private JLabel jLabel3;
 	private JLabel jLabel4;	
 	private JButton alta;
-	private JTextField patente;
-	private JTextField marca;
-	private JTextField modelo;
-	private JTextField fecha;	
+	private JTextField entidad;
+	private JTextField archivoEntrada;
+	private JTextField archivoSalida;
+	private JTextField ftp;	
 	
 	private SistemaCocheras sistemaCocheras;
-	private String dniCliente;
 	
-	public AltaAuto(SistemaCocheras s, String d) {
-		super();
-		
+	public AltaMedioPago(SistemaCocheras s) {
+		super();		
 		sistemaCocheras = s;
-		dniCliente = d;
-		initGUI(dniCliente);
+		initGUI();
 	}
 	
-	private Date parsearFecha(String fecha){
-		Date fechaParseada = null;
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			fechaParseada = formato.parse(fecha);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return fechaParseada;
-	}
-	
-	private void initGUI(final String dniCliente) {
+	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);			
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("AGREGAR AUTO PARA CLIENTE: " + dniCliente);
-				titulo.setBounds(90, 20, 258, 28);
+				titulo.setText("AGREGAR MEDIO DE PAGO");
+				titulo.setBounds(120, 20, 258, 28);
 			}
 			{
 				jLabel1 = new JLabel();
 				getContentPane().add(jLabel1);
-				jLabel1.setText("Patente:");
+				jLabel1.setText("Entidad:");
 				jLabel1.setBounds(21, 69, 113, 28);
 			}
 			{
 				jLabel2 = new JLabel();
 				getContentPane().add(jLabel2);
-				jLabel2.setText("Marca:");
+				jLabel2.setText("Archivo Entrada:");
 				jLabel2.setBounds(21, 118, 113, 28);
 			}
 			{
 				jLabel3 = new JLabel();
 				getContentPane().add(jLabel3);
-				jLabel3.setText("Modelo:");
+				jLabel3.setText("Archivo Salida:");
 				jLabel3.setBounds(21, 167, 113, 28);
 			}
 			{
 				jLabel4 = new JLabel();
 				getContentPane().add(jLabel4);
-				jLabel4.setText("Fecha de Entrada:");
+				jLabel4.setText("Direccion FTP:");
 				jLabel4.setBounds(21, 216, 113, 28);
 			}
 			{
-				patente = new JTextField();
-				getContentPane().add(patente);
-				patente.setBounds(169, 69, 210, 28);
+				entidad = new JTextField();
+				getContentPane().add(entidad);
+				entidad.setBounds(169, 69, 210, 28);
 			}
 			{
-				marca = new JTextField();
-				getContentPane().add(marca);
-				marca.setBounds(169, 118, 210, 28);
+				archivoEntrada = new JTextField();
+				getContentPane().add(archivoEntrada);
+				archivoEntrada.setBounds(169, 118, 210, 28);
 			}
 			{
-				modelo = new JTextField();
-				getContentPane().add(modelo);
-				modelo.setBounds(169, 167, 210, 28);
+				archivoSalida = new JTextField();
+				getContentPane().add(archivoSalida);
+				archivoSalida.setBounds(169, 167, 210, 28);
 			}
 			{
-				fecha = new JTextField();
-				getContentPane().add(fecha);
-				fecha.setBounds(169, 216, 210, 28);
+				ftp = new JTextField();
+				getContentPane().add(ftp);
+				ftp.setBounds(169, 216, 210, 28);
 			}
 			{
 				alta = new JButton();
 				getContentPane().add(alta);
 				alta.setText("CONFIRMAR");
-				alta.setBounds(169, 265, 113, 28);
+				alta.setBounds(119, 265, 113, 28);
 				alta.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 
-					{						
-						int rdo = sistemaCocheras.crearAuto(dniCliente, patente.getText(), marca.getText(), parsearFecha(fecha.getText()), modelo.getText());						
+					{
+						int rdo = sistemaCocheras.crearMedioPago(entidad.getText(), archivoEntrada.getText(), archivoSalida.getText(), ftp.getText());												
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
-								mensaje = "El auto se ha creado con exito.";	
+								mensaje = "El medio de pago se ha creado con exito.";
 								break;
 							}
 							case ExitCodes.YA_EXISTE_ENTIDAD: {
-								mensaje = "El auto ya existe.";	
+								mensaje = "El medio de pago ya existe.";	
 								break;
 							}
 							case ExitCodes.ARGUMENTOS_INVALIDOS: {
-								mensaje = "Alguno de los argumentos es invalido.";	
-								break;
-							}
-							case ExitCodes.NO_EXISTE_ENTIDAD: {
-								mensaje = "El cliente no existe.";	
+								mensaje = "Alguno de los argumentos es invalido.";
 								break;
 							}
 							default: {
@@ -141,20 +120,20 @@ public class AltaAuto extends javax.swing.JFrame {
 						}
 						JOptionPane.showMessageDialog(null, mensaje);						
 						if(rdo == ExitCodes.OK){							
-							patente.setText("");
-							marca.setText("");
-							modelo.setText("");
-							fecha.setText("");							
+							entidad.setText("");
+							archivoEntrada.setText("");
+							archivoSalida.setText("");
+							ftp.setText("");							
 						}
 						
 					}
 				});
 			}
-			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			ImageIcon img = new ImageIcon("src/swing/pago.png");
 			setIconImage(img.getImage());
 			pack();
 			setSize(400, 350);
-			setTitle("Agregar Auto");
+			setTitle("Agregar Medio de Pago");
 			setLocationRelativeTo(null);
 			setResizable(false);
 		} catch (Exception e) {

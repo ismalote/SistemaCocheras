@@ -31,16 +31,6 @@ public class AltaCliente extends javax.swing.JFrame {
 	private JTextField telefono;	
 	
 	private SistemaCocheras sistemaCocheras;
-
-	public static void main(String[] args) {
-		AltaCliente inst = new AltaCliente();
-		inst.setVisible(true);
-	}
-	
-	public AltaCliente ()
-	{
-		
-	}
 	
 	public AltaCliente(SistemaCocheras s) {
 		super();
@@ -156,8 +146,10 @@ public class AltaCliente extends javax.swing.JFrame {
 			ImageIcon img = new ImageIcon("src/swing/persona.png");
 			setIconImage(img.getImage());
 			pack();
-			setSize(400, 400);
+			setSize(400, 415);
 			setTitle("Agregar Cliente");
+			setLocationRelativeTo(null);
+			setResizable(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

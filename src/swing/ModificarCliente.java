@@ -38,15 +38,6 @@ public class ModificarCliente extends javax.swing.JFrame {
 	private SistemaCocheras sistemaCocheras;
 	private ClienteView cliente;
 
-	public static void main(String[] args) {
-		ModificarCliente inst = new ModificarCliente();
-		inst.setVisible(true);
-	}
-	
-	public ModificarCliente ()
-	{
-		
-	}
 	public ModificarCliente(SistemaCocheras s) {
 		super();
 		sistemaCocheras = s;
@@ -60,8 +51,8 @@ public class ModificarCliente extends javax.swing.JFrame {
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("MODIFICACION CLIENTE");
-				titulo.setBounds(150, 20, 148, 28);
+				titulo.setText("MODIFICAR CLIENTE");
+				titulo.setBounds(140, 20, 148, 28);
 			}
 			{
 				jLabel1 = new JLabel();
@@ -233,8 +224,10 @@ public class ModificarCliente extends javax.swing.JFrame {
 			ImageIcon img = new ImageIcon("src/swing/persona.png");
 			setIconImage(img.getImage());
 			pack();
-			setSize(400, 600);
+			setSize(400, 455);
 			setTitle("Modificar Cliente");
+			setLocationRelativeTo(null);
+			setResizable(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

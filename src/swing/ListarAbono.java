@@ -15,66 +15,64 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import controlador.SistemaCocheras;
-import vista.AutoView;
+import vista.AbonoView;
 
-public class ListarAuto extends javax.swing.JFrame {
+public class ListarAbono extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTable autos;
+	private JTable abonos;
 	private TableModel jTable1Model;
 		
 	private SistemaCocheras sistemaCocheras;
-	private String dniCliente;
 	
-	public ListarAuto(SistemaCocheras s, String d) {
+	public ListarAbono(SistemaCocheras s) {
 		super();
 		sistemaCocheras = s;
-		dniCliente = d;
-		initGUI(dniCliente);		
+		initGUI();		
 	}
 	
-	private void initGUI(final String dniCliente) {
+	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{				
-				Vector<AutoView> autosView = sistemaCocheras.listarAutos(dniCliente);
+				Vector<AbonoView> abonosView = sistemaCocheras.listarAbonos();
 				Vector<Object> vectorOfVectors = new Vector<Object>();
-				for (int i= 0; i < autosView.size(); i++)
+				for (int i= 0; i < abonosView.size(); i++)
 				{
-					vectorOfVectors.add((autosView.elementAt(i)).toVector());
+					vectorOfVectors.add((abonosView.elementAt(i)).toVector());
 				}				
 				Vector<String> columnas = new Vector<String>();
-				columnas.add("Patente");
-				columnas.add("Marca");				
-				columnas.add("Modelo");
-				columnas.add("Fecha");					
-				columnas.add("Estado");
-				
+				columnas.add("Nombre");
+				columnas.add("Cant. Dias");
+				columnas.add("Precio");				
+				columnas.add("Descuento");									
+				columnas.add("Cochera");
+				columnas.add("Estado");				
 				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas);
-				autos = new JTable();				
-				autos.setModel(jTable1Model);				
+				abonos = new JTable();				
+				abonos.setModel(jTable1Model);				
 				
 				//Centrar la fila del DNI y el ESTADO
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-				autos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				autos.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+				abonos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				abonos.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 				
 				//Tamaño de las columnas
-				resizeColumnWidth(autos);
+				resizeColumnWidth(abonos);
 				
 				//Borde Negro
-				autos.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+				abonos.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
 				
-				JScrollPane scrollPane = new JScrollPane(autos);
+				JScrollPane scrollPane = new JScrollPane(abonos);
 				
 				getContentPane().add(scrollPane);
 			}			
-			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			ImageIcon img = new ImageIcon("src/swing/abono.png");
 			setIconImage(img.getImage());
 			pack();
 			setSize(750, 450);
-			setTitle("Autos del Cliente: " + dniCliente);
+			setTitle("Listar Abonos");
 			setLocationRelativeTo(null);
 			setResizable(false);
 		} catch (Exception e) {

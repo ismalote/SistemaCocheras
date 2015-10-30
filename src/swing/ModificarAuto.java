@@ -45,15 +45,6 @@ public class ModificarAuto extends javax.swing.JFrame {
 	private SistemaCocheras sistemaCocheras;
 	private String dniCliente;	
 
-	public static void main(String[] args) {
-		ModificarAuto inst = new ModificarAuto();
-		inst.setVisible(true);
-	}
-	
-	public ModificarAuto ()
-	{
-		
-	}
 	public ModificarAuto(SistemaCocheras s, String d) {
 		super();
 		sistemaCocheras = s;
@@ -245,6 +236,8 @@ public class ModificarAuto extends javax.swing.JFrame {
 			pack();
 			setSize(400, 400);
 			setTitle("Modificar Auto");
+			setLocationRelativeTo(null);
+			setResizable(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
