@@ -10,6 +10,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -79,6 +80,8 @@ public class ListarAuto extends javax.swing.JFrame {
 				
 				getContentPane().add(scrollPane);
 			}			
+			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			setIconImage(img.getImage());
 			pack();
 			setSize(600, 600);
 			setTitle("Autos del Cliente: " + dniCliente);

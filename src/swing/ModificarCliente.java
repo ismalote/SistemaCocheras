@@ -3,6 +3,7 @@ package swing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -229,6 +230,8 @@ public class ModificarCliente extends javax.swing.JFrame {
 					}
 				});
 			}
+			ImageIcon img = new ImageIcon("src/swing/persona.png");
+			setIconImage(img.getImage());
 			pack();
 			setSize(400, 600);
 			setTitle("Modificar Cliente");

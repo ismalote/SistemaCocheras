@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -159,6 +160,8 @@ public class AltaAuto extends javax.swing.JFrame {
 					}
 				});
 			}
+			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			setIconImage(img.getImage());
 			pack();
 			setSize(400, 400);
 			setTitle("Agregar Auto");

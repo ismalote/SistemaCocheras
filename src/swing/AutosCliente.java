@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.WindowConstants;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -161,6 +162,8 @@ public class AutosCliente extends javax.swing.JFrame {
 					}
 				});
 			}
+			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			setIconImage(img.getImage());
 			pack();
 			setSize(400, 600);
 			setTitle("Autos por Cliente");

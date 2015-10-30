@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -227,6 +228,8 @@ public class EliminarAuto extends javax.swing.JFrame {
 					}
 				});
 			}
+			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			setIconImage(img.getImage());
 			pack();
 			setSize(400, 600);
 			setTitle("Eliminar Auto");

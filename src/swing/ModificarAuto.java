@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -239,6 +240,8 @@ public class ModificarAuto extends javax.swing.JFrame {
 					}
 				});
 			}
+			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			setIconImage(img.getImage());
 			pack();
 			setSize(400, 400);
 			setTitle("Modificar Auto");

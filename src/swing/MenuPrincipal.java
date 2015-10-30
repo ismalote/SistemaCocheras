@@ -3,6 +3,7 @@ package swing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -414,7 +415,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					}
 				}
 			}		
-			
+			ImageIcon img = new ImageIcon("src/swing/auto.png");
+			setIconImage(img.getImage());
 			pack();
 			setSize(800, 600);
 			setTitle("Sistema de Cocheras - Menu Principal");

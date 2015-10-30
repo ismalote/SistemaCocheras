@@ -5,6 +5,7 @@ import controlador.SistemaCocheras;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -152,6 +153,8 @@ public class AltaCliente extends javax.swing.JFrame {
 					}
 				});
 			}
+			ImageIcon img = new ImageIcon("src/swing/persona.png");
+			setIconImage(img.getImage());
 			pack();
 			setSize(400, 400);
 			setTitle("Agregar Cliente");
