@@ -59,8 +59,8 @@ public class EliminarAuto extends javax.swing.JFrame {
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("ELIMINAR AUTO");
-				titulo.setBounds(150, 20, 148, 28);
+				titulo.setText("ELIMINAR AUTO DEL CLIENTE: " + dniCliente);
+				titulo.setBounds(90, 20, 258, 28);
 			}
 			{
 				jLabel1 = new JLabel();
@@ -229,7 +229,7 @@ public class EliminarAuto extends javax.swing.JFrame {
 			}
 			pack();
 			setSize(400, 600);
-			setTitle("Sistema de Cocheras - Eliminar Cliente");
+			setTitle("Eliminar Auto");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

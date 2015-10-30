@@ -78,8 +78,8 @@ public class ModificarAuto extends javax.swing.JFrame {
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("MODIFICACION AUTOS DEL CLIENTE " + dniCliente);
-				titulo.setBounds(60, 20, 258, 28);
+				titulo.setText("MODIFICAR AUTO DEL CLIENTE: " + dniCliente);
+				titulo.setBounds(65, 20, 258, 28);
 			}
 			{
 				jLabel1 = new JLabel();
@@ -241,7 +241,7 @@ public class ModificarAuto extends javax.swing.JFrame {
 			}
 			pack();
 			setSize(400, 400);
-			setTitle("Sistema de Cocheras - Modificar Cliente");
+			setTitle("Modificar Auto");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

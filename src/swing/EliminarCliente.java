@@ -239,7 +239,7 @@ public class EliminarCliente extends javax.swing.JFrame {
 			}
 			pack();
 			setSize(400, 600);
-			setTitle("Sistema de Cocheras - Eliminar Cliente");
+			setTitle("Eliminar Cliente");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

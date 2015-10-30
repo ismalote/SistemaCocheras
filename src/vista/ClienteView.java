@@ -53,7 +53,19 @@ public class ClienteView {
 		v.add(domicilio);
 		v.add(mail);
 		v.add(telefono);
-		v.add(estado == 1 ? "Activo" : "Inactivo");
+		String est = "";
+		switch(estado){
+			case 1:
+				est = "Activo";
+				break;
+			case 2:
+				est = "Inactivo";
+				break;
+			default:
+				est = "Con deuda";
+				break;
+		}
+		v.add(est);
 		return v;
 	}
 }

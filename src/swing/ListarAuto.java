@@ -14,75 +14,74 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import controlador.SistemaCocheras;
-import vista.ClienteView;
+import vista.AutoView;
 
-public class ListarCliente extends javax.swing.JFrame {
+public class ListarAuto extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTable clientes;
+	private JTable autos;
 	private TableModel jTable1Model;
-	
+		
 	private SistemaCocheras sistemaCocheras;
+	private String dniCliente;
 	
 	public static void main(String[] args) {
-		ListarCliente inst = new ListarCliente();
+		ListarAuto inst = new ListarAuto();
 		inst.setVisible(true);
 	}	
 	
-	public ListarCliente()
+	public ListarAuto()
 	{
 		
 	}
 	
-	public ListarCliente(SistemaCocheras s) {
+	public ListarAuto(SistemaCocheras s, String d) {
 		super();
 		sistemaCocheras = s;
-		initGUI();		
+		dniCliente = d;
+		initGUI(dniCliente);		
 	}
 	
-	private void initGUI() {
+	private void initGUI(final String dniCliente) {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			//getContentPane().setLayout(null);
 			{				
-				Vector<ClienteView> clientesView = sistemaCocheras.listarClientes();
+				Vector<AutoView> autosView = sistemaCocheras.listarAutos(dniCliente);
 				Vector<Object> vectorOfVectors = new Vector<Object>();
-				for (int i= 0; i < clientesView.size(); i++)
+				for (int i= 0; i < autosView.size(); i++)
 				{
-					vectorOfVectors.add((clientesView.elementAt(i)).toVector());
+					vectorOfVectors.add((autosView.elementAt(i)).toVector());
 				}				
 				Vector<String> columnas = new Vector<String>();
-				columnas.add("DNI");
-				columnas.add("Nombre");				
-				columnas.add("Domicilio");
-				columnas.add("Telefono");
-				columnas.add("Mail");
+				columnas.add("Patente");
+				columnas.add("Marca");				
+				columnas.add("Modelo");
+				columnas.add("Fecha");					
 				columnas.add("Estado");
 				
 				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas);
-				clientes = new JTable();				
-				clientes.setModel(jTable1Model);				
+				autos = new JTable();				
+				autos.setModel(jTable1Model);				
 				
 				//Centrar la fila del DNI y el ESTADO
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-				clientes.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				clientes.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+				autos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				autos.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
 				
 				//Tamaño de las columnas
-				resizeColumnWidth(clientes);
+				resizeColumnWidth(autos);
 				
 				//Borde Negro
-				clientes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+				autos.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
 				
-				JScrollPane scrollPane = new JScrollPane(clientes);
+				JScrollPane scrollPane = new JScrollPane(autos);
 				
 				getContentPane().add(scrollPane);
-
-			}
+			}			
 			pack();
 			setSize(600, 600);
-			setTitle("Listar Clientes");
+			setTitle("Autos del Cliente: " + dniCliente);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

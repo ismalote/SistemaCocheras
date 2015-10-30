@@ -24,12 +24,12 @@ public class AutosCliente extends javax.swing.JFrame {
 	private JButton alta;
 	private JButton modificar;
 	private JButton eliminar;
+	private JButton listar;
 	private JLabel titulo;
 	private JLabel jLabel1;
 	private JTextField dniCliente;
 	private JTextField dni;
-	private ClienteView cliente;
-	
+	private ClienteView cliente;	
 	
 	private SistemaCocheras sistemaCocheras;
 	
@@ -57,7 +57,7 @@ public class AutosCliente extends javax.swing.JFrame {
 				titulo = new JLabel();
 				getContentPane().add(titulo);
 				titulo.setText("ABM AUTOS POR CLIENTE");
-				titulo.setBounds(120, 20, 148, 28);
+				titulo.setBounds(110, 20, 148, 28);
 			}
 			{
 				dni = new JTextField();
@@ -109,6 +109,20 @@ public class AutosCliente extends javax.swing.JFrame {
 				});				
 			}
 			{
+				listar = new JButton();
+				getContentPane().add(listar);
+				listar.setVisible(false);
+				listar.setText("LISTAR AUTOS");
+				listar.setBounds(113, 316, 137, 28);
+				listar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) 
+					{
+						ListarAuto a = new ListarAuto(sistemaCocheras, dni.getText());
+						a.setVisible(true);
+					}
+				});				
+			}
+			{
 				jLabel1 = new JLabel();
 				getContentPane().add(jLabel1);
 				jLabel1.setText("Ingrese DNI:");
@@ -134,15 +148,22 @@ public class AutosCliente extends javax.swing.JFrame {
 							alta.setVisible(true);
 							modificar.setVisible(true);
 							eliminar.setVisible(true);
+							listar.setVisible(true);
 						}else{
 							JOptionPane.showMessageDialog(null, "El cliente no existe.");
+							dni.setText("");
+							dni.setVisible(false);
+							alta.setVisible(false);
+							modificar.setVisible(false);
+							eliminar.setVisible(false);
+							listar.setVisible(false);
 						}
 					}
 				});
 			}
 			pack();
 			setSize(400, 600);
-			setTitle("Sistema de Cocheras - Listar Autos de Cliente");
+			setTitle("Autos por Cliente");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

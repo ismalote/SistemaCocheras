@@ -231,7 +231,7 @@ public class ModificarCliente extends javax.swing.JFrame {
 			}
 			pack();
 			setSize(400, 600);
-			setTitle("Sistema de Cocheras - Modificar Cliente");
+			setTitle("Modificar Cliente");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

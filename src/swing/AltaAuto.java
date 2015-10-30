@@ -69,8 +69,8 @@ public class AltaAuto extends javax.swing.JFrame {
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("AGREGAR AUTO");
-				titulo.setBounds(150, 20, 108, 28);
+				titulo.setText("AGREGAR AUTO PARA CLIENTE: " + dniCliente);
+				titulo.setBounds(90, 20, 258, 28);
 			}
 			{
 				jLabel1 = new JLabel();
@@ -161,7 +161,7 @@ public class AltaAuto extends javax.swing.JFrame {
 			}
 			pack();
 			setSize(400, 400);
-			setTitle("Sistema de Cocheras - Agregar Auto");
+			setTitle("Agregar Auto");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
