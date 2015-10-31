@@ -87,8 +87,8 @@ public class AltaContrato extends javax.swing.JFrame {
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("ALTA CONTRATO");
-				titulo.setBounds(150, 20, 113, 28);
+				titulo.setText("AGREGAR CONTRATO");
+				titulo.setBounds(130, 20, 133, 28);
 			}
 			{
 				jLabel1 = new JLabel();
@@ -632,11 +632,11 @@ public class AltaContrato extends javax.swing.JFrame {
 					}
 				});
 			}
-			ImageIcon img = new ImageIcon("src/swing/persona.png");
+			ImageIcon img = new ImageIcon("src/swing/contract.png");
 			setIconImage(img.getImage());
 			pack();
 			setSize(400, 600);
-			setTitle("Agregar Cliente");
+			setTitle("Agregar Contrato");
 			setLocationRelativeTo(null);
 			setResizable(false);
 		} catch (Exception e) {
