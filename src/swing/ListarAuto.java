@@ -54,7 +54,6 @@ public class ListarAuto extends javax.swing.JFrame {
 				autos = new JTable();				
 				autos.setModel(jTable1Model);				
 				
-				//Centrar la fila del DNI y el ESTADO
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 				autos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);

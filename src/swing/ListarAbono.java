@@ -52,7 +52,6 @@ public class ListarAbono extends javax.swing.JFrame {
 				abonos = new JTable();				
 				abonos.setModel(jTable1Model);				
 				
-				//Centrar la fila del DNI y el ESTADO
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 				abonos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);

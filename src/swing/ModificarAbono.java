@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -24,7 +25,6 @@ public class ModificarAbono extends javax.swing.JFrame {
 	private JLabel jLabel4;
 	private JLabel jLabel5;
 	private JLabel jLabel6;
-	private JLabel jLabel7;
 	private JButton buscar;
 	private JButton modificar;
 	private JTextField nombreAbono;
@@ -32,7 +32,7 @@ public class ModificarAbono extends javax.swing.JFrame {
 	private JTextField dias;
 	private JTextField precio;
 	private JTextField descuento;
-	private JTextField cochera;	
+	private JComboBox<String> cochera;	
 	
 	private SistemaCocheras sistemaCocheras;
 	private AbonoView abono;
@@ -89,13 +89,6 @@ public class ModificarAbono extends javax.swing.JFrame {
 				jLabel5.setVisible(false);
 			}
 			{
-				jLabel7 = new JLabel();
-				getContentPane().add(jLabel7);
-				jLabel7.setText("1 pequena - 2 mediana - 3 grande");
-				jLabel7.setBounds(21, 335, 200, 28);
-				jLabel7.setVisible(false);
-			}
-			{
 				nombre = new JTextField();
 				getContentPane().add(nombre);
 				nombre.setBounds(169, 118, 210, 28);
@@ -120,7 +113,8 @@ public class ModificarAbono extends javax.swing.JFrame {
 				descuento.setVisible(false);
 			}
 			{
-				cochera = new JTextField();
+				String[] tamanios = { "", "Pequena", "Mediana", "Grande" };
+				cochera = new JComboBox<String>(tamanios);
 				getContentPane().add(cochera);
 				cochera.setBounds(169, 314, 210, 28);
 				cochera.setVisible(false);
@@ -140,7 +134,7 @@ public class ModificarAbono extends javax.swing.JFrame {
 							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
 						}
 						if(rdo == -1){
-							rdo = sistemaCocheras.modificarAbono(nombre.getText(), Integer.parseInt(dias.getText()), Float.parseFloat(precio.getText()), Float.parseFloat(descuento.getText()), Integer.parseInt(cochera.getText()));
+							rdo = sistemaCocheras.modificarAbono(nombre.getText(), Integer.parseInt(dias.getText()), Float.parseFloat(precio.getText()), Float.parseFloat(descuento.getText()), cochera.getSelectedIndex());
 						}
 						String mensaje = "";
 						switch(rdo) {
@@ -166,8 +160,7 @@ public class ModificarAbono extends javax.swing.JFrame {
 							jLabel2.setVisible(false);
 							jLabel3.setVisible(false);
 							jLabel4.setVisible(false);
-							jLabel5.setVisible(false);
-							jLabel7.setVisible(false);
+							jLabel5.setVisible(false);							
 							nombreAbono.setText("");
 							nombre.setVisible(false);
 							dias.setVisible(false);
@@ -205,7 +198,6 @@ public class ModificarAbono extends javax.swing.JFrame {
 							jLabel3.setVisible(true);
 							jLabel4.setVisible(true);
 							jLabel5.setVisible(true);
-							jLabel7.setVisible(true);
 							nombre.setVisible(true);
 							nombre.setEnabled(false);
 							dias.setVisible(true);							
@@ -217,7 +209,7 @@ public class ModificarAbono extends javax.swing.JFrame {
 							dias.setText(Integer.toString(abono.getCantidadDias()));
 							precio.setText(Float.toString(abono.getPrecioBase()));
 							descuento.setText(Float.toString(abono.getDescuento()));
-							cochera.setText(Integer.toString(abono.getTamanioCochera()));
+							cochera.setSelectedIndex(abono.getTamanioCochera());
 						}else{
 							JOptionPane.showMessageDialog(null, "El abono no existe.");
 							jLabel1.setVisible(false);

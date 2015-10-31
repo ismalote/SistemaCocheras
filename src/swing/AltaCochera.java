@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import enums.ExitCodes;
@@ -19,9 +19,8 @@ public class AltaCochera extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel titulo;
 	private JLabel jLabel1;
-	private JLabel jLabel2;
 	private JButton alta;
-	private JTextField tamanio;
+	private JComboBox<String> tamanio;
 	
 	private SistemaCocheras sistemaCocheras;
 	
@@ -48,13 +47,8 @@ public class AltaCochera extends javax.swing.JFrame {
 				jLabel1.setBounds(21, 69, 113, 28);
 			}
 			{
-				jLabel2 = new JLabel();
-				getContentPane().add(jLabel2);
-				jLabel2.setText("1 pequena - 2 mediana - 3 grande");
-				jLabel2.setBounds(21, 94, 200, 28);
-			}
-			{
-				tamanio = new JTextField();
+				String[] tamanios = { "", "Pequena", "Mediana", "Grande" };
+				tamanio = new JComboBox<String>(tamanios);
 				getContentPane().add(tamanio);
 				tamanio.setBounds(169, 69, 210, 28);
 			}
@@ -67,13 +61,7 @@ public class AltaCochera extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = -1;
-						if(!isInteger(tamanio.getText())){
-							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
-						}
-						if(rdo == -1){
-							rdo = sistemaCocheras.crearCochera(Integer.parseInt(tamanio.getText()));
-						}																		
+						int	rdo = sistemaCocheras.crearCochera(tamanio.getSelectedIndex());																
 						String mensaje = "";
 						switch (rdo) {
 							case ExitCodes.OK: {
@@ -94,7 +82,7 @@ public class AltaCochera extends javax.swing.JFrame {
 						}
 						JOptionPane.showMessageDialog(null, mensaje);						
 						if(rdo == ExitCodes.OK){							
-							tamanio.setText("");														
+							tamanio.setSelectedIndex(0);														
 						}						
 					}
 				});
@@ -111,15 +99,4 @@ public class AltaCochera extends javax.swing.JFrame {
 		}
 	}
 	
-	public static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    return true;
-	}
-
 }

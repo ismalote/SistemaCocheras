@@ -15,17 +15,17 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import controlador.SistemaCocheras;
-import vista.ClienteView;
+import vista.CocheraView;
 
-public class ListarCliente extends javax.swing.JFrame {
+public class ListarCochera extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTable clientes;
+	private JTable cocheras;
 	private TableModel jTable1Model;
 	
 	private SistemaCocheras sistemaCocheras;
 	
-	public ListarCliente(SistemaCocheras s) {
+	public ListarCochera(SistemaCocheras s) {
 		super();
 		sistemaCocheras = s;
 		initGUI();		
@@ -36,45 +36,42 @@ public class ListarCliente extends javax.swing.JFrame {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			//getContentPane().setLayout(null);
 			{				
-				Vector<ClienteView> clientesView = sistemaCocheras.listarClientes();
+				Vector<CocheraView> cocherasView = sistemaCocheras.listarCocheras();
 				Vector<Object> vectorOfVectors = new Vector<Object>();
-				for (int i= 0; i < clientesView.size(); i++)
+				for (int i= 0; i < cocherasView.size(); i++)
 				{
-					vectorOfVectors.add((clientesView.elementAt(i)).toVector());
+					vectorOfVectors.add((cocherasView.elementAt(i)).toVector());
 				}				
 				Vector<String> columnas = new Vector<String>();
-				columnas.add("DNI");
-				columnas.add("Nombre");				
-				columnas.add("Domicilio");
-				columnas.add("Telefono");
-				columnas.add("Mail");
-				columnas.add("Estado");
+				columnas.add("Numero");
+				columnas.add("Tamano Vehiculo");				
+				columnas.add("Estado");		
 				
 				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas);
-				clientes = new JTable();				
-				clientes.setModel(jTable1Model);				
+				cocheras = new JTable();				
+				cocheras.setModel(jTable1Model);				
 				
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-				clientes.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				clientes.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+				cocheras.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				cocheras.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
 				
 				//Tamaño de las columnas
-				resizeColumnWidth(clientes);
+				resizeColumnWidth(cocheras);
 				
 				//Borde Negro
-				clientes.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+				cocheras.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
 				
-				JScrollPane scrollPane = new JScrollPane(clientes);
+				JScrollPane scrollPane = new JScrollPane(cocheras);
 				
 				getContentPane().add(scrollPane);
 
 			}
-			ImageIcon img = new ImageIcon("src/swing/persona.png");
+			ImageIcon img = new ImageIcon("src/swing/lot.png");
 			setIconImage(img.getImage());
 			pack();
 			setSize(750, 450);
-			setTitle("Listar Clientes");
+			setTitle("Listar Cocheras");
 			setLocationRelativeTo(null);
 			setResizable(false);
 		} catch (Exception e) {

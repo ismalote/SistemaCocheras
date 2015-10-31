@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -23,13 +24,12 @@ public class AltaAbono extends javax.swing.JFrame {
 	private JLabel jLabel3;
 	private JLabel jLabel4;
 	private JLabel jLabel5;
-	private JLabel jLabel6;
 	private JButton alta;
 	private JTextField nombre;
 	private JTextField dias;
 	private JTextField precio;
 	private JTextField descuento;
-	private JTextField cochera;	
+	private JComboBox<String> cochera;	
 	
 	private SistemaCocheras sistemaCocheras;
 	
@@ -80,12 +80,6 @@ public class AltaAbono extends javax.swing.JFrame {
 				jLabel5.setBounds(21, 265, 113, 28);
 			}
 			{
-				jLabel6 = new JLabel();
-				getContentPane().add(jLabel6);
-				jLabel6.setText("1 pequena - 2 mediana - 3 grande");
-				jLabel6.setBounds(21, 290, 200, 28);
-			}
-			{
 				nombre = new JTextField();
 				getContentPane().add(nombre);
 				nombre.setBounds(169, 69, 210, 28);
@@ -106,7 +100,8 @@ public class AltaAbono extends javax.swing.JFrame {
 				descuento.setBounds(169, 216, 210, 28);
 			}
 			{
-				cochera = new JTextField();
+				String[] tamanios = { "", "Pequena", "Mediana", "Grande" };
+				cochera = new JComboBox<String>(tamanios);
 				getContentPane().add(cochera);
 				cochera.setBounds(169, 265, 210, 28);
 			}
@@ -124,7 +119,7 @@ public class AltaAbono extends javax.swing.JFrame {
 							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
 						}
 						if(rdo == -1){
-							rdo = sistemaCocheras.crearAbono(nombre.getText(), Integer.parseInt(dias.getText()), Float.parseFloat(precio.getText()), Float.parseFloat(descuento.getText()), Integer.parseInt(cochera.getText()));
+							rdo = sistemaCocheras.crearAbono(nombre.getText(), Integer.parseInt(dias.getText()), Float.parseFloat(precio.getText()), Float.parseFloat(descuento.getText()), cochera.getSelectedIndex());
 						}
 						String mensaje = "";
 						switch(rdo) {
@@ -150,7 +145,7 @@ public class AltaAbono extends javax.swing.JFrame {
 							dias.setText("");
 							precio.setText("");
 							descuento.setText("");
-							cochera.setText("");
+							cochera.setSelectedIndex(0);
 						}
 					}
 				});

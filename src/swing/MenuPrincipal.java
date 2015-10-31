@@ -267,9 +267,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 						jMenuItem13.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								//AltaMedioPago a = new AltaMedioPago(sistemaCocheras);
-								System.out.println( "Apreto Alta");
-								//a.setVisible(true);
+								AltaContrato a = new AltaContrato(sistemaCocheras);								
+								a.setVisible(true);
 							}
 						});
 					}
@@ -343,10 +342,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 						jMenuItem18.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								//ModificarAbono m = new ModificarAbono(sistemaCocheras);
-								System.out.println( "Apreto Baja");
-								//m.setVisible(true);
-
+								ModificarCochera m = new ModificarCochera(sistemaCocheras);								
+								m.setVisible(true);
 							}
 						});
 					}
@@ -357,10 +354,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 						jMenuItem19.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								//BajaAbono b = new BajaAbono(sistemaCocheras);
-								System.out.println( "Apreto Baja");
-								//b.setVisible(true);
-
+								EliminarCochera b = new EliminarCochera(sistemaCocheras);								
+								b.setVisible(true);
 							}
 						});
 					}
@@ -371,10 +366,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 						jMenuItem20.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								//BajaAbono b = new BajaAbono(sistemaCocheras);
-								System.out.println( "Apreto Baja");
-								//b.setVisible(true);
-
+								ListarCochera b = new ListarCochera(sistemaCocheras);								
+								b.setVisible(true);
 							}
 						});
 					}

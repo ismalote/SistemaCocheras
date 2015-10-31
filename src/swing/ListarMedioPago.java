@@ -51,8 +51,7 @@ public class ListarMedioPago extends javax.swing.JFrame {
 				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas);
 				mediosPago = new JTable();				
 				mediosPago.setModel(jTable1Model);				
-				
-				//Centrar la fila del DNI y el ESTADO
+								
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 				mediosPago.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
