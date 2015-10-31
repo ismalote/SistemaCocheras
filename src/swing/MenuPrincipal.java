@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -390,6 +391,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 				}
 			}		
 			ImageIcon img = new ImageIcon("src/swing/sistema.png");
+			setContentPane(new JLabel(new ImageIcon("src/swing/estacionamiento.jpg")));
 			setIconImage(img.getImage());
 			pack();
 			setSize(800, 600);
