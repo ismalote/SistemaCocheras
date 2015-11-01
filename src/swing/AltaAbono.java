@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import enums.ExitCodes;
+import utils.*;
 
 public class AltaAbono extends javax.swing.JFrame {
 
@@ -115,7 +116,7 @@ public class AltaAbono extends javax.swing.JFrame {
 					public void actionPerformed(ActionEvent evt) 
 					{	
 						int rdo = -1;
-						if(!isInteger(dias.getText()) || !isFloat(precio.getText()) || !isFloat(descuento.getText())){
+						if(!NumeroUtils.isInteger(dias.getText()) || !NumeroUtils.isFloat(precio.getText()) || !NumeroUtils.isFloat(descuento.getText())){
 							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
 						}
 						if(rdo == -1){
@@ -160,27 +161,5 @@ public class AltaAbono extends javax.swing.JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    return true;
-	}
-
-	public static boolean isFloat(String s) {
-	    try { 
-	        Double.parseDouble(s);
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    return true;
 	}
 }
