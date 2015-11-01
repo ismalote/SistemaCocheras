@@ -4,9 +4,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -22,7 +20,7 @@ import javax.swing.table.TableColumnModel;
 import vista.AutoView;
 import controlador.SistemaCocheras;
 import enums.ExitCodes;
-
+import utils.*;
 
 
 public class ModificarAuto extends javax.swing.JFrame {
@@ -50,17 +48,6 @@ public class ModificarAuto extends javax.swing.JFrame {
 		sistemaCocheras = s;
 		dniCliente = d;
 		initGUI(dniCliente);		
-	}
-	
-	private Date parsearFecha(String fecha){
-		Date fechaParseada = null;
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			fechaParseada = formato.parse(fecha);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return fechaParseada;
 	}
 	
 	private void initGUI(final String dniCliente) {
@@ -135,7 +122,7 @@ public class ModificarAuto extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.modificarAuto(dniCliente, patente.getText(), marca.getText(), parsearFecha(fecha.getText()), modelo.getText(), true);						
+						int rdo = sistemaCocheras.modificarAuto(dniCliente, patente.getText(), marca.getText(), FechaUtils.parsearFecha(fecha.getText()), modelo.getText(), true);						
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {

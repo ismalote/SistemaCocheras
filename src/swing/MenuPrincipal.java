@@ -24,6 +24,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenu jMenu4;//Contratos
 	private JMenu jMenu5;//Cocheras
 	private JMenu jMenu6;//Salir
+	private JMenu jMenu7;//Generar datos de prueba
 
 	private JMenuItem jMenuItem1;	
 	private JMenuItem jMenuItem2;
@@ -45,6 +46,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenuItem jMenuItem18;
 	private JMenuItem jMenuItem19;	
 	private JMenuItem jMenuItem20;
+	private JMenuItem jMenuItem21;
 	
 	private SistemaCocheras sistemaCocheras;
 
@@ -369,6 +371,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
 							{
 								ListarCochera b = new ListarCochera(sistemaCocheras);								
 								b.setVisible(true);
+							}
+						});
+					}
+					{
+						jMenu7 = new JMenu();
+						jMenuBar1.add(jMenu7);
+						jMenu7.setText("Datos de prueba");
+						jMenu7.addMenuListener(new MenuListener() {
+							public void menuSelected(MenuEvent evt) {
+
+							}
+							public void menuDeselected(MenuEvent evt) {
+								
+							}
+							public void menuCanceled(MenuEvent evt) {
+								
+							}
+						});
+					}
+					{
+						jMenuItem21 = new JMenuItem();
+						jMenu7.add(jMenuItem21);
+						jMenuItem21.setText("Generar");
+						jMenuItem21.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) 
+							{
+								GenerarDatosPrueba g = new GenerarDatosPrueba(sistemaCocheras);
+								g.setVisible(true);
 							}
 						});
 					}

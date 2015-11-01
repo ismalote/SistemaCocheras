@@ -51,8 +51,8 @@ public class ClienteView {
 		v.add(dni);		
 		v.add(nombre);		
 		v.add(domicilio);
-		v.add(mail);
 		v.add(telefono);
+		v.add(mail);
 		String est = "";
 		switch(estado){
 			case 1:

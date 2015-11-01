@@ -1,9 +1,9 @@
 package vista;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+
+import utils.FechaUtils;
 
 public class AutoView {
 	
@@ -47,8 +47,7 @@ public class AutoView {
 		v.add(patente);		
 		v.add(marca);		
 		v.add(modelo);
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		v.add(df.format(fechaEntrada));
+		v.add(FechaUtils.formatearFecha(fechaEntrada));
 		v.add(activo ? "Activo" : "Inactivo");
 		return v;
 	}

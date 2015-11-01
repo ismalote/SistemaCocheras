@@ -1,12 +1,12 @@
 package main;
 
 import java.io.*;
-import java.text.*;
 import java.util.*;
 
 import controlador.*;
 import enums.*;
 import vista.*;
+import utils.*;
 
 public class MainSistemaCocheras {
 
@@ -24,20 +24,6 @@ public class MainSistemaCocheras {
 	public static void main(String[] args) {
 		MainSistemaCocheras sistema = new MainSistemaCocheras();
 		sistema.mostrarMenu();
-	}
-	
-	private Date parsearFecha(String fecha) throws ParseException {
-		Date fechaParseada = null;
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		fechaParseada = formato.parse(fecha);
-		return fechaParseada;
-	}
-	
-	private String formatearFecha(Date fecha) throws ParseException {
-		String fechaFormateada = null;
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		fechaFormateada = formato.format(fecha);
-		return fechaFormateada;
 	}
 
 	private void mostrarMenu() {
@@ -956,7 +942,7 @@ public class MainSistemaCocheras {
 			System.out.print("Abono: ");
 			String nombreAbono = reader.readLine();
 			System.out.print("Fecha: ");
-			Date fecha = this.parsearFecha(reader.readLine());
+			Date fecha = FechaUtils.parsearFecha(reader.readLine());
 			
 			String lineaMedioPagoCliente = String.format("Seleccione el medio de pago (%s: efectivo, %s: cheque, %s: debito tarjeta de credito, %s: debito CBU): ", 
 					MediosPagoCliente.EFECTIVO, MediosPagoCliente.CHEQUE, MediosPagoCliente.DEBITO_TARJETA_CREDITO,
@@ -986,7 +972,7 @@ public class MainSistemaCocheras {
 				System.out.print("Numero tarjeta: ");
 				String nroTarjeta = reader.readLine();
 				System.out.print("Fecha de vencimiento de la tarjeta: ");
-				Date vencimientoTarjeta = this.parsearFecha(reader.readLine());
+				Date vencimientoTarjeta = FechaUtils.parsearFecha(reader.readLine());
 				System.out.print("Entidad emisora de la tarjeta: ");
 				String entidadEmisoraTarjeta = reader.readLine();
 				
@@ -1052,7 +1038,7 @@ public class MainSistemaCocheras {
 				for (ContratoView cv: contratosVigentes) {				
 					String linea = String.format("%d\t%s\t%s\t%d\t%s\t%s", 
 							cv.getNroContrato(),
-							this.formatearFecha(cv.getFecha()),
+							FechaUtils.formatearFecha(cv.getFecha()),
 							cv.getPatenteAuto(),
 							cv.getNroCochera(),
 							cv.getAbono(),
@@ -1119,7 +1105,7 @@ public class MainSistemaCocheras {
 				for (ContratoView cv: contratosVigentes) {				
 					String linea = String.format("%d\t%s\t%s\t%d\t%s\t%s", 
 							cv.getNroContrato(),
-							this.formatearFecha(cv.getFecha()),
+							FechaUtils.formatearFecha(cv.getFecha()),
 							cv.getPatenteAuto(),
 							cv.getNroCochera(),
 							cv.getAbono(),
@@ -1179,7 +1165,7 @@ public class MainSistemaCocheras {
 				for (ContratoView cv: contratosView) {				
 					String linea = String.format("%d\t%s\t%s\t%s\t%s\t%s", 
 							cv.getNroContrato(),
-							this.formatearFecha(cv.getFecha()),
+							FechaUtils.formatearFecha(cv.getFecha()),
 							cv.getPatenteAuto(),
 							cv.getNroCochera(),
 							cv.getAbono(),
@@ -1413,7 +1399,7 @@ public class MainSistemaCocheras {
 			System.out.print("Modelo: ");
 			String modelo = reader.readLine();
 			System.out.print("Fecha de entrada: ");
-			Date fechaEntrada = this.parsearFecha(reader.readLine());
+			Date fechaEntrada = FechaUtils.parsearFecha(reader.readLine());
 			
 			int exitCode = sistemaCocheras.crearAuto(dni, patente, marca, fechaEntrada, modelo);
 			
@@ -1469,7 +1455,7 @@ public class MainSistemaCocheras {
 							av.getPatente(),
 							av.getMarca(),
 							av.getModelo(),
-							this.formatearFecha(av.getFechaEntrada()),
+							FechaUtils.formatearFecha(av.getFechaEntrada()),
 							av.getActivo() ? "Activo" : "Inactivo");
 					
 					System.out.println(linea);
@@ -1485,7 +1471,7 @@ public class MainSistemaCocheras {
 				String modelo = reader.readLine();
 				
 				System.out.print("Ingresar fecha de entrada: ");
-				Date fechaEntrada = this.parsearFecha(reader.readLine());
+				Date fechaEntrada = FechaUtils.parsearFecha(reader.readLine());
 								
 				int exitCode = sistemaCocheras.modificarAuto(dni, patente, marca, fechaEntrada, modelo, true);
 				
@@ -1590,7 +1576,7 @@ public class MainSistemaCocheras {
 							av.getPatente(),
 							av.getMarca(),
 							av.getModelo(),
-							this.formatearFecha(av.getFechaEntrada()),
+							FechaUtils.formatearFecha(av.getFechaEntrada()),
 							av.getActivo() ? "Activo" : "Inactivo");
 					
 					System.out.println(linea);

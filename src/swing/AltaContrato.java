@@ -4,9 +4,6 @@ import controlador.SistemaCocheras;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +15,7 @@ import javax.swing.WindowConstants;
 
 import enums.ExitCodes;
 import enums.MediosPagoCliente;
+import utils.*;
 
 public class AltaContrato extends javax.swing.JFrame {
 
@@ -67,17 +65,6 @@ public class AltaContrato extends javax.swing.JFrame {
 		super();
 		initGUI();
 		sistemaCocheras = s;
-	}
-	
-	private Date parsearFecha(String fecha){
-		Date fechaParseada = null;
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			fechaParseada = formato.parse(fecha);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return fechaParseada;
 	}
 	
 	private void initGUI() {
@@ -216,7 +203,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.crearContratoEfectivo(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), parsearFecha(fecha.getText()));						
+						int rdo = sistemaCocheras.crearContratoEfectivo(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()));						
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
@@ -299,7 +286,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.crearContratoCheque(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), parsearFecha(fecha.getText()), cuentaCorriente.getText(), entidadBancaria.getText());												
+						int rdo = sistemaCocheras.crearContratoCheque(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), cuentaCorriente.getText(), entidadBancaria.getText());												
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
@@ -398,7 +385,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.crearContratoTarjetaCredito(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), parsearFecha(fecha.getText()), numeroTarjeta.getText(), parsearFecha(vencimientoTarjeta.getText()), entidadEmisora.getText());																		
+						int rdo = sistemaCocheras.crearContratoTarjetaCredito(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), numeroTarjeta.getText(), FechaUtils.parsearFecha(vencimientoTarjeta.getText()), entidadEmisora.getText());																		
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
@@ -496,7 +483,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.crearContratoDebitoAutomatico(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), parsearFecha(fecha.getText()), cbu.getText(), entidadBancariaCBU.getText());																		
+						int rdo = sistemaCocheras.crearContratoDebitoAutomatico(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), cbu.getText(), entidadBancariaCBU.getText());																		
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
