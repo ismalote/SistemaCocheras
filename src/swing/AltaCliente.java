@@ -46,7 +46,7 @@ public class AltaCliente extends javax.swing.JFrame {
 				titulo = new JLabel();
 				getContentPane().add(titulo);
 				titulo.setText("AGREGAR CLIENTE");
-				titulo.setBounds(150, 20, 88, 28);
+				titulo.setBounds(150, 20, 110, 28);
 			}
 			{
 				jLabel1 = new JLabel();
