@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Vector;
 
 import vista.ContratoView;
 
@@ -14,6 +15,7 @@ public abstract class Contrato {
 	protected Abono abono;
 	protected boolean estado;
 	protected Date fecha;
+	protected Vector<Cuota> cuotas;
 	
 	private static int proxNroContrato;
 	
@@ -29,6 +31,7 @@ public abstract class Contrato {
 		this.abono = abono;
 		this.estado = true;
 		this.fecha = fecha;
+		this.cuotas = new Vector<Cuota>();
 	}
 	
 	public ContratoView getView()
@@ -86,5 +89,13 @@ public abstract class Contrato {
 	
 	public void darDeBaja() {
 		this.estado = false;
+	}
+	
+	public Vector<Cuota> getCuotas() {
+		return this.cuotas;
+	}
+	
+	public void agregarCuota(Cuota cuota) {
+		this.cuotas.add(cuota);
 	}
 }

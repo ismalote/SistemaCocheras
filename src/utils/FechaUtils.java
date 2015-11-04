@@ -1,9 +1,12 @@
 package utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public final class FechaUtils {
+	
+	private static Date fechaActual = Calendar.getInstance().getTime(); 
 
 	public static Date parsearFecha(String fecha) {
 		Date fechaParseada = null;
@@ -31,5 +34,9 @@ public final class FechaUtils {
 		}
 		
 		return fechaFormateada;
+	}
+
+	public static Date getFechaActual() {
+		return fechaActual;
 	}
 }

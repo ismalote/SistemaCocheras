@@ -8,6 +8,7 @@ import java.util.Vector;
 import modelo.*;
 import enums.*;
 import tests.DatosPrueba;
+import utils.FechaUtils;
 import vista.*;
 
 public class SistemaCocheras {
@@ -513,6 +514,72 @@ public class SistemaCocheras {
 		return contratosView;
 	}
 	
+	public int generarCuotas() {
+		
+		if (this.contratos != null && this.contratos.size() > 0) {
+			for (Contrato c: this.contratos) {
+				Abono abono = c.getAbono();
+				Vector<Cuota> cuotas = c.getCuotas();
+				Cuota cuota;
+				Calendar fechaVencimiento = Calendar.getInstance();
+				
+				if (cuotas != null && cuotas.size() > 0) {
+					// Si ya tenia cuotas generadas
+					Cuota cuo = cuotas.lastElement();
+					
+					// Seteo la fecha de vencimiento a partir de la ultima cuota.
+					fechaVencimiento.setTime(cuo.getFechaGeneracion());
+					fechaVencimiento.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
+				}
+				else {
+					// Genero la primera cuota
+					fechaVencimiento.setTime(c.getFecha());
+					fechaVencimiento.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
+				}	
+				
+				cuota = new Cuota(fechaVencimiento.getTime(), abono.calcularPrecio());
+				
+				c.agregarCuota(cuota);
+			}
+			
+			return ExitCodes.OK;
+		}
+		else {
+			return ExitCodes.FALLA_GENERACION_CUOTAS;
+		}
+	}
+	
+	public Vector<CuotaView> listarProximasCuotas() {
+		Vector<CuotaView> cuotasView = new Vector<CuotaView>();
+		
+		// Busca la ultima cuota de cada contrato.
+		Vector<Cuota> cuotas = this.buscarCuotas();
+		
+		if(cuotas != null && cuotas.size() > 0) {
+			for (Cuota c: cuotas) {
+				cuotasView.add(c.getView());
+			}
+		}
+		
+		return cuotasView;
+	}
+	
+	private  Vector<Cuota> buscarCuotas(){
+		Vector<Cuota> cuotas = new Vector<Cuota>();
+		
+		if (this.contratos != null && this.contratos.size() > 0) {
+			for(Contrato c: this.contratos) {
+				Vector<Cuota> cuo = c.getCuotas();
+				if (cuo != null && cuo.size() > 0) {
+					cuotas.add(cuo.lastElement());
+				}
+			}
+		}
+
+		return (cuotas.size() != 0 ? cuotas : null);
+	}
+	
+	
 	/*********** Fin Regi�n: CONTRATOS ***********/ 
 	
 	
@@ -723,7 +790,9 @@ public class SistemaCocheras {
 	
 	public void generarDatosPrueba(int cantidadDatosAGenerar) {
 		DatosPrueba datosPrueba = new DatosPrueba(cantidadDatosAGenerar);
-		Date fecha = Calendar.getInstance().getTime();
+		Calendar fecha = Calendar.getInstance();
+		fecha.setTime(FechaUtils.getFechaActual());
+		fecha.add(Calendar.DAY_OF_YEAR, -4);
 		
 		this.abonos.addAll(datosPrueba.generarAbonos());
 		this.clientes.addAll(datosPrueba.generarClientes());
@@ -741,7 +810,7 @@ public class SistemaCocheras {
 				this.clientes.elementAt(i).getAutos().firstElement(),
 				this.cocheras.elementAt(i),
 				this.abonos.elementAt(i),
-				fecha
+				fecha.getTime()
 				);
 		
 		this.contratos.add(contratoE);
@@ -755,7 +824,7 @@ public class SistemaCocheras {
 				this.abonos.elementAt(i),
 				Integer.toString(i),
 				String.format("Entidad %d", i),
-				fecha
+				FechaUtils.getFechaActual()
 				);
 		
 		this.contratos.add(contratoC);
@@ -768,9 +837,9 @@ public class SistemaCocheras {
 				this.cocheras.elementAt(i),
 				this.abonos.elementAt(i),
 				Integer.toString(i),
-				Calendar.getInstance().getTime(),
+				FechaUtils.getFechaActual(),
 				String.format("Entidad %d", i),
-				fecha
+				fecha.getTime()
 				);
 		
 		this.contratos.add(contratoTC);
@@ -784,7 +853,7 @@ public class SistemaCocheras {
 				this.abonos.elementAt(i),
 				Integer.toString(i),
 				String.format("Entidad %d", i),
-				fecha
+				FechaUtils.getFechaActual()
 				);
 		
 		this.contratos.add(contratoDA);
