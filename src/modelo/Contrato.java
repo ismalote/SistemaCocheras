@@ -21,14 +21,14 @@ public abstract class Contrato {
 		return ++proxNroContrato;
 	}
 	
-	public Contrato(Cliente cliente, Auto auto, Cochera cochera, Abono abono) {
+	public Contrato(Cliente cliente, Auto auto, Cochera cochera, Abono abono, Date fecha) {
 		this.nroContrato = getProxNroContrato();
 		this.cliente = cliente;
 		this.auto = auto;
 		this.cochera = cochera;
 		this.abono = abono;
 		this.estado = true;
-		this.fecha = Calendar.getInstance().getTime();
+		this.fecha = fecha;
 	}
 	
 	public ContratoView getView()

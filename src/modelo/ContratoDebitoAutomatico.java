@@ -1,13 +1,15 @@
 package modelo;
 
+import java.util.Date;
+
 public class ContratoDebitoAutomatico extends Contrato {
 
 	private String cbu;
 	private String entidadBancaria;
 	
 	public ContratoDebitoAutomatico(Cliente cliente, Auto auto, Cochera cochera, Abono abono, 
-			String cbu, String entidadBancaria) {
-		super(cliente, auto, cochera, abono);
+			String cbu, String entidadBancaria, Date fecha) {
+		super(cliente, auto, cochera, abono, fecha);
 		this.setCbu(cbu);
 		this.setEntidadBancaria(entidadBancaria);
 	}

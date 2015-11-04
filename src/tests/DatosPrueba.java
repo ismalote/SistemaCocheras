@@ -121,7 +121,7 @@ public class DatosPrueba {
 		return mediosPagos;
 	}
 	
-	public ContratoEfectivo generarContratoEfectivo(Cliente cliente, Auto auto, Cochera cochera, Abono abono) 
+	public ContratoEfectivo generarContratoEfectivo(Cliente cliente, Auto auto, Cochera cochera, Abono abono, Date fecha) 
 			throws IllegalArgumentException {
 
 		ContratoEfectivo contrato = null;
@@ -132,7 +132,8 @@ public class DatosPrueba {
 					cliente,
 					auto,
 					cochera,
-					abono
+					abono,
+					fecha
 					);
 		} else {
 			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");
@@ -142,7 +143,7 @@ public class DatosPrueba {
 	}
 	
 	public ContratoDebitoAutomatico generarContratoDebitoAutomatico(Cliente cliente, Auto auto, Cochera cochera, Abono abono,
-			String cbu, String entidadBancaria) 
+			String cbu, String entidadBancaria, Date fecha) 
 			throws IllegalArgumentException {
 
 		ContratoDebitoAutomatico contrato = null;
@@ -156,7 +157,8 @@ public class DatosPrueba {
 					cochera,
 					abono,
 					cbu,
-					entidadBancaria
+					entidadBancaria,
+					fecha
 					);
 		} else {
 			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");
@@ -166,7 +168,7 @@ public class DatosPrueba {
 	}
 	
 	public ContratoTarjetaCredito generarContratoTarjetaCredito(Cliente cliente, Auto auto, Cochera cochera, Abono abono,
-			String nroTarjeta, Date vencimientoTarjeta, String entidadTarjeta) 
+			String nroTarjeta, Date vencimientoTarjeta, String entidadTarjeta, Date fecha) 
 			throws IllegalArgumentException {
 
 		ContratoTarjetaCredito contrato = null;
@@ -181,7 +183,8 @@ public class DatosPrueba {
 					abono,
 					nroTarjeta,
 					vencimientoTarjeta,
-					entidadTarjeta
+					entidadTarjeta,
+					fecha
 					);
 		} else {
 			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");
@@ -191,7 +194,7 @@ public class DatosPrueba {
 	}
 	
 	public ContratoCheque generarContratoCheque(Cliente cliente, Auto auto, Cochera cochera, Abono abono,
-			String nroCuentaCorriente, String entidadBancaria) 
+			String nroCuentaCorriente, String entidadBancaria, Date fecha) 
 			throws IllegalArgumentException {
 
 		ContratoCheque contrato = null;
@@ -205,7 +208,8 @@ public class DatosPrueba {
 					cochera,
 					abono,
 					nroCuentaCorriente,
-					entidadBancaria
+					entidadBancaria,
+					fecha
 					);
 		} else {
 			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");

@@ -4,6 +4,7 @@ import controlador.SistemaCocheras;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -184,6 +185,7 @@ public class AltaContrato extends javax.swing.JFrame {
 			}
 			{
 				fecha = new JTextField();
+				fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
 				getContentPane().add(fecha);
 				fecha.setBounds(169, 265, 210, 28);
 			}

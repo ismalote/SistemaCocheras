@@ -352,7 +352,7 @@ public class SistemaCocheras {
 
 			if (auto != null && cochera != null && abono != null) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
-					contrato = new ContratoEfectivo(cliente, auto, cochera, abono);
+					contrato = new ContratoEfectivo(cliente, auto, cochera, abono, fecha);
 					this.contratos.add(contrato);
 					return ExitCodes.OK;
 				} else {
@@ -380,7 +380,7 @@ public class SistemaCocheras {
 			
 			if (auto != null && cochera != null && abono != null) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
-					contrato = new ContratoCheque(cliente, auto, cochera, abono, nroCuentaCorriente, entidadBancaria);
+					contrato = new ContratoCheque(cliente, auto, cochera, abono, nroCuentaCorriente, entidadBancaria, fecha);
 					this.contratos.add(contrato);
 					return ExitCodes.OK;
 				} else {
@@ -410,7 +410,7 @@ public class SistemaCocheras {
 			if (auto != null && cochera != null && abono != null) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
 					contrato = new ContratoTarjetaCredito(cliente, auto, cochera, abono, 
-					nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta);
+					nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta, fecha);
 					this.contratos.add(contrato);
 					return ExitCodes.OK;
 				} else {
@@ -438,7 +438,7 @@ public class SistemaCocheras {
 			
 			if (auto != null && cochera != null && abono != null) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
-					contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, cbu, entidadBancaria);
+					contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, cbu, entidadBancaria, fecha);
 					this.contratos.add(contrato);
 					return ExitCodes.OK;
 				} else {
@@ -723,6 +723,7 @@ public class SistemaCocheras {
 	
 	public void generarDatosPrueba(int cantidadDatosAGenerar) {
 		DatosPrueba datosPrueba = new DatosPrueba(cantidadDatosAGenerar);
+		Date fecha = Calendar.getInstance().getTime();
 		
 		this.abonos.addAll(datosPrueba.generarAbonos());
 		this.clientes.addAll(datosPrueba.generarClientes());
@@ -739,7 +740,8 @@ public class SistemaCocheras {
 				this.clientes.elementAt(i),
 				this.clientes.elementAt(i).getAutos().firstElement(),
 				this.cocheras.elementAt(i),
-				this.abonos.elementAt(i)
+				this.abonos.elementAt(i),
+				fecha
 				);
 		
 		this.contratos.add(contratoE);
@@ -752,7 +754,8 @@ public class SistemaCocheras {
 				this.cocheras.elementAt(i),
 				this.abonos.elementAt(i),
 				Integer.toString(i),
-				String.format("Entidad %d", i)
+				String.format("Entidad %d", i),
+				fecha
 				);
 		
 		this.contratos.add(contratoC);
@@ -766,7 +769,8 @@ public class SistemaCocheras {
 				this.abonos.elementAt(i),
 				Integer.toString(i),
 				Calendar.getInstance().getTime(),
-				String.format("Entidad %d", i)
+				String.format("Entidad %d", i),
+				fecha
 				);
 		
 		this.contratos.add(contratoTC);
@@ -779,7 +783,8 @@ public class SistemaCocheras {
 				this.cocheras.elementAt(i),
 				this.abonos.elementAt(i),
 				Integer.toString(i),
-				String.format("Entidad %d", i)
+				String.format("Entidad %d", i),
+				fecha
 				);
 		
 		this.contratos.add(contratoDA);

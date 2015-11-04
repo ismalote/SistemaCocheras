@@ -9,8 +9,8 @@ public class ContratoTarjetaCredito extends Contrato {
 	private String entidadEmisoraTarjeta;
 	
 	public ContratoTarjetaCredito(Cliente cliente, Auto auto, Cochera cochera, Abono abono, 
-			String nroTarjeta, Date vencimientoTarjeta, String entidadEmisoraTarjeta) {
-		super(cliente, auto, cochera, abono);
+			String nroTarjeta, Date vencimientoTarjeta, String entidadEmisoraTarjeta, Date fecha) {
+		super(cliente, auto, cochera, abono, fecha);
 		this.setNroTarjeta(nroTarjeta);
 		this.setVencimientoTarjeta(vencimientoTarjeta);
 		this.setEntidadEmisoraTarjeta(entidadEmisoraTarjeta);

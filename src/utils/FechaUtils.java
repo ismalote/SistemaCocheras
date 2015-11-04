@@ -23,8 +23,8 @@ public final class FechaUtils {
 		String fechaFormateada = null;
 		
 		try {
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		fechaFormateada = formato.format(fecha);
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			fechaFormateada = formato.format(fecha);
 		}
 		catch (Exception e) {
 			// DO NOTHING.
