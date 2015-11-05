@@ -529,14 +529,13 @@ public class SistemaCocheras {
 					
 					// Seteo la fecha de vencimiento a partir de la ultima cuota.
 					fechaVencimiento.setTime(cuo.getFechaGeneracion());
-					fechaVencimiento.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
 				}
 				else {
 					// Genero la primera cuota
 					fechaVencimiento.setTime(c.getFecha());
-					fechaVencimiento.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
 				}	
 				
+				fechaVencimiento.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
 				cuota = new Cuota(fechaVencimiento.getTime(), abono.calcularPrecio());
 				
 				c.agregarCuota(cuota);
