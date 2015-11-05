@@ -5,6 +5,7 @@ import controlador.SistemaCocheras;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +18,8 @@ import javax.swing.WindowConstants;
 import enums.ExitCodes;
 import enums.MediosPagoCliente;
 import utils.*;
+import vista.AutoView;
+import vista.ClienteView;
 
 public class AltaContrato extends javax.swing.JFrame {
 
@@ -38,7 +41,7 @@ public class AltaContrato extends javax.swing.JFrame {
 	private JButton volverTarjeta;
 	private JButton volverCBU;
 	private JTextField dni;
-	private JTextField patente;
+	private JComboBox<String> patente;
 	private JTextField cochera;
 	private JTextField abono;
 	private JTextField fecha;
@@ -61,15 +64,19 @@ public class AltaContrato extends javax.swing.JFrame {
 	private JComboBox<String> medioPago;
 	
 	private SistemaCocheras sistemaCocheras;
+	private String dniCliente;
 	
-	public AltaContrato(SistemaCocheras s) {
+	public AltaContrato(SistemaCocheras s, String d) {
 		super();
-		initGUI();
 		sistemaCocheras = s;
+		dniCliente = d;
+		initGUI(dniCliente);
+
 	}
 	
-	private void initGUI() {
+	private void initGUI(final String dniCliente) {
 		try {
+			ClienteView cliente = sistemaCocheras.buscarDatosCliente(dniCliente);
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			{
@@ -165,11 +172,23 @@ public class AltaContrato extends javax.swing.JFrame {
 			}
 			{
 				dni = new JTextField();
+				dni.setText(dniCliente);
+				dni.setEnabled(false);
 				getContentPane().add(dni);
 				dni.setBounds(169, 69, 210, 28);
 			}
-			{
-				patente = new JTextField();
+			{				
+				Vector<AutoView> autosView = cliente.getAutos();
+				String[] autosCombo;
+				if(autosView != null && autosView.size() > 0){
+					autosCombo = new String[autosView.size()];
+					for(int i = 0; i < autosView.size(); i++){
+						autosCombo[i] = autosView.elementAt(i).getPatente();
+					}
+					patente = new JComboBox<String>(autosCombo);
+				}else{
+					patente = new JComboBox<String>();
+				}
 				getContentPane().add(patente);
 				patente.setBounds(169, 118, 210, 28);
 			}
@@ -205,7 +224,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.crearContratoEfectivo(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()));						
+						int rdo = sistemaCocheras.crearContratoEfectivo(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()));					
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
@@ -226,17 +245,17 @@ public class AltaContrato extends javax.swing.JFrame {
 						}
 						JOptionPane.showMessageDialog(null, mensaje);
 						if(rdo == ExitCodes.OK){
-							dni.setText("");
-							patente.setText("");
+							patente.setSelectedIndex(0);
 							cochera.setText("");
 							abono.setText("");
 							fecha.setText("");
-							dni.setEnabled(true);
+							medioPago.setSelectedIndex(0);
 							patente.setEnabled(true);
 							cochera.setEnabled(true);
 							abono.setEnabled(true);
 							fecha.setEnabled(true);
-							medioPago.setEnabled(true);
+							fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
+							medioPago.setEnabled(true);							
 							reconfirmarEfectivo.setVisible(false);
 							volverEfectivo.setVisible(false);
 							alta.setVisible(true);
@@ -254,7 +273,6 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						dni.setEnabled(true);
 						patente.setEnabled(true);
 						cochera.setEnabled(true);
 						abono.setEnabled(true);
@@ -287,8 +305,14 @@ public class AltaContrato extends javax.swing.JFrame {
 				reconfirmarCheque.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 
-					{
-						int rdo = sistemaCocheras.crearContratoCheque(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), cuentaCorriente.getText(), entidadBancaria.getText());												
+					{	
+						int rdo = 0;
+						if(cuentaCorriente.getText().length() == 0 || entidadBancaria.getText().length() == 0){
+							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
+						}
+						if(rdo == 0){
+							rdo = sistemaCocheras.crearContratoCheque(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), cuentaCorriente.getText(), entidadBancaria.getText());
+						}
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
@@ -309,19 +333,20 @@ public class AltaContrato extends javax.swing.JFrame {
 						}
 						JOptionPane.showMessageDialog(null, mensaje);
 						if(rdo == ExitCodes.OK){
-							dni.setText("");
-							patente.setText("");
+							patente.setSelectedIndex(0);
 							cochera.setText("");
 							abono.setText("");
 							fecha.setText("");
+							fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
 							cuentaCorriente.setText("");
 							entidadBancaria.setText("");
-							dni.setEnabled(true);
 							patente.setEnabled(true);
 							cochera.setEnabled(true);
 							abono.setEnabled(true);
 							fecha.setEnabled(true);
-							medioPago.setEnabled(true);
+							medioPago.setEnabled(true);							
+							jLabel7.setVisible(false);
+							jLabel8.setVisible(false);
 							cuentaCorriente.setVisible(false);
 							entidadBancaria.setVisible(false);							
 							reconfirmarCheque.setVisible(false);
@@ -340,8 +365,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				volverCheque.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 
-					{
-						dni.setEnabled(true);
+					{					
 						patente.setEnabled(true);
 						cochera.setEnabled(true);
 						abono.setEnabled(true);
@@ -387,7 +411,13 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.crearContratoTarjetaCredito(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), numeroTarjeta.getText(), FechaUtils.parsearFecha(vencimientoTarjeta.getText()), entidadEmisora.getText());																		
+						int rdo = 0;
+						if(numeroTarjeta.getText().length() == 0 || entidadEmisora.getText().length() == 0 || vencimientoTarjeta.getText().length() == 0){
+							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
+						}
+						if(rdo == 0){
+							rdo = sistemaCocheras.crearContratoTarjetaCredito(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), numeroTarjeta.getText(), FechaUtils.parsearFecha(vencimientoTarjeta.getText()), entidadEmisora.getText());
+						}
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
@@ -408,15 +438,14 @@ public class AltaContrato extends javax.swing.JFrame {
 						}
 						JOptionPane.showMessageDialog(null, mensaje);
 						if(rdo == ExitCodes.OK){
-							dni.setText("");
-							patente.setText("");
+							patente.setSelectedIndex(0);
 							cochera.setText("");
 							abono.setText("");
 							fecha.setText("");
+							fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
 							numeroTarjeta.setText("");
 							vencimientoTarjeta.setText("");
 							entidadEmisora.setText("");
-							dni.setEnabled(true);
 							patente.setEnabled(true);
 							cochera.setEnabled(true);
 							abono.setEnabled(true);
@@ -442,7 +471,6 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						dni.setEnabled(true);
 						patente.setEnabled(true);
 						cochera.setEnabled(true);
 						abono.setEnabled(true);
@@ -485,7 +513,13 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.crearContratoDebitoAutomatico(dni.getText(), patente.getText(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), cbu.getText(), entidadBancariaCBU.getText());																		
+						int rdo = 0;
+						if(cbu.getText().length() == 0 || entidadBancariaCBU.getText().length() == 0){
+							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
+						}
+						if(rdo == 0){
+							sistemaCocheras.crearContratoDebitoAutomatico(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), cbu.getText(), entidadBancariaCBU.getText());
+						}																						
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
@@ -506,14 +540,13 @@ public class AltaContrato extends javax.swing.JFrame {
 						}
 						JOptionPane.showMessageDialog(null, mensaje);
 						if(rdo == ExitCodes.OK){
-							dni.setText("");
-							patente.setText("");
+							patente.setSelectedIndex(0);
 							cochera.setText("");
 							abono.setText("");
 							fecha.setText("");
 							cbu.setText("");
+							fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
 							entidadBancariaCBU.setText("");
-							dni.setEnabled(true);
 							patente.setEnabled(true);
 							cochera.setEnabled(true);
 							abono.setEnabled(true);
@@ -538,7 +571,6 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						dni.setEnabled(true);
 						patente.setEnabled(true);
 						cochera.setEnabled(true);
 						abono.setEnabled(true);
@@ -564,60 +596,63 @@ public class AltaContrato extends javax.swing.JFrame {
 				alta.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 
-					{						
-						dni.setEnabled(false);
-						patente.setEnabled(false);
-						cochera.setEnabled(false);
-						abono.setEnabled(false);
-						fecha.setEnabled(false);
-						medioPago.setEnabled(false);
-						alta.setVisible(false);
-						String letra = "X";
-						if(medioPago.getSelectedIndex() > 0){
-							String inicial = (String) medioPago.getSelectedItem();
-							letra = inicial.substring(0, 1).toUpperCase();
+					{
+						int rdo = validarCampos(patente.getSelectedItem().toString(), cochera.getText(), abono.getText(), medioPago.getSelectedIndex(), fecha.getText());
+						if(rdo == -1){
+							JOptionPane.showMessageDialog(null, "Verifique los datos ingresados.");
+						} else {
+							patente.setEnabled(false);
+							cochera.setEnabled(false);
+							abono.setEnabled(false);
+							fecha.setEnabled(false);
+							medioPago.setEnabled(false);
+							alta.setVisible(false);
+							String letra = "X";
+							if(medioPago.getSelectedIndex() > 0){
+								String inicial = (String) medioPago.getSelectedItem();
+								letra = inicial.substring(0, 1).toUpperCase();
+							}
+							switch(letra){
+								case MediosPagoCliente.EFECTIVO:
+									reconfirmarEfectivo.setVisible(true);																
+									volverEfectivo.setVisible(true);								
+									break;
+								case MediosPagoCliente.CHEQUE:								
+									jLabel7.setVisible(true);
+									cuentaCorriente.setVisible(true);
+									jLabel8.setVisible(true);
+									entidadBancaria.setVisible(true);
+									reconfirmarCheque.setVisible(true);																
+									volverCheque.setVisible(true);								
+									break;
+								case MediosPagoCliente.DEBITO_TARJETA_CREDITO:
+									jLabel9.setVisible(true);
+									numeroTarjeta.setVisible(true);
+									jLabel10.setVisible(true);
+									vencimientoTarjeta.setVisible(true);
+									jLabel11.setVisible(true);
+									entidadEmisora.setVisible(true);
+									reconfirmarTarjeta.setVisible(true);
+									volverTarjeta.setVisible(true);
+									break;
+								case MediosPagoCliente.DEBITO_CBU:
+									jLabel12.setVisible(true);
+									cbu.setVisible(true);
+									jLabel13.setVisible(true);
+									entidadBancariaCBU.setVisible(true);								
+									reconfirmarCBU.setVisible(true);
+									volverCBU.setVisible(true);
+									break;
+								case "X":
+									patente.setEnabled(true);
+									cochera.setEnabled(true);
+									abono.setEnabled(true);
+									fecha.setEnabled(true);
+									medioPago.setEnabled(true);
+									alta.setVisible(true);
+									break;
+							}					
 						}
-						switch(letra){
-							case MediosPagoCliente.EFECTIVO:
-								reconfirmarEfectivo.setVisible(true);																
-								volverEfectivo.setVisible(true);								
-								break;
-							case MediosPagoCliente.CHEQUE:								
-								jLabel7.setVisible(true);
-								cuentaCorriente.setVisible(true);
-								jLabel8.setVisible(true);
-								entidadBancaria.setVisible(true);
-								reconfirmarCheque.setVisible(true);																
-								volverCheque.setVisible(true);								
-								break;
-							case MediosPagoCliente.DEBITO_TARJETA_CREDITO:
-								jLabel9.setVisible(true);
-								numeroTarjeta.setVisible(true);
-								jLabel10.setVisible(true);
-								vencimientoTarjeta.setVisible(true);
-								jLabel11.setVisible(true);
-								entidadEmisora.setVisible(true);
-								reconfirmarTarjeta.setVisible(true);
-								volverTarjeta.setVisible(true);
-								break;
-							case MediosPagoCliente.DEBITO_CBU:
-								jLabel12.setVisible(true);
-								cbu.setVisible(true);
-								jLabel13.setVisible(true);
-								entidadBancariaCBU.setVisible(true);								
-								reconfirmarCBU.setVisible(true);
-								volverCBU.setVisible(true);
-								break;
-							case "X":
-								dni.setEnabled(true);
-								patente.setEnabled(true);
-								cochera.setEnabled(true);
-								abono.setEnabled(true);
-								fecha.setEnabled(true);
-								medioPago.setEnabled(true);
-								alta.setVisible(true);
-								break;
-						}					
 					}
 				});
 			}
@@ -633,4 +668,8 @@ public class AltaContrato extends javax.swing.JFrame {
 		}
 	}
 
+	private int validarCampos(String patente, String cochera, String abono, int medioPago, String fecha){
+		return (patente.length() > 0 && NumeroUtils.isInteger(cochera) && abono.length() > 0 && medioPago > 0 && FechaUtils.parsearFecha(fecha) != null) ? 0 : -1;
+	}	
+	
 }

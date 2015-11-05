@@ -39,9 +39,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenuItem jMenuItem11;
 	private JMenuItem jMenuItem12;
 	private JMenuItem jMenuItem13;	
-	private JMenuItem jMenuItem14;
-	private JMenuItem jMenuItem15;
-	private JMenuItem jMenuItem16;	
 	private JMenuItem jMenuItem17;
 	private JMenuItem jMenuItem18;
 	private JMenuItem jMenuItem19;	
@@ -266,51 +263,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					{
 						jMenuItem13 = new JMenuItem();
 						jMenu4.add(jMenuItem13);
-						jMenuItem13.setText("Agregar");
+						jMenuItem13.setText("Administrar");
 						jMenuItem13.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								AltaContrato a = new AltaContrato(sistemaCocheras);								
+								ContratosCliente a = new ContratosCliente(sistemaCocheras);								
 								a.setVisible(true);
-							}
-						});
-					}
-					{
-						jMenuItem14 = new JMenuItem();
-						jMenu4.add(jMenuItem14);
-						jMenuItem14.setText("Modificar");
-						jMenuItem14.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) 
-							{
-								//ModificarAbono m = new ModificarAbono(sistemaCocheras);
-								System.out.println( "Apreto Baja");
-								//m.setVisible(true);
-							}
-						});
-					}
-					{
-						jMenuItem15 = new JMenuItem();
-						jMenu4.add(jMenuItem15);
-						jMenuItem15.setText("Eliminar");
-						jMenuItem15.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) 
-							{
-								//BajaAbono b = new BajaAbono(sistemaCocheras);
-								System.out.println( "Apreto Baja");
-								//b.setVisible(true);
-							}
-						});
-					}
-					{
-						jMenuItem16 = new JMenuItem();
-						jMenu4.add(jMenuItem16);
-						jMenuItem16.setText("Listar");
-						jMenuItem16.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) 
-							{
-								//BajaAbono b = new BajaAbono(sistemaCocheras);
-								System.out.println( "Apreto Baja");
-								//b.setVisible(true);
 							}
 						});
 					}

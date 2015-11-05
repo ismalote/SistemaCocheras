@@ -1,7 +1,9 @@
 package modelo;
 
 import java.util.Vector;
+
 import enums.EstadosCliente;
+import vista.AutoView;
 import vista.ClienteView;
 
 public class Cliente {
@@ -27,7 +29,14 @@ public class Cliente {
 	
 	public ClienteView getView()
 	{
-		ClienteView clienteView = new ClienteView(this.dni, this.nombre, this.domicilio, this.mail, this.telefono, this.estado);
+		Vector<AutoView> autosView = new Vector<AutoView>();
+		
+		if (this.autos != null && this.autos.size() > 0) {
+			for(Auto a: this.autos) {
+				autosView.add(a.getView());
+			}
+		}
+		ClienteView clienteView = new ClienteView(this.dni, this.nombre, this.domicilio, this.mail, this.telefono, this.estado, autosView);
 		return clienteView;
 	}
 
