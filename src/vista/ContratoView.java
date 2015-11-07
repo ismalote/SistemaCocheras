@@ -1,6 +1,9 @@
 package vista;
 
 import java.util.Date;
+import java.util.Vector;
+
+import utils.FechaUtils;
 
 public class ContratoView {
 	private int nroContrato;
@@ -54,5 +57,19 @@ public class ContratoView {
 	
 	public Date getFecha() {
 		return this.fecha;
-	}	
+	}
+	
+	public Vector<String> toVector()
+	{
+		Vector<String> v = new Vector<String>();
+		v.add(Integer.toString(nroContrato));		
+		v.add(FechaUtils.formatearFecha(fecha));		
+		v.add(patenteAuto);
+		v.add(Integer.toString(nroCochera));
+		v.add(abono);
+		String est = "";
+		est = (estado == true) ? "Vigente" : "No vigente";
+		v.add(est);
+		return v;
+	}
 }

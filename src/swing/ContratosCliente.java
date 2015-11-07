@@ -94,8 +94,8 @@ public class ContratosCliente extends javax.swing.JFrame {
 				eliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) 
 					{
-						//EliminarContrato a = new EliminarContrato(sistemaCocheras, dni.getText());
-						//a.setVisible(true);
+						EliminarContrato a = new EliminarContrato(sistemaCocheras, dni.getText());
+						a.setVisible(true);
 					}
 				});				
 			}
@@ -108,8 +108,8 @@ public class ContratosCliente extends javax.swing.JFrame {
 				listar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) 
 					{
-						//ListarContrato a = new ListarContrato(sistemaCocheras, dni.getText());
-						//a.setVisible(true);
+						ListarContratos a = new ListarContratos(sistemaCocheras, dni.getText(), false);
+						a.setVisible(true);
 					}
 				});				
 			}
