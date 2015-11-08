@@ -80,8 +80,8 @@ public class ContratosCliente extends javax.swing.JFrame {
 				modificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) 
 					{
-						//ModificarContrato a = new ModificarContrato(sistemaCocheras, dni.getText());
-						//a.setVisible(true);
+						ModificarContrato a = new ModificarContrato(sistemaCocheras, dni.getText());
+						a.setVisible(true);
 					}
 				});				
 			}
