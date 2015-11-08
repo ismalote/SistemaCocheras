@@ -2,7 +2,7 @@ package controlador;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
+//import java.util.Random;
 import java.util.Vector;
 
 import modelo.*;
@@ -13,7 +13,7 @@ import vista.*;
 
 public class SistemaCocheras {
 	
-	/*********** Regi�n: INICIALIZACI�N ***********/ 
+	/*********** Region: INICIALIZACI�N ***********/ 
 	
 	private Vector<Contrato> contratos;
 	private Vector<Cliente> clientes;
@@ -29,10 +29,10 @@ public class SistemaCocheras {
 		this.abonos = new Vector<Abono>();
 	}
 	
-	/*********** Fin Regi�n: INICIALIZACI�N ***********/ 
+	/*********** Fin Region: INICIALIZACI�N ***********/ 
 		
 
-	/*********** Regi�n: CLIENTES ***********/ 
+	/*********** Region: CLIENTES ***********/ 
 	
 	public int crearCliente(String dni, String nombre, String domicilio, String mail, String telefono){
 		
@@ -163,10 +163,10 @@ public class SistemaCocheras {
 		return (contratosCliente.size() != 0 ? contratosCliente : null);
 	}
 	
-	/*********** Fin Regi�n: CLIENTES ***********/ 
+	/*********** Fin Region: CLIENTES ***********/ 
 	
 	
-	/*********** Regi�n: MEDIOS DE PAGO ***********/ 
+	/*********** Region: MEDIOS DE PAGO ***********/ 
 	
 	public int crearMedioPago(String nombreEntidad, String nombreArchivoEntrada,
 			String nombreArchivoSalida, String direccionFTP) {
@@ -231,10 +231,10 @@ public class SistemaCocheras {
 		return mediosPagoView;
 	}
 	
-	/*********** Fin Regi�n: MEDIOS DE PAGO ***********/ 
+	/*********** Fin Region: MEDIOS DE PAGO ***********/ 
 
 	
-	/*********** Regi�n: ABONOS ***********/ 
+	/*********** Region: ABONOS ***********/ 
 	
 	public int crearAbono(String nombre, int cantidadDias, float precioBase, float descuento, int tamanioCochera){
 		
@@ -333,28 +333,23 @@ public class SistemaCocheras {
 		return abonosView;
 	}
 	
-	/*********** Fin Regi�n: ABONOS ***********/ 
+	/*********** Fin Region: ABONOS ***********/ 
 	
 	
-	/*********** Regi�n: CONTRATOS ***********/ 
+	/*********** Region: CONTRATOS ***********/ 
 	
-	public int crearContratoEfectivo(String dni,
-			String patente, int nroCochera,
-			String nombreAbono, Date fecha) {
+	public int crearContratoEfectivo(String dni, String patente, int nroCochera, String nombreAbono, Date fecha) {
 		ContratoEfectivo contrato = null;
-
 		Cliente cliente = buscarCliente(dni);
-
-		if (cliente != null) {
-			
+		if (cliente != null) {			
 			Auto auto = cliente.buscarAuto(patente);
 			Cochera cochera = this.buscarCochera(nroCochera);
-			Abono abono = this.buscarAbono(nombreAbono);
-
-			if (auto != null && cochera != null && abono != null) {
+			Abono abono = this.buscarAbono(nombreAbono);			
+			if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
 					contrato = new ContratoEfectivo(cliente, auto, cochera, abono, fecha);
 					this.contratos.add(contrato);
+					cochera.setEstado(EstadosCochera.OCUPADA);
 					return ExitCodes.OK;
 				} else {
 					return ExitCodes.COCHERA_NO_DISPONIBLE;
@@ -367,9 +362,7 @@ public class SistemaCocheras {
 		}
 	}
 	
-	
-	public int crearContratoCheque(String dni, String patente, int nroCochera, String nombreAbono,
-			Date fecha, String nroCuentaCorriente, String entidadBancaria) {
+	public int crearContratoCheque(String dni, String patente, int nroCochera, String nombreAbono, Date fecha, String nroCuentaCorriente, String entidadBancaria) {
 		ContratoCheque contrato = null;
 		
 		Cliente cliente = buscarCliente(dni);
@@ -378,17 +371,20 @@ public class SistemaCocheras {
 			Auto auto = cliente.buscarAuto(patente);
 			Cochera cochera = this.buscarCochera(nroCochera);
 			Abono abono = this.buscarAbono(nombreAbono);
-			
-			if (auto != null && cochera != null && abono != null) {
-				if (cochera.getEstado() == EstadosCochera.LIBRE) {
-					contrato = new ContratoCheque(cliente, auto, cochera, abono, nroCuentaCorriente, entidadBancaria, fecha);
-					this.contratos.add(contrato);
-					return ExitCodes.OK;
+			if(verificarPatenteEnContrato(cliente, patente)){
+				if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
+					if (cochera.getEstado() == EstadosCochera.LIBRE) {
+						contrato = new ContratoCheque(cliente, auto, cochera, abono, nroCuentaCorriente, entidadBancaria, fecha);
+						this.contratos.add(contrato);
+						cochera.setEstado(EstadosCochera.OCUPADA);
+						return ExitCodes.OK;
+					} else {
+						return ExitCodes.COCHERA_NO_DISPONIBLE;
+					}
 				} else {
-					return ExitCodes.COCHERA_NO_DISPONIBLE;
+					return ExitCodes.ARGUMENTOS_INVALIDOS;
 				}
-			}
-			else {
+			} else {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
 			}
 		} else {
@@ -396,29 +392,24 @@ public class SistemaCocheras {
 		}  
 	}
 	
-	public int crearContratoTarjetaCredito(String dni, String patente, int nroCochera, String nombreAbono,
-			Date fecha, String nroTarjeta, Date vencimientoTarjeta, 
-			String entidadEmisoraTarjeta) {
-		ContratoTarjetaCredito contrato = null;
-		
-		Cliente cliente = buscarCliente(dni);
-		
+	public int crearContratoTarjetaCredito(String dni, String patente, int nroCochera, String nombreAbono, Date fecha, String nroTarjeta, Date vencimientoTarjeta, String entidadEmisoraTarjeta) {
+		ContratoTarjetaCredito contrato = null;		
+		Cliente cliente = buscarCliente(dni);		
 		if (cliente != null) {
 			Auto auto = cliente.buscarAuto(patente);
 			Cochera cochera = this.buscarCochera(nroCochera);
-			Abono abono = this.buscarAbono(nombreAbono);
-			
-			if (auto != null && cochera != null && abono != null) {
+			Abono abono = this.buscarAbono(nombreAbono);			
+			if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
 					contrato = new ContratoTarjetaCredito(cliente, auto, cochera, abono, 
 					nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta, fecha);
 					this.contratos.add(contrato);
+					cochera.setEstado(EstadosCochera.OCUPADA);
 					return ExitCodes.OK;
 				} else {
 					return ExitCodes.COCHERA_NO_DISPONIBLE; 
 				}
-			}
-			else {
+			} else {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
 			}
 		} else {
@@ -428,30 +419,38 @@ public class SistemaCocheras {
 	
 	public int crearContratoDebitoAutomatico(String dni, String patente, int nroCochera, String nombreAbono,
 			Date fecha, String cbu, String entidadBancaria) {
-		ContratoDebitoAutomatico contrato = null;
-		
-		Cliente cliente = buscarCliente(dni);
-		
+		ContratoDebitoAutomatico contrato = null;		
+		Cliente cliente = buscarCliente(dni);		
 		if (cliente != null) {
 			Auto auto = cliente.buscarAuto(patente);
 			Cochera cochera = this.buscarCochera(nroCochera);
-			Abono abono = this.buscarAbono(nombreAbono);
-			
-			if (auto != null && cochera != null && abono != null) {
+			Abono abono = this.buscarAbono(nombreAbono);			
+			if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
 					contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, cbu, entidadBancaria, fecha);
 					this.contratos.add(contrato);
+					cochera.setEstado(EstadosCochera.OCUPADA);
 					return ExitCodes.OK;
 				} else {
 					return ExitCodes.COCHERA_NO_DISPONIBLE;
 				}
-			}
-			else {
+			} else {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
 			}
 		} else {
 			return ExitCodes.ARGUMENTOS_INVALIDOS;
 		}  
+	}	
+	
+	private boolean verificarPatenteEnContrato(Cliente cliente, String patente){		
+		Vector<ContratoView> contratosView = this.listarContratos(cliente.getDni(), true);
+		boolean flag = true;
+		for(int i = 0; i < contratosView.size() && flag; i++){
+			if(contratosView.elementAt(i).getPatenteAuto().equalsIgnoreCase(patente)){
+				flag = false;
+			}
+		}
+		return flag;
 	}
 	
 	public int modificarContrato(int nroContrato, String abono) {
@@ -461,7 +460,7 @@ public class SistemaCocheras {
 		if (contrato != null) {
 			Abono abonoNuevo = this.buscarAbono(abono);
 			
-			if (abonoNuevo != null) {
+			if (abonoNuevo != null && abonoNuevo.getTamanioCochera() == contrato.getCochera().getTamanioVehiculoAdmitido()) {
 				contrato.setAbono(abonoNuevo);
 				return ExitCodes.OK;
 			} else {
@@ -579,10 +578,10 @@ public class SistemaCocheras {
 	}
 	
 	
-	/*********** Fin Regi�n: CONTRATOS ***********/ 
+	/*********** Fin Region: CONTRATOS ***********/ 
 	
 	
-	/*********** Regi�n: COCHERAS ***********/ 
+	/*********** Region: COCHERAS ***********/ 
 	
 	public int crearCochera(int tamanioVehiculoAdmitido) {
 		// Se usa Integer.MAX_VALUE como valor provisorio; se asignar� el n�mero de la cochera
@@ -672,10 +671,10 @@ public class SistemaCocheras {
 		return cocheraView;
 	}
 	
-	/*********** Fin Regi�n: COCHERAS ***********/ 
+	/*********** Fin Region: COCHERAS ***********/ 
 	
 	
-	/*********** Regi�n: AUTOS ***********/ 
+	/*********** Region: AUTOS ***********/ 
 	
 	public int crearAuto(String dniCliente, String patente, String marca,
 			Date fechaEntrada, String modelo) {
@@ -782,10 +781,10 @@ public class SistemaCocheras {
 		return autosView;
 	}
 	
-	/*********** Fin Regi�n: AUTOS ***********/ 
+	/*********** Fin Region: AUTOS ***********/ 
 	
 	
-	/*********** Regi�n: DATOS PRUEBA ***********/ 
+	/*********** Region: DATOS PRUEBA ***********/ 
 	
 	public void generarDatosPrueba(int cantidadDatosAGenerar) {
 		DatosPrueba datosPrueba = new DatosPrueba(cantidadDatosAGenerar);
@@ -793,11 +792,73 @@ public class SistemaCocheras {
 		fecha.setTime(FechaUtils.getFechaActual());
 		fecha.add(Calendar.DAY_OF_YEAR, -4);
 		
-		this.abonos.addAll(datosPrueba.generarAbonos());
-		this.clientes.addAll(datosPrueba.generarClientes());
+		this.abonos.addAll(datosPrueba.generarAbonos());		
 		this.cocheras.addAll(datosPrueba.generarCocheras());
 		this.mediosPagos.addAll(datosPrueba.generarMediosPagos());
+		this.clientes.addAll(datosPrueba.generarClientes());
 		
+		int j = 0, k = 0;
+		for(int i = 0; i < cantidadDatosAGenerar; i++){
+			j = 0;
+			if(j< cantidadDatosAGenerar && k < this.cocheras.size()){
+				ContratoEfectivo contratoE = new ContratoEfectivo(
+						this.clientes.elementAt(i),
+						this.clientes.elementAt(i).getAutos().elementAt(j),
+						this.cocheras.elementAt(k),
+						this.abonos.elementAt(k),
+						fecha.getTime()
+						);
+				this.contratos.add(contratoE);
+				j++;
+				k++;
+			}
+			if(j< cantidadDatosAGenerar && k < this.cocheras.size()){
+				ContratoCheque contratoC = new ContratoCheque(
+						this.clientes.elementAt(i),
+						this.clientes.elementAt(i).getAutos().elementAt(j),
+						this.cocheras.elementAt(k),
+						this.abonos.elementAt(k),
+						Integer.toString(j),
+						String.format("Entidad %d", j),
+						FechaUtils.getFechaActual()
+						);
+				this.contratos.add(contratoC);
+				j++;
+				k++;
+			}
+			if(j< cantidadDatosAGenerar && k < this.cocheras.size()){
+				ContratoTarjetaCredito contratoTC = new ContratoTarjetaCredito(
+						this.clientes.elementAt(i),
+						this.clientes.elementAt(i).getAutos().elementAt(j),
+						this.cocheras.elementAt(k),
+						this.abonos.elementAt(k),
+						Integer.toString(j),
+						FechaUtils.getFechaActual(),
+						String.format("Entidad %d", j),
+						fecha.getTime()
+						);
+				this.contratos.add(contratoTC);
+				j++;
+				k++;
+			}
+			if(j< cantidadDatosAGenerar && k < this.cocheras.size()){
+				ContratoDebitoAutomatico contratoDA = new ContratoDebitoAutomatico(
+						this.clientes.elementAt(i),
+						this.clientes.elementAt(i).getAutos().elementAt(j),
+						this.cocheras.elementAt(k),
+						this.abonos.elementAt(k),
+						Integer.toString(j),
+						String.format("Entidad %d", j),
+						FechaUtils.getFechaActual()
+						);
+				this.contratos.add(contratoDA);	
+				j++;
+				k++;
+			}					
+		}
+		
+		
+		/*	
 		int min = 0;
 		int max = cantidadDatosAGenerar - 1;
 		Random random = new Random();
@@ -855,9 +916,9 @@ public class SistemaCocheras {
 				FechaUtils.getFechaActual()
 				);
 		
-		this.contratos.add(contratoDA);
+		this.contratos.add(contratoDA);*/
 	}
 	
-	/*********** Fin Regi�n: DATOS PRUEBA ***********/ 
+	/*********** Fin Region: DATOS PRUEBA ***********/ 
 }
 

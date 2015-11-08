@@ -2,6 +2,8 @@ package vista;
 
 import java.util.Vector;
 
+import enums.EstadosCochera;
+
 public class CocheraView {
 	private int numero;
 	private int tamanioVehiculoAdmitido;
@@ -42,19 +44,7 @@ public class CocheraView {
 				break;
 		}
 		v.add(tamanio);
-		String est = "";
-		switch(estado){
-			case 1:
-				est = "Libre";
-				break;
-			case 2:
-				est = "Ocupada";
-				break;
-			default:
-				est = "Inactiva";
-				break;
-		}
-		v.add(est);
+		v.add(EstadosCochera.getEstado(estado));
 		return v;
 	}
 	

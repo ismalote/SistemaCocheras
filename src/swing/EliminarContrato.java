@@ -26,9 +26,11 @@ public class EliminarContrato extends javax.swing.JFrame {
 	private JLabel jLabel4;
 	private JLabel jLabel5;
 	private JLabel jLabel6;
+	private JLabel jLabel7;
 	private JButton buscar;
 	private JButton baja;
 	private JTextField nroContrato;
+	private JTextField contrato;	
 	private JTextField fecha;
 	private JTextField patente;
 	private JTextField nroCochera;
@@ -43,89 +45,103 @@ public class EliminarContrato extends javax.swing.JFrame {
 		super();
 		sistemaCocheras = s;
 		dniCliente = dni;
-		initGUI();
+		initGUI(dniCliente);
 	}
 
-	private void initGUI() {
+	private void initGUI(final String dniCliente) {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("ELIMINAR CONTRATO");
-				titulo.setBounds(150, 20, 148, 28);
+				titulo.setText("ELIMINAR CONTRATO DEL CLIENTE: " + dniCliente);
+				titulo.setBounds(90, 20, 243, 28);
+			}
+			{
+				jLabel7 = new JLabel();
+				getContentPane().add(jLabel7);
+				jLabel7.setText("Nro. Contrato:");
+				jLabel7.setBounds(21, 118, 80, 28);
+				jLabel7.setVisible(false);
 			}
 			{
 				jLabel1 = new JLabel();
 				getContentPane().add(jLabel1);
 				jLabel1.setText("Fecha:");
-				jLabel1.setBounds(21, 118, 80, 28);
+				jLabel1.setBounds(21, 167, 80, 28);
 				jLabel1.setVisible(false);
 			}
 			{
 				jLabel2 = new JLabel();
 				getContentPane().add(jLabel2);
 				jLabel2.setText("Patente:");
-				jLabel2.setBounds(21, 167, 80, 28);
+				jLabel2.setBounds(21, 216, 80, 28);
 				jLabel2.setVisible(false);
 			}
 			{
 				jLabel3 = new JLabel();
 				getContentPane().add(jLabel3);
 				jLabel3.setText("Nº cochera:");
-				jLabel3.setBounds(21, 216, 80, 28);
+				jLabel3.setBounds(21, 265, 80, 28);
 				jLabel3.setVisible(false);
 			}
 			{
 				jLabel4 = new JLabel();
 				getContentPane().add(jLabel4);
 				jLabel4.setText("Abono:");
-				jLabel4.setBounds(21, 265, 80, 28);
+				jLabel4.setBounds(21, 314, 80, 28);
 				jLabel4.setVisible(false);
 			}
 			{
 				jLabel5 = new JLabel();
 				getContentPane().add(jLabel5);
 				jLabel5.setText("Estado:");
-				jLabel5.setBounds(21, 314, 80, 28);
+				jLabel5.setBounds(21, 363, 80, 28);
 				jLabel5.setVisible(false);
+			}
+			{
+				contrato = new JTextField();
+				getContentPane().add(contrato);
+				contrato.setBounds(140, 118, 210, 28);
+				contrato.setVisible(false);
+				contrato.setEnabled(false);
 			}
 			{
 				fecha = new JTextField();
 				getContentPane().add(fecha);
-				fecha.setBounds(140, 118, 210, 28);
+				fecha.setBounds(140, 167, 210, 28);
 				fecha.setVisible(false);
 			}
 			{
 				patente = new JTextField();
 				getContentPane().add(patente);
-				patente.setBounds(140, 167, 210, 28);
+				patente.setBounds(140, 216, 210, 28);
 				patente.setVisible(false);
 			}
 			{
 				nroCochera = new JTextField();
 				getContentPane().add(nroCochera);
-				nroCochera.setBounds(140, 216, 210, 28);
+				nroCochera.setBounds(140, 265, 210, 28);
 				nroCochera.setVisible(false);
 			}
 			{
 				abono = new JTextField();
 				getContentPane().add(abono);
-				abono.setBounds(140, 265, 210, 28);
+				abono.setBounds(140, 314, 210, 28);
 				abono.setVisible(false);
 			}
 			{
 				estado = new JTextField();
 				getContentPane().add(estado);
-				estado.setBounds(140, 314, 210, 28);
+				estado.setBounds(140, 363, 210, 28);
 				estado.setVisible(false);
 			}
 			{
 				baja = new JButton();
 				getContentPane().add(baja);
 				baja.setText("CONFIRMAR");
-				baja.setBounds(140, 363, 113, 28);
+				baja.setBounds(140, 412, 113, 28);
 				baja.setVisible(false);
 				baja.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -156,8 +172,9 @@ public class EliminarContrato extends javax.swing.JFrame {
 							jLabel3.setVisible(false);
 							jLabel4.setVisible(false);
 							jLabel5.setVisible(false);
+							jLabel7.setVisible(false);
 							nroContrato.setText("");
-							// nroContrato.setVisible(false);
+							contrato.setVisible(false);
 							fecha.setVisible(false);
 							patente.setVisible(false);
 							nroCochera.setVisible(false);
@@ -194,15 +211,15 @@ public class EliminarContrato extends javax.swing.JFrame {
 								cont = contratos.elementAt(i);
 							}
 						}
-
 						if (cont != null) {
 							jLabel1.setVisible(true);
 							jLabel2.setVisible(true);
 							jLabel3.setVisible(true);
 							jLabel4.setVisible(true);
 							jLabel5.setVisible(true);
-							nroContrato.setVisible(true);
-							nroContrato.setEnabled(false);
+							jLabel7.setVisible(true);
+							contrato.setVisible(true);
+							contrato.setEnabled(false);							
 							fecha.setVisible(true);
 							fecha.setEnabled(false);
 							patente.setVisible(true);
@@ -214,6 +231,7 @@ public class EliminarContrato extends javax.swing.JFrame {
 							estado.setVisible(true);
 							estado.setEnabled(false);
 							baja.setVisible(true);
+							contrato.setText(Integer.toString(cont.getNroContrato()));
 							fecha.setText(FechaUtils.formatearFecha(cont
 									.getFecha()));
 							patente.setText(cont.getPatenteAuto());
@@ -228,6 +246,8 @@ public class EliminarContrato extends javax.swing.JFrame {
 							jLabel3.setVisible(false);
 							jLabel4.setVisible(false);
 							jLabel5.setVisible(false);
+							jLabel7.setVisible(false);
+							contrato.setVisible(false);
 							fecha.setVisible(false);
 							patente.setVisible(false);
 							nroCochera.setVisible(false);
@@ -241,7 +261,7 @@ public class EliminarContrato extends javax.swing.JFrame {
 			ImageIcon img = new ImageIcon("src/swing/contract.png");
 			setIconImage(img.getImage());
 			pack();
-			setSize(400, 450);
+			setSize(400, 500);
 			setTitle("Eliminar Contrato");
 			setLocationRelativeTo(null);
 			setResizable(false);

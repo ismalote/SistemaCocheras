@@ -8,11 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
 import controlador.SistemaCocheras;
+import enums.ExitCodes;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -253,30 +255,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					}
 				}
 				{
-					jMenu4 = new JMenu();
-					jMenuBar1.add(jMenu4);
-					jMenu4.setText("Contratos");
-					jMenu4.setPreferredSize(new java.awt.Dimension(70, 21));
-					jMenu4.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent evt) 
-						{
-
-						}
-					});
-					{
-						jMenuItem13 = new JMenuItem();
-						jMenu4.add(jMenuItem13);
-						jMenuItem13.setText("Administrar");
-						jMenuItem13.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) 
-							{
-								ContratosCliente a = new ContratosCliente(sistemaCocheras);								
-								a.setVisible(true);
-							}
-						});
-					}
-				}
-				{
 					jMenu5 = new JMenu();
 					jMenuBar1.add(jMenu5);
 					jMenu5.setText("Cocheras");
@@ -336,32 +314,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
 						});
 					}
 					{
-						jMenu7 = new JMenu();
-						jMenuBar1.add(jMenu7);
-						jMenu7.setText("Datos de prueba");
-						jMenu7.addMenuListener(new MenuListener() {
-							public void menuSelected(MenuEvent evt) {
-
-							}
-							public void menuDeselected(MenuEvent evt) {
-								
-							}
-							public void menuCanceled(MenuEvent evt) {
-								
-							}
-						});
-					}
-					{
-						jMenuItem21 = new JMenuItem();
-						jMenu7.add(jMenuItem21);
-						jMenuItem21.setText("Generar");
-						jMenuItem21.addActionListener(new ActionListener() {
+						jMenu4 = new JMenu();
+						jMenuBar1.add(jMenu4);
+						jMenu4.setText("Contratos");
+						jMenu4.setPreferredSize(new java.awt.Dimension(70, 21));
+						jMenu4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								GenerarDatosPrueba g = new GenerarDatosPrueba(sistemaCocheras);
-								g.setVisible(true);
+
 							}
 						});
+						{
+							jMenuItem13 = new JMenuItem();
+							jMenu4.add(jMenuItem13);
+							jMenuItem13.setText("Administrar");
+							jMenuItem13.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) 
+								{
+									ContratosCliente a = new ContratosCliente(sistemaCocheras);								
+									a.setVisible(true);
+								}
+							});
+						}
 					}
 					{
 						jMenu8 = new JMenu();
@@ -386,8 +360,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
 						jMenuItem22.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
-								GenerarProximasCuotas g = new GenerarProximasCuotas(sistemaCocheras);
-								g.setVisible(true);
+								int rdo = sistemaCocheras.generarCuotas();
+								String mensaje = "";
+								switch(rdo) {
+									case ExitCodes.OK: {
+										mensaje = "Las proximas cuotas se han generado con exito.";	
+										break;
+									}
+									case ExitCodes.FALLA_GENERACION_CUOTAS: {
+										mensaje = "La generacion de proximas cuotas ha fallado.";	
+										break;
+									}
+									default: {
+										break;
+									}
+								}
+								JOptionPane.showMessageDialog(null, mensaje);								
 							}
 						});
 					}
@@ -400,6 +388,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
 							{
 								ListarProximasCuotas l = new ListarProximasCuotas(sistemaCocheras);
 								l.setVisible(true);
+							}
+						});
+					}
+					{
+						jMenu7 = new JMenu();
+						jMenuBar1.add(jMenu7);
+						jMenu7.setText("Datos de prueba");
+						jMenu7.addMenuListener(new MenuListener() {
+							public void menuSelected(MenuEvent evt) {
+
+							}
+							public void menuDeselected(MenuEvent evt) {
+								
+							}
+							public void menuCanceled(MenuEvent evt) {
+								
+							}
+						});
+					}
+					{
+						jMenuItem21 = new JMenuItem();
+						jMenu7.add(jMenuItem21);
+						jMenuItem21.setText("Generar");
+						jMenuItem21.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) 
+							{
+								GenerarDatosPrueba g = new GenerarDatosPrueba(sistemaCocheras);
+								g.setVisible(true);
 							}
 						});
 					}

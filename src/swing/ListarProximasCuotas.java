@@ -56,8 +56,10 @@ public class ListarProximasCuotas extends javax.swing.JFrame {
 				cuotas.setModel(jTable1Model);				
 				
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-				//cuotas.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				centerRenderer.setHorizontalAlignment(JLabel.CENTER);				
+				cuotas.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				cuotas.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+				cuotas.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
 				//cuotas.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 				
 				//Tamaño de las columnas
@@ -71,7 +73,7 @@ public class ListarProximasCuotas extends javax.swing.JFrame {
 				getContentPane().add(scrollPane);
 
 			}
-			ImageIcon img = new ImageIcon("src/swing/persona.png");
+			ImageIcon img = new ImageIcon("src/swing/pago.png");
 			setIconImage(img.getImage());
 			pack();
 			setSize(750, 450);

@@ -2,6 +2,8 @@ package vista;
 
 import java.util.Vector;
 
+import enums.Tamanios;
+
 public class AbonoView {
 	private float descuento;
 	private String nombre;
@@ -51,7 +53,7 @@ public class AbonoView {
 		v.add(Integer.toString(cantidadDias));
 		v.add(Float.toString(precioBase));
 		v.add(Float.toString(descuento));		
-		v.add(Integer.toString(tamanioCochera));
+		v.add(Tamanios.getDescripcion(tamanioCochera));
 		v.add(activo ? "Activo" : "Inactivo");
 		return v;
 	}

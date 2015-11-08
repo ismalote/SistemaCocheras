@@ -53,8 +53,7 @@ public class ListarAbono extends javax.swing.JFrame {
 				abonos.setModel(jTable1Model);				
 				
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-				abonos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				centerRenderer.setHorizontalAlignment(JLabel.CENTER);				
 				abonos.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 				
 				//Tamaño de las columnas

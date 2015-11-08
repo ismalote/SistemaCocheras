@@ -18,6 +18,7 @@ import javax.swing.WindowConstants;
 import enums.ExitCodes;
 import enums.Tamanios;
 import vista.AbonoView;
+import vista.CocheraView;
 import vista.ContratoView;
 
 public class ModificarContrato extends javax.swing.JFrame {
@@ -26,8 +27,10 @@ public class ModificarContrato extends javax.swing.JFrame {
 	private JLabel titulo;
 	private JLabel jLabel1;
 	private JLabel jLabel2;
+	private JLabel jLabel3;
 	private JButton modificar;
 	private JTextField nroContrato;
+	private JLabel tamanioCochera;
 	private JComboBox<ComboItemAbonos> abono;
 	private JButton buscar;
 
@@ -50,8 +53,8 @@ public class ModificarContrato extends javax.swing.JFrame {
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("MODIFICAR CONTRATO");
-				titulo.setBounds(130, 20, 133, 28);
+				titulo.setText("MODIFICAR CONTRATO DEL CLIENTE: " + dniCliente);
+				titulo.setBounds(90, 20, 243, 28);
 			}
 			{
 				jLabel1 = new JLabel();
@@ -65,10 +68,59 @@ public class ModificarContrato extends javax.swing.JFrame {
 				nroContrato.setBounds(150, 69, 127, 28);
 			}
 			{
+				buscar = new JButton();
+				getContentPane().add(buscar);
+				buscar.setText("BUSCAR");
+				buscar.setBounds(300, 69, 127, 28);
+				buscar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						Vector<ContratoView> contratos = sistemaCocheras.listarContratos(dniCliente, true);
+						ContratoView cont = null;
+						for(int i = 0; i < contratos.size() && cont == null; i++){
+							if(contratos.elementAt(i).getNroContrato() == Integer.parseInt(nroContrato.getText())){								
+								cont = contratos.elementAt(i);
+							}
+						}						
+						if (cont != null)
+						{
+							//abono.setSelectedItem(Arrays.binarySearch(itemsAbonos, cont.getAbono()));
+							abono.setSelectedIndex(posicionesItemsAbonos.get(cont.getAbono()));
+							jLabel2.setVisible(true);
+							jLabel3.setVisible(true);
+							tamanioCochera.setVisible(true);
+							CocheraView cocheraView = sistemaCocheras.buscarDatosCochera(cont.getNroCochera());
+							tamanioCochera.setText(Tamanios.getDescripcion(cocheraView.getTamanioVechiculoAdmitido()));
+							abono.setVisible(true);
+							modificar.setVisible(true);
+						}else{
+							JOptionPane.showMessageDialog(null, "El contrato no existe.");							
+							jLabel2.setVisible(false);
+							jLabel3.setVisible(false);
+							tamanioCochera.setVisible(false);
+							abono.setVisible(false);
+							modificar.setVisible(false);
+						}
+					}
+				});
+			}
+			{
+				jLabel3 = new JLabel();
+				getContentPane().add(jLabel3);
+				jLabel3.setText("Tamaño admitido:");
+				jLabel3.setBounds(21, 118, 113, 28);
+				jLabel3.setVisible(false);
+			}
+			{
+				tamanioCochera = new JLabel();
+				getContentPane().add(tamanioCochera);
+				tamanioCochera.setVisible(false);				
+				tamanioCochera.setBounds(150, 118, 127, 28);
+			}
+			{
 				jLabel2 = new JLabel();
 				getContentPane().add(jLabel2);
 				jLabel2.setText("Abono:");
-				jLabel2.setBounds(21, 118, 113, 28);
+				jLabel2.setBounds(21, 167, 113, 28);
 				jLabel2.setVisible(false);
 			}
 			{
@@ -79,7 +131,7 @@ public class ModificarContrato extends javax.swing.JFrame {
 					itemsAbonos =  new ComboItemAbonos[abonosView.size() + 1];
 					itemsAbonos[0] = new ComboItemAbonos("", ""); 
 					for(int i = 0, j = 1; i < abonosView.size(); i++, j++) {
-						itemsAbonos[j] = new ComboItemAbonos(abonosView.elementAt(i).getNombre(), abonosView.elementAt(i).getNombre() + " - "  + Tamanios.getDescripcion(abonosView.elementAt(i).getTamanioCochera()));
+						itemsAbonos[j] = new ComboItemAbonos(abonosView.elementAt(i).getNombre(), abonosView.elementAt(i).getNombre());
 						posicionesItemsAbonos.put(abonosView.elementAt(i).getNombre(), j);
 					}
 					
@@ -88,7 +140,7 @@ public class ModificarContrato extends javax.swing.JFrame {
 					abono = new JComboBox<ComboItemAbonos>();
 				}
 				getContentPane().add(abono);
-				abono.setBounds(150, 118, 210, 28);
+				abono.setBounds(150, 167, 210, 28);
 				abono.setVisible(false);
 			}
 			{
@@ -96,12 +148,12 @@ public class ModificarContrato extends javax.swing.JFrame {
 				getContentPane().add(modificar);
 				modificar.setText("MODIFICAR");
 				modificar.setVisible(false);
-				modificar.setBounds(169, 200, 113, 28);
+				modificar.setBounds(150, 216, 113, 28);
 				modificar.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = validarCampos(((ComboItemAbonos)abono.getSelectedItem()).getValue());
+						int rdo = (abono.getSelectedIndex() > 0) ? 0 : -1;
 						if(rdo == -1){
 							JOptionPane.showMessageDialog(null, "Verifique los datos ingresados.");
 						} else {
@@ -111,7 +163,7 @@ public class ModificarContrato extends javax.swing.JFrame {
 							String mensaje = "";
 							switch(rdo) {
 								case ExitCodes.OK: {
-									mensaje = "El abono se ha modificado con exito.";
+									mensaje = "El abono del contrato se ha modificado con exito.";
 									break;
 								}
 								case ExitCodes.NO_EXISTE_ENTIDAD: {
@@ -129,44 +181,16 @@ public class ModificarContrato extends javax.swing.JFrame {
 							JOptionPane.showMessageDialog(null, mensaje);
 							if(rdo == ExitCodes.OK){
 								jLabel2.setVisible(false);
+								jLabel3.setVisible(false);
+								nroContrato.setText("");
+								tamanioCochera.setVisible(false);
 								abono.setVisible(false);
 								modificar.setVisible(false);
 							}
 						}
 					}
 				});
-			}
-			{
-				buscar = new JButton();
-				getContentPane().add(buscar);
-				buscar.setText("BUSCAR");
-				buscar.setBounds(300, 69, 127, 28);
-				buscar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						Vector<ContratoView> contratos = sistemaCocheras.listarContratos(dniCliente, true);
-						ContratoView cont = null;
-						for(int i = 0; i < contratos.size() && cont == null; i++){
-							if(contratos.elementAt(i).getNroContrato() == Integer.parseInt(nroContrato.getText())){								
-								cont = contratos.elementAt(i);
-							}
-						}		
-						
-						if (cont != null)
-						{
-							//abono.setSelectedItem(Arrays.binarySearch(itemsAbonos, cont.getAbono()));
-							abono.setSelectedIndex(posicionesItemsAbonos.get(cont.getAbono()));
-							jLabel2.setVisible(true);
-							abono.setVisible(true);
-							modificar.setVisible(true);
-						}else{
-							JOptionPane.showMessageDialog(null, "El contrato no existe.");
-							jLabel2.setVisible(false);
-							abono.setVisible(false);
-							modificar.setVisible(false);
-						}
-					}
-				});
-			}
+			}	
 			
 			ImageIcon img = new ImageIcon("src/swing/contract.png");
 			setIconImage(img.getImage());
@@ -179,10 +203,5 @@ public class ModificarContrato extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
-
-	private int validarCampos(String abono) {
-		return (abono.length() > 0 ? 0 : -1);
-	}
-
 
 }

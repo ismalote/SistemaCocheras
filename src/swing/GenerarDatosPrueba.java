@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import controlador.SistemaCocheras;
+import utils.NumeroUtils;
 
 public class GenerarDatosPrueba extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
@@ -57,11 +58,16 @@ public class GenerarDatosPrueba extends javax.swing.JFrame {
 				generar.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 
-					{						
-						sistemaCocheras.generarDatosPrueba(Integer.parseInt(cantidad.getText()));
-						String mensaje = "Los datos se han generado con exito.";
+					{		
+						String mensaje = "";
+						if(NumeroUtils.isInteger(cantidad.getText()) && Integer.parseInt(cantidad.getText()) > 0){
+							sistemaCocheras.generarDatosPrueba(Integer.parseInt(cantidad.getText()));
+							mensaje = "Los datos se han generado con exito.";							
+						} else {
+							mensaje = "Ingrese un numero entero positivo.";						
+						}
+						cantidad.setText("");
 						JOptionPane.showMessageDialog(null, mensaje);						
-						cantidad.setText("");									
 					}
 				});
 			}

@@ -64,6 +64,8 @@ public class ListarContratos extends javax.swing.JFrame {
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 				contratos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				contratos.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+				contratos.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
 				contratos.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 				
 				//Tamaño de las columnas
@@ -81,7 +83,7 @@ public class ListarContratos extends javax.swing.JFrame {
 			setIconImage(img.getImage());
 			pack();
 			setSize(750, 450);
-			setTitle("Listar Contratos");
+			setTitle("Contratos del Cliente: " + dniCliente);
 			setLocationRelativeTo(null);
 			setResizable(false);
 		} catch (Exception e) {

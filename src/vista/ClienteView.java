@@ -2,6 +2,8 @@ package vista;
 
 import java.util.Vector;
 
+import enums.EstadosCliente;
+
 public class ClienteView {
 
 	private String dni;
@@ -58,19 +60,7 @@ public class ClienteView {
 		v.add(domicilio);
 		v.add(telefono);
 		v.add(mail);
-		String est = "";
-		switch(estado){
-			case 1:
-				est = "Activo";
-				break;
-			case 2:
-				est = "Inactivo";
-				break;
-			default:
-				est = "Con deuda";
-				break;
-		}
-		v.add(est);
+		v.add(EstadosCliente.getEstado(estado));
 		return v;
 	}
 }
