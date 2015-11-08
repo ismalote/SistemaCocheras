@@ -17,9 +17,12 @@ import javax.swing.WindowConstants;
 
 import enums.ExitCodes;
 import enums.MediosPagoCliente;
+import enums.Tamanios;
 import utils.*;
+import vista.AbonoView;
 import vista.AutoView;
 import vista.ClienteView;
+import vista.CocheraView;
 
 public class AltaContrato extends javax.swing.JFrame {
 
@@ -42,8 +45,8 @@ public class AltaContrato extends javax.swing.JFrame {
 	private JButton volverCBU;
 	private JTextField dni;
 	private JComboBox<String> patente;
-	private JTextField cochera;
-	private JTextField abono;
+	private JComboBox<String> cochera;
+	private JComboBox<ComboItemAbonos> abono;
 	private JTextField fecha;
 	
 	private JLabel jLabel7;
@@ -181,9 +184,10 @@ public class AltaContrato extends javax.swing.JFrame {
 				Vector<AutoView> autosView = cliente.getAutos();
 				String[] autosCombo;
 				if(autosView != null && autosView.size() > 0){
-					autosCombo = new String[autosView.size()];
-					for(int i = 0; i < autosView.size(); i++){
-						autosCombo[i] = autosView.elementAt(i).getPatente();
+					autosCombo = new String[autosView.size() + 1];
+					autosCombo[0] = "";
+					for(int i = 0, j = 1; i < autosView.size(); i++, j++){
+						autosCombo[j] = autosView.elementAt(i).getPatente();
 					}
 					patente = new JComboBox<String>(autosCombo);
 				}else{
@@ -193,12 +197,36 @@ public class AltaContrato extends javax.swing.JFrame {
 				patente.setBounds(169, 118, 210, 28);
 			}
 			{
-				cochera = new JTextField();
+				Vector<CocheraView> cocherasView = sistemaCocheras.listarCocheras();
+				String[] cocherasCombo;
+				if(cocherasView != null && cocherasView.size() > 0){
+					cocherasCombo = new String[cocherasView.size() + 1];
+					cocherasCombo[0] = "";
+					for(int i = 0, j = 1; i < cocherasView.size(); i++, j++){
+						cocherasCombo[j] = Integer.toString(cocherasView.elementAt(i).getNumero());
+					}
+					cochera = new JComboBox<String>(cocherasCombo);
+				}else{
+					cochera = new JComboBox<String>();
+				}
 				getContentPane().add(cochera);
 				cochera.setBounds(169, 167, 210, 28);
 			}
 			{
-				abono = new JTextField();
+				Vector<AbonoView> abonosView = sistemaCocheras.listarAbonos();
+				ComboItemAbonos[] itemsAbonos;
+				abono = new JComboBox<ComboItemAbonos>();
+				if (abonosView != null && abonosView.size() > 0) {
+					itemsAbonos =  new ComboItemAbonos[abonosView.size() + 1];
+					itemsAbonos[0] = new ComboItemAbonos("", ""); 
+					for(int i = 0, j = 1; i < abonosView.size(); i++, j++) {
+						itemsAbonos[j] = new ComboItemAbonos(abonosView.elementAt(i).getNombre(), abonosView.elementAt(i).getNombre() + " - "  + Tamanios.getDescripcion(abonosView.elementAt(i).getTamanioCochera()));
+					}
+					
+					abono = new JComboBox<ComboItemAbonos>(itemsAbonos);
+				} else {
+					abono = new JComboBox<ComboItemAbonos>();
+				}
 				getContentPane().add(abono);
 				abono.setBounds(169, 216, 210, 28);
 			}
@@ -224,7 +252,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.crearContratoEfectivo(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()));					
+						int rdo = sistemaCocheras.crearContratoEfectivo(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getSelectedItem().toString()), ((ComboItemAbonos)abono.getSelectedItem()).getValue(), FechaUtils.parsearFecha(fecha.getText()));					
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
@@ -246,8 +274,8 @@ public class AltaContrato extends javax.swing.JFrame {
 						JOptionPane.showMessageDialog(null, mensaje);
 						if(rdo == ExitCodes.OK){
 							patente.setSelectedIndex(0);
-							cochera.setText("");
-							abono.setText("");
+							cochera.setSelectedIndex(0);
+							abono.setSelectedIndex(0);
 							fecha.setText("");
 							medioPago.setSelectedIndex(0);
 							patente.setEnabled(true);
@@ -311,7 +339,7 @@ public class AltaContrato extends javax.swing.JFrame {
 							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
 						}
 						if(rdo == 0){
-							rdo = sistemaCocheras.crearContratoCheque(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), cuentaCorriente.getText(), entidadBancaria.getText());
+							rdo = sistemaCocheras.crearContratoCheque(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getSelectedItem().toString()), ((ComboItemAbonos)abono.getSelectedItem()).getValue(), FechaUtils.parsearFecha(fecha.getText()), cuentaCorriente.getText(), entidadBancaria.getText());
 						}
 						String mensaje = "";
 						switch(rdo) {
@@ -334,8 +362,8 @@ public class AltaContrato extends javax.swing.JFrame {
 						JOptionPane.showMessageDialog(null, mensaje);
 						if(rdo == ExitCodes.OK){
 							patente.setSelectedIndex(0);
-							cochera.setText("");
-							abono.setText("");
+							cochera.setSelectedIndex(0);
+							abono.setSelectedIndex(0);
 							fecha.setText("");
 							fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
 							cuentaCorriente.setText("");
@@ -416,7 +444,7 @@ public class AltaContrato extends javax.swing.JFrame {
 							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
 						}
 						if(rdo == 0){
-							rdo = sistemaCocheras.crearContratoTarjetaCredito(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), numeroTarjeta.getText(), FechaUtils.parsearFecha(vencimientoTarjeta.getText()), entidadEmisora.getText());
+							rdo = sistemaCocheras.crearContratoTarjetaCredito(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getSelectedItem().toString()), ((ComboItemAbonos)abono.getSelectedItem()).getValue(), FechaUtils.parsearFecha(fecha.getText()), numeroTarjeta.getText(), FechaUtils.parsearFecha(vencimientoTarjeta.getText()), entidadEmisora.getText());
 						}
 						String mensaje = "";
 						switch(rdo) {
@@ -439,8 +467,8 @@ public class AltaContrato extends javax.swing.JFrame {
 						JOptionPane.showMessageDialog(null, mensaje);
 						if(rdo == ExitCodes.OK){
 							patente.setSelectedIndex(0);
-							cochera.setText("");
-							abono.setText("");
+							cochera.setSelectedIndex(0);
+							abono.setSelectedIndex(0);
 							fecha.setText("");
 							fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
 							numeroTarjeta.setText("");
@@ -518,7 +546,7 @@ public class AltaContrato extends javax.swing.JFrame {
 							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
 						}
 						if(rdo == 0){
-							sistemaCocheras.crearContratoDebitoAutomatico(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getText()), abono.getText(), FechaUtils.parsearFecha(fecha.getText()), cbu.getText(), entidadBancariaCBU.getText());
+							sistemaCocheras.crearContratoDebitoAutomatico(dni.getText(), patente.getSelectedItem().toString(), Integer.parseInt(cochera.getSelectedItem().toString()), ((ComboItemAbonos)abono.getSelectedItem()).getValue(), FechaUtils.parsearFecha(fecha.getText()), cbu.getText(), entidadBancariaCBU.getText());
 						}																						
 						String mensaje = "";
 						switch(rdo) {
@@ -541,8 +569,8 @@ public class AltaContrato extends javax.swing.JFrame {
 						JOptionPane.showMessageDialog(null, mensaje);
 						if(rdo == ExitCodes.OK){
 							patente.setSelectedIndex(0);
-							cochera.setText("");
-							abono.setText("");
+							cochera.setSelectedIndex(0);
+							abono.setSelectedIndex(0);
 							fecha.setText("");
 							cbu.setText("");
 							fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
@@ -597,7 +625,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = validarCampos(patente.getSelectedItem().toString(), cochera.getText(), abono.getText(), medioPago.getSelectedIndex(), fecha.getText());
+						int rdo = validarCampos(patente.getSelectedItem().toString(), cochera.getSelectedItem().toString(), ((ComboItemAbonos)abono.getSelectedItem()).getValue(), medioPago.getSelectedIndex(), fecha.getText());
 						if(rdo == -1){
 							JOptionPane.showMessageDialog(null, "Verifique los datos ingresados.");
 						} else {
@@ -672,4 +700,27 @@ public class AltaContrato extends javax.swing.JFrame {
 		return (patente.length() > 0 && NumeroUtils.isInteger(cochera) && abono.length() > 0 && medioPago > 0 && FechaUtils.parsearFecha(fecha) != null) ? 0 : -1;
 	}	
 	
+}
+
+class ComboItemAbonos {
+    private String value;
+    private String label;
+
+    public ComboItemAbonos(String value, String label) {
+        this.value = value;
+        this.label = label;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public String getLabel() {
+        return this.label;
+    }
+
+    @Override
+    public String toString() {
+        return label;
+    }
 }
