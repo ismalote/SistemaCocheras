@@ -536,7 +536,7 @@ public class SistemaCocheras {
 				}	
 				
 				fechaVencimiento.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
-				cuota = new Cuota(fechaVencimiento.getTime(), abono.calcularPrecio());
+				cuota = new Cuota(c.getNroContrato(), fechaVencimiento.getTime(), abono.calcularPrecio());
 				
 				c.agregarCuota(cuota);
 			}

@@ -25,27 +25,27 @@ public class DatosPrueba {
 		
 		for (int i = 0; i < this.cantidadDatosAGenerar; i++) {
 			Abono abonoPequenio = new Abono(
-					i * 0.1f,
+					0.1f,
 					String.format("Abono %d", i),
 					Tamanios.PEQUENIA,
-					i,
-					i * 2.0f,
+					i + 10,
+					(i + 10) * 2.0f,
 					true);
 			
 			Abono abonoMediano = new Abono(
-					i * 0.2f,
+					0.2f,
 					String.format("Abono %d", i),
 					Tamanios.MEDIANA,
-					i,
-					i * 4.0f,
+					i + 20,
+					(i + 20) * 4.0f,
 					true);
 			
 			Abono abonoGrande = new Abono(
-					i * 0.3f,
+					0.3f,
 					String.format("Abono %d", i),
 					Tamanios.GRANDE,
-					i,
-					i * 6.0f,
+					i + 30,
+					(i + 30) * 6.0f,
 					true);
 			
 			abonos.add(abonoPequenio);

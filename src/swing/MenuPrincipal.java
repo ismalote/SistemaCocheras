@@ -25,6 +25,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenu jMenu5;//Cocheras
 	private JMenu jMenu6;//Salir
 	private JMenu jMenu7;//Generar datos de prueba
+	private JMenu jMenu8;//Cuotas
 
 	private JMenuItem jMenuItem1;	
 	private JMenuItem jMenuItem2;
@@ -44,6 +45,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenuItem jMenuItem19;	
 	private JMenuItem jMenuItem20;
 	private JMenuItem jMenuItem21;
+	private JMenuItem jMenuItem22;
+	private JMenuItem jMenuItem23;
 	
 	private SistemaCocheras sistemaCocheras;
 
@@ -357,6 +360,46 @@ public class MenuPrincipal extends javax.swing.JFrame {
 							{
 								GenerarDatosPrueba g = new GenerarDatosPrueba(sistemaCocheras);
 								g.setVisible(true);
+							}
+						});
+					}
+					{
+						jMenu8 = new JMenu();
+						jMenuBar1.add(jMenu8);
+						jMenu8.setText("Cuotas");
+						jMenu8.addMenuListener(new MenuListener() {
+							public void menuSelected(MenuEvent evt) {
+
+							}
+							public void menuDeselected(MenuEvent evt) {
+								
+							}
+							public void menuCanceled(MenuEvent evt) {
+								
+							}
+						});
+					}
+					{
+						jMenuItem22 = new JMenuItem();
+						jMenu8.add(jMenuItem22);
+						jMenuItem22.setText("Generar proximas cuotas");
+						jMenuItem22.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) 
+							{
+								GenerarProximasCuotas g = new GenerarProximasCuotas(sistemaCocheras);
+								g.setVisible(true);
+							}
+						});
+					}
+					{
+						jMenuItem23 = new JMenuItem();
+						jMenu8.add(jMenuItem23);
+						jMenuItem23.setText("Listar proximas cuotas");
+						jMenuItem23.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent evt) 
+							{
+								ListarProximasCuotas l = new ListarProximasCuotas(sistemaCocheras);
+								l.setVisible(true);
 							}
 						});
 					}

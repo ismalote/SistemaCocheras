@@ -7,21 +7,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import controlador.SistemaCocheras;
+import enums.ExitCodes;
 
-public class GenerarDatosPrueba extends javax.swing.JFrame {
+public class GenerarProximasCuotas extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel titulo;
-	private JLabel jLabel1;
-	private JTextField cantidad;
 	private JButton generar;
 	
 	private SistemaCocheras sistemaCocheras;
 	
-	public GenerarDatosPrueba(SistemaCocheras s) {
+	public GenerarProximasCuotas(SistemaCocheras s) {
 		super();
 		
 		sistemaCocheras = s;
@@ -35,19 +33,8 @@ public class GenerarDatosPrueba extends javax.swing.JFrame {
 			{
 				titulo = new JLabel();
 				getContentPane().add(titulo);
-				titulo.setText("GENERAR DATOS DE PRUEBA");
+				titulo.setText("GENERAR PROXIMAS CUOTAS");
 				titulo.setBounds(60, 20, 258, 28);
-			}
-			{
-				jLabel1 = new JLabel();
-				getContentPane().add(jLabel1);
-				jLabel1.setText("Cantidad de datos a generar:");
-				jLabel1.setBounds(21, 69, 180, 28);
-			}
-			{
-				cantidad = new JTextField();
-				getContentPane().add(cantidad);
-				cantidad.setBounds(200, 69, 50, 28);
 			}
 			{
 				generar = new JButton();
@@ -58,10 +45,23 @@ public class GenerarDatosPrueba extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{						
-						sistemaCocheras.generarDatosPrueba(Integer.parseInt(cantidad.getText()));
-						String mensaje = "Los datos se han generado con exito.";
-						JOptionPane.showMessageDialog(null, mensaje);						
-						cantidad.setText("");									
+						int rdo = sistemaCocheras.generarCuotas();
+
+						String mensaje = "";
+						switch(rdo) {
+							case ExitCodes.OK: {
+								mensaje = "Las proximas cuotas se han generado con exito.";	
+								break;
+							}
+							case ExitCodes.FALLA_GENERACION_CUOTAS: {
+								mensaje = "La generacion de proximas cuotas ha fallado.";	
+								break;
+							}
+							default: {
+								break;
+							}
+						}
+						JOptionPane.showMessageDialog(null, mensaje);
 					}
 				});
 			}
