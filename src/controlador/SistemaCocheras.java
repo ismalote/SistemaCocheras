@@ -371,18 +371,14 @@ public class SistemaCocheras {
 			Auto auto = cliente.buscarAuto(patente);
 			Cochera cochera = this.buscarCochera(nroCochera);
 			Abono abono = this.buscarAbono(nombreAbono);
-			if(verificarPatenteEnContrato(cliente, patente)){
-				if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
-					if (cochera.getEstado() == EstadosCochera.LIBRE) {
-						contrato = new ContratoCheque(cliente, auto, cochera, abono, nroCuentaCorriente, entidadBancaria, fecha);
-						this.contratos.add(contrato);
-						cochera.setEstado(EstadosCochera.OCUPADA);
-						return ExitCodes.OK;
-					} else {
-						return ExitCodes.COCHERA_NO_DISPONIBLE;
-					}
+			if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
+				if (cochera.getEstado() == EstadosCochera.LIBRE) {
+					contrato = new ContratoCheque(cliente, auto, cochera, abono, nroCuentaCorriente, entidadBancaria, fecha);
+					this.contratos.add(contrato);
+					cochera.setEstado(EstadosCochera.OCUPADA);
+					return ExitCodes.OK;
 				} else {
-					return ExitCodes.ARGUMENTOS_INVALIDOS;
+					return ExitCodes.COCHERA_NO_DISPONIBLE;
 				}
 			} else {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
@@ -517,27 +513,29 @@ public class SistemaCocheras {
 		
 		if (this.contratos != null && this.contratos.size() > 0) {
 			for (Contrato c: this.contratos) {
-				Abono abono = c.getAbono();
-				Vector<Cuota> cuotas = c.getCuotas();
-				Cuota cuota;
-				Calendar fechaVencimiento = Calendar.getInstance();
+				if (c.getEstado()){
+					Abono abono = c.getAbono();
+					Vector<Cuota> cuotas = c.getCuotas();
+					Cuota cuota;
+					Calendar fechaVencimiento = Calendar.getInstance();
 				
-				if (cuotas != null && cuotas.size() > 0) {
-					// Si ya tenia cuotas generadas
-					Cuota cuo = cuotas.lastElement();
+					if (cuotas != null && cuotas.size() > 0) {
+						// Si ya tenia cuotas generadas
+						Cuota cuo = cuotas.lastElement();
 					
-					// Seteo la fecha de vencimiento a partir de la ultima cuota.
-					fechaVencimiento.setTime(cuo.getFechaGeneracion());
+						// Seteo la fecha de vencimiento a partir de la ultima cuota.
+						fechaVencimiento.setTime(cuo.getFechaGeneracion());
+					}
+					else {
+						// Genero la primera cuota
+						fechaVencimiento.setTime(c.getFecha());
+					}	
+				
+					fechaVencimiento.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
+					cuota = new Cuota(c.getNroContrato(), fechaVencimiento.getTime(), abono.calcularPrecio());
+				
+					c.agregarCuota(cuota);
 				}
-				else {
-					// Genero la primera cuota
-					fechaVencimiento.setTime(c.getFecha());
-				}	
-				
-				fechaVencimiento.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
-				cuota = new Cuota(c.getNroContrato(), fechaVencimiento.getTime(), abono.calcularPrecio());
-				
-				c.agregarCuota(cuota);
 			}
 			
 			return ExitCodes.OK;
