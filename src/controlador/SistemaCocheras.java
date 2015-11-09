@@ -256,7 +256,7 @@ public class SistemaCocheras {
 	private boolean validarAbono(String nombre, int cantidadDias, float precioBase, 
 			float descuento, int tamanioCochera) {
 		return (nombre.length() > 0 && cantidadDias > 0 && precioBase > 0 &&
-				descuento > 0 && (tamanioCochera > 0 && tamanioCochera < 4)); 
+				descuento >= 0 && (tamanioCochera > 0 && tamanioCochera < 4)); 
 	}
 	
 	

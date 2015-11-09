@@ -25,6 +25,7 @@ public class AltaAbono extends javax.swing.JFrame {
 	private JLabel jLabel3;
 	private JLabel jLabel4;
 	private JLabel jLabel5;
+	private JLabel jLabel16;
 	private JButton alta;
 	private JTextField nombre;
 	private JTextField dias;
@@ -75,6 +76,12 @@ public class AltaAbono extends javax.swing.JFrame {
 				jLabel4.setBounds(21, 216, 113, 28);
 			}
 			{
+				jLabel16 = new JLabel();
+				getContentPane().add(jLabel16);
+				jLabel16.setText("%");
+				jLabel16.setBounds(180, 216, 37, 28);
+			}
+			{
 				jLabel5 = new JLabel();
 				getContentPane().add(jLabel5);
 				jLabel5.setText("Cochera:");
@@ -83,34 +90,34 @@ public class AltaAbono extends javax.swing.JFrame {
 			{
 				nombre = new JTextField();
 				getContentPane().add(nombre);
-				nombre.setBounds(169, 69, 210, 28);
+				nombre.setBounds(140, 69, 210, 28);
 			}
 			{
 				dias = new JTextField();
 				getContentPane().add(dias);
-				dias.setBounds(169, 118, 210, 28);
+				dias.setBounds(140, 118, 40, 28);
 			}
 			{
 				precio = new JTextField();
 				getContentPane().add(precio);
-				precio.setBounds(169, 167, 210, 28);
+				precio.setBounds(140, 167, 40, 28);
 			}
 			{
 				descuento = new JTextField();
 				getContentPane().add(descuento);
-				descuento.setBounds(169, 216, 210, 28);
+				descuento.setBounds(140, 216, 40, 28);
 			}
 			{
 				String[] tamanios = { "", "Pequena", "Mediana", "Grande" };
 				cochera = new JComboBox<String>(tamanios);
 				getContentPane().add(cochera);
-				cochera.setBounds(169, 265, 210, 28);
+				cochera.setBounds(140, 265, 95, 28);
 			}
 			{
 				alta = new JButton();
 				getContentPane().add(alta);
 				alta.setText("CONFIRMAR");
-				alta.setBounds(169, 335, 113, 28);
+				alta.setBounds(140, 335, 113, 28);
 				alta.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 

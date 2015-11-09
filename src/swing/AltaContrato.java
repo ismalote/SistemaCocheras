@@ -178,7 +178,7 @@ public class AltaContrato extends javax.swing.JFrame {
 				dni.setText(dniCliente);
 				dni.setEnabled(false);
 				getContentPane().add(dni);
-				dni.setBounds(169, 69, 210, 28);
+				dni.setBounds(169, 69, 165, 28);
 			}
 			{				
 				Vector<AutoView> autosView = cliente.getAutos();
@@ -194,7 +194,7 @@ public class AltaContrato extends javax.swing.JFrame {
 					patente = new JComboBox<String>();
 				}
 				getContentPane().add(patente);
-				patente.setBounds(169, 118, 210, 28);
+				patente.setBounds(169, 118, 90, 28);
 			}
 			{
 				Vector<CocheraView> cocherasView = sistemaCocheras.listarCocheras();
@@ -210,7 +210,7 @@ public class AltaContrato extends javax.swing.JFrame {
 					cochera = new JComboBox<String>();
 				}
 				getContentPane().add(cochera);
-				cochera.setBounds(169, 167, 210, 28);
+				cochera.setBounds(169, 167, 110, 28);
 			}
 			{
 				Vector<AbonoView> abonosView = sistemaCocheras.listarAbonos();
@@ -228,19 +228,19 @@ public class AltaContrato extends javax.swing.JFrame {
 					abono = new JComboBox<ComboItemAbonos>();
 				}
 				getContentPane().add(abono);
-				abono.setBounds(169, 216, 210, 28);
+				abono.setBounds(169, 216, 150, 28);
 			}
 			{
 				fecha = new JTextField();
 				fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
 				getContentPane().add(fecha);
-				fecha.setBounds(169, 265, 210, 28);
+				fecha.setBounds(169, 265, 80, 28);
 			}
 			{				
 				String[] mediosPago = { "", "E - Efectivo", "C - Cheque", "T - Debito Tarjeta Credito", "D - Debito CBU" };
 				medioPago = new JComboBox<String>(mediosPago);
 				getContentPane().add(medioPago);
-				medioPago.setBounds(169, 314, 210, 28);
+				medioPago.setBounds(169, 314, 165, 28);
 			}
 			{
 				reconfirmarEfectivo = new JButton();

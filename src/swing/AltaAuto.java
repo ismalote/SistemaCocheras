@@ -77,28 +77,28 @@ public class AltaAuto extends javax.swing.JFrame {
 			{
 				patente = new JTextField();
 				getContentPane().add(patente);
-				patente.setBounds(169, 69, 210, 28);
+				patente.setBounds(145, 69, 75, 28);
 			}
 			{
 				marca = new JTextField();
 				getContentPane().add(marca);
-				marca.setBounds(169, 118, 210, 28);
+				marca.setBounds(145, 118, 210, 28);
 			}
 			{
 				modelo = new JTextField();
 				getContentPane().add(modelo);
-				modelo.setBounds(169, 167, 210, 28);
+				modelo.setBounds(145, 167, 210, 28);
 			}
 			{
 				fecha = new JTextField();
 				getContentPane().add(fecha);
-				fecha.setBounds(169, 216, 210, 28);
+				fecha.setBounds(145, 216, 75, 28);
 			}
 			{
 				alta = new JButton();
 				getContentPane().add(alta);
 				alta.setText("CONFIRMAR");
-				alta.setBounds(169, 265, 113, 28);
+				alta.setBounds(145, 265, 113, 28);
 				alta.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent evt) 

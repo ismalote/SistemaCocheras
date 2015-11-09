@@ -74,7 +74,7 @@ public class Abono {
 		// cantidadDias es la cantidad de días que dura el abono
 		float precio = this.precioBase * 24 * this.cantidadDias;
 		// Menos el descuento
-		return precio - (precio * this.descuento);
+		return precio - ((precio * this.descuento)/100);
 	}
 	
 	public boolean getActivo() {

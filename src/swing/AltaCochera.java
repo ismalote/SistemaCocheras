@@ -50,7 +50,7 @@ public class AltaCochera extends javax.swing.JFrame {
 				String[] tamanios = { "", "Pequena", "Mediana", "Grande" };
 				tamanio = new JComboBox<String>(tamanios);
 				getContentPane().add(tamanio);
-				tamanio.setBounds(169, 69, 210, 28);
+				tamanio.setBounds(169, 69, 100, 28);
 			}
 			{
 				alta = new JButton();
