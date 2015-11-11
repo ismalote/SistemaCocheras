@@ -3,7 +3,6 @@ package modelo;
 import java.util.Calendar;
 import java.util.Date;
 
-import utils.FechaUtils;
 import vista.CuotaView;
 
 public class Cuota {
