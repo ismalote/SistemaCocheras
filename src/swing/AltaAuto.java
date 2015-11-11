@@ -4,6 +4,7 @@ import controlador.SistemaCocheras;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -91,6 +92,7 @@ public class AltaAuto extends javax.swing.JFrame {
 			}
 			{
 				fecha = new JTextField();
+				fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));
 				getContentPane().add(fecha);
 				fecha.setBounds(145, 216, 75, 28);
 			}

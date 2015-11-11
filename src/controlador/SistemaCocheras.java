@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 //import java.util.Random;
 import java.util.Vector;
 
@@ -518,13 +519,19 @@ public class SistemaCocheras {
 					Vector<Cuota> cuotas = c.getCuotas();
 					Cuota cuota;
 					Calendar fechaVencimiento = Calendar.getInstance();
-				
+									
 					if (cuotas != null && cuotas.size() > 0) {
 						// Si ya tenia cuotas generadas
 						Cuota cuo = cuotas.lastElement();
 					
-						// Seteo la fecha de vencimiento a partir de la ultima cuota.
-						fechaVencimiento.setTime(cuo.getFechaGeneracion());
+						Calendar periodo = new GregorianCalendar();
+						periodo.setTime(cuo.getFechaGeneracion());
+						periodo.add(Calendar.DAY_OF_YEAR, abono.getCantidadDias());
+						
+						if (periodo.after(fechaVencimiento)) {
+							// Seteo la fecha de vencimiento a partir de la ultima cuota.
+							fechaVencimiento.setTime(cuo.getFechaGeneracion());
+						}
 					}
 					else {
 						// Genero la primera cuota
@@ -799,6 +806,7 @@ public class SistemaCocheras {
 		for(int i = 0; i < cantidadDatosAGenerar; i++){
 			j = 0;
 			if(j< cantidadDatosAGenerar && k < this.cocheras.size()){
+				this.cocheras.elementAt(k).setEstado(EstadosCochera.OCUPADA);
 				ContratoEfectivo contratoE = new ContratoEfectivo(
 						this.clientes.elementAt(i),
 						this.clientes.elementAt(i).getAutos().elementAt(j),
@@ -811,6 +819,7 @@ public class SistemaCocheras {
 				k++;
 			}
 			if(j< cantidadDatosAGenerar && k < this.cocheras.size()){
+				this.cocheras.elementAt(k).setEstado(EstadosCochera.OCUPADA);
 				ContratoCheque contratoC = new ContratoCheque(
 						this.clientes.elementAt(i),
 						this.clientes.elementAt(i).getAutos().elementAt(j),
@@ -825,6 +834,7 @@ public class SistemaCocheras {
 				k++;
 			}
 			if(j< cantidadDatosAGenerar && k < this.cocheras.size()){
+				this.cocheras.elementAt(k).setEstado(EstadosCochera.OCUPADA);
 				ContratoTarjetaCredito contratoTC = new ContratoTarjetaCredito(
 						this.clientes.elementAt(i),
 						this.clientes.elementAt(i).getAutos().elementAt(j),
@@ -840,6 +850,7 @@ public class SistemaCocheras {
 				k++;
 			}
 			if(j< cantidadDatosAGenerar && k < this.cocheras.size()){
+				this.cocheras.elementAt(k).setEstado(EstadosCochera.OCUPADA);
 				ContratoDebitoAutomatico contratoDA = new ContratoDebitoAutomatico(
 						this.clientes.elementAt(i),
 						this.clientes.elementAt(i).getAutos().elementAt(j),

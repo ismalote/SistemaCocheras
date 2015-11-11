@@ -419,7 +419,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 							}
 						});
 					}
-					{
+					/*{
 						jMenu6 = new JMenu();
 						jMenuBar1.add(jMenu6);
 						jMenu6.setText("Salir");
@@ -434,7 +434,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 								
 							}
 						});
-					}
+					}*/
 				}
 			}		
 			ImageIcon img = new ImageIcon("src/swing/sistema.png");
