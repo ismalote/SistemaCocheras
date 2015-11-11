@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import utils.FechaUtils;
+import utils.NumeroUtils;
 import vista.ContratoView;
 import controlador.SistemaCocheras;
 import enums.ExitCodes;
@@ -145,8 +146,15 @@ public class EliminarContrato extends javax.swing.JFrame {
 				baja.setVisible(false);
 				baja.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						int rdo = sistemaCocheras.bajaContrato(Integer
-								.parseInt(nroContrato.getText()));
+						
+						int rdo = -1;
+						if(!NumeroUtils.isInteger(nroContrato.getText())){
+							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
+							nroContrato.setText("");
+						}
+						if(rdo == -1){
+							rdo = sistemaCocheras.bajaContrato(Integer.parseInt(nroContrato.getText()));
+						}
 						String mensaje = "";
 						switch (rdo) {
 						case ExitCodes.OK: {

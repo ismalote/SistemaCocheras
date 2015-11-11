@@ -17,6 +17,7 @@ import javax.swing.WindowConstants;
 
 import enums.ExitCodes;
 import enums.Tamanios;
+import utils.NumeroUtils;
 import vista.AbonoView;
 import vista.CocheraView;
 import vista.ContratoView;
@@ -74,31 +75,36 @@ public class ModificarContrato extends javax.swing.JFrame {
 				buscar.setBounds(300, 69, 127, 28);
 				buscar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						Vector<ContratoView> contratos = sistemaCocheras.listarContratos(dniCliente, true);
-						ContratoView cont = null;
-						for(int i = 0; i < contratos.size() && cont == null; i++){
-							if(contratos.elementAt(i).getNroContrato() == Integer.parseInt(nroContrato.getText())){								
-								cont = contratos.elementAt(i);
+						if(NumeroUtils.isInteger(nroContrato.getText())){
+							Vector<ContratoView> contratos = sistemaCocheras.listarContratos(dniCliente, true);
+							ContratoView cont = null;
+							for(int i = 0; i < contratos.size() && cont == null; i++){
+								if(contratos.elementAt(i).getNroContrato() == Integer.parseInt(nroContrato.getText())){								
+									cont = contratos.elementAt(i);
+								}
+							}						
+							if (cont != null)
+							{
+								//abono.setSelectedItem(Arrays.binarySearch(itemsAbonos, cont.getAbono()));
+								abono.setSelectedIndex(posicionesItemsAbonos.get(cont.getAbono()));
+								jLabel2.setVisible(true);
+								jLabel3.setVisible(true);
+								tamanioCochera.setVisible(true);
+								CocheraView cocheraView = sistemaCocheras.buscarDatosCochera(cont.getNroCochera());
+								tamanioCochera.setText(Tamanios.getDescripcion(cocheraView.getTamanioVechiculoAdmitido()));
+								abono.setVisible(true);
+								modificar.setVisible(true);
+							}else{
+								JOptionPane.showMessageDialog(null, "El contrato no existe.");							
+								jLabel2.setVisible(false);
+								jLabel3.setVisible(false);
+								tamanioCochera.setVisible(false);
+								abono.setVisible(false);
+								modificar.setVisible(false);
 							}
-						}						
-						if (cont != null)
-						{
-							//abono.setSelectedItem(Arrays.binarySearch(itemsAbonos, cont.getAbono()));
-							abono.setSelectedIndex(posicionesItemsAbonos.get(cont.getAbono()));
-							jLabel2.setVisible(true);
-							jLabel3.setVisible(true);
-							tamanioCochera.setVisible(true);
-							CocheraView cocheraView = sistemaCocheras.buscarDatosCochera(cont.getNroCochera());
-							tamanioCochera.setText(Tamanios.getDescripcion(cocheraView.getTamanioVechiculoAdmitido()));
-							abono.setVisible(true);
-							modificar.setVisible(true);
 						}else{
-							JOptionPane.showMessageDialog(null, "El contrato no existe.");							
-							jLabel2.setVisible(false);
-							jLabel3.setVisible(false);
-							tamanioCochera.setVisible(false);
-							abono.setVisible(false);
-							modificar.setVisible(false);
+							JOptionPane.showMessageDialog(null, "Ingrese un numero de contrato valido.");	
+							nroContrato.setText("");
 						}
 					}
 				});

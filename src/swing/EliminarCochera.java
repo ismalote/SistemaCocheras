@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import utils.NumeroUtils;
 import vista.CocheraView;
 import controlador.SistemaCocheras;
 import enums.EstadosCochera;
@@ -93,7 +94,14 @@ public class EliminarCochera extends javax.swing.JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						int rdo = sistemaCocheras.bajaCochera(Integer.parseInt(numero.getText()));						
+						int rdo = -1;
+						if(!NumeroUtils.isInteger(numero.getText())){
+							rdo = ExitCodes.ARGUMENTOS_INVALIDOS;
+							numero.setText("");
+						}
+						if(rdo == -1){
+							rdo = sistemaCocheras.bajaCochera(Integer.parseInt(numero.getText()));	
+						}
 						String mensaje = "";
 						switch(rdo) {
 							case ExitCodes.OK: {
