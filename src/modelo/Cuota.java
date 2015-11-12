@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import utils.FechaUtils;
@@ -14,7 +15,7 @@ public class Cuota {
 	
 	public Cuota(int nroContrato, Date fechaVencimiento, float monto) {
 		this.nroContrato = nroContrato;
-		this.fechaGeneracion = FechaUtils.getFechaActual();
+		this.fechaGeneracion = Calendar.getInstance().getTime();
 		this.fechaVencimiento = fechaVencimiento;
 		this.monto = monto;
 		this.fechaPago = null;

@@ -73,15 +73,15 @@ public class DatosPrueba {
 	
 	public Vector<Cliente> generarClientes() {
 		Vector<Cliente> clientes = new Vector<Cliente>();
-		Calendar fecha = Calendar.getInstance();
-		fecha.setTime(FechaUtils.getFechaActual());
-		fecha.add(Calendar.DAY_OF_YEAR, -4);
+		//Calendar fecha = Calendar.getInstance();
+		//fecha.setTime(FechaUtils.getFechaActual());
+		//fecha.add(Calendar.DAY_OF_YEAR, -4);
 		for (int i = 1; i <= this.cantidadDatosAGenerar; i++) {
 			
 			Auto auto1 = new Auto(
 					String.format("ABC 12%d", i),
 					String.format("Chevrolet"),
-					fecha.getTime(),
+					Calendar.getInstance().getTime(),
 					String.format("Corsa")
 					);
 			
@@ -95,7 +95,7 @@ public class DatosPrueba {
 			Auto auto3 = new Auto(
 					String.format("XYZ 56%d", i),
 					String.format("Volkswagen"),
-					fecha.getTime(),
+					Calendar.getInstance().getTime(),
 					String.format("Fox")
 					);
 			

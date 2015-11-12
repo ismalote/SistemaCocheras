@@ -793,9 +793,9 @@ public class SistemaCocheras {
 	
 	public void generarDatosPrueba(int cantidadDatosAGenerar) {
 		DatosPrueba datosPrueba = new DatosPrueba(cantidadDatosAGenerar);
-		Calendar fecha = Calendar.getInstance();
-		fecha.setTime(FechaUtils.getFechaActual());
-		fecha.add(Calendar.DAY_OF_YEAR, -4);
+		//Calendar fecha = Calendar.getInstance();
+		//fecha.setTime(FechaUtils.getFechaActual());
+		//fecha.add(Calendar.DAY_OF_YEAR, -4);
 		
 		this.abonos.addAll(datosPrueba.generarAbonos());		
 		this.cocheras.addAll(datosPrueba.generarCocheras());
@@ -812,7 +812,7 @@ public class SistemaCocheras {
 						this.clientes.elementAt(i).getAutos().elementAt(j),
 						this.cocheras.elementAt(k),
 						this.abonos.elementAt(k),
-						fecha.getTime()
+						FechaUtils.getFechaActual()
 						);
 				this.contratos.add(contratoE);
 				j++;
@@ -843,7 +843,7 @@ public class SistemaCocheras {
 						Integer.toString(j),
 						FechaUtils.getFechaActual(),
 						String.format("Entidad %d", j),
-						fecha.getTime()
+						FechaUtils.getFechaActual()
 						);
 				this.contratos.add(contratoTC);
 				j++;

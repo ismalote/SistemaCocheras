@@ -25,7 +25,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenu jMenu3;//Abonos
 	private JMenu jMenu4;//Contratos
 	private JMenu jMenu5;//Cocheras
-	private JMenu jMenu6;//Salir
+	//private JMenu jMenu6;//Salir
 	private JMenu jMenu7;//Generar datos de prueba
 	private JMenu jMenu8;//Cuotas
 
