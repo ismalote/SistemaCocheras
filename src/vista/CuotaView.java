@@ -30,8 +30,7 @@ public class CuotaView {
 	
 	public Date getFechaVencimiento() {
 		return this.fechaVencimiento;
-	}
-	
+	}	
 	
 	public Date getFechaPago() {
 		return this.fechaPago;

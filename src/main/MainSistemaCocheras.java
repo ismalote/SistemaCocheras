@@ -700,12 +700,12 @@ public class MainSistemaCocheras {
 	private void listarMediosPago() {
 		try
 		{
-			Vector<MedioPagoView> mediosPagosView = this.sistemaCocheras.listarMediosPagos();	
+			Vector<MedioPagoView> mediosPagoView = this.sistemaCocheras.listarMediosPago();	
 			
-			if (mediosPagosView != null && mediosPagosView.size() > 0) {
+			if (mediosPagoView != null && mediosPagoView.size() > 0) {
 				System.out.println("NOMBRE\tARCH.ENTRADA\tARCH.SALIDA\tFTP\tACTIVO");
 				
-				for (MedioPagoView mpv: mediosPagosView) {				
+				for (MedioPagoView mpv: mediosPagoView) {				
 					String linea = String.format("%s\t%s\t%s\t%s\t%s", mpv.getNombreEntidad(),
 							mpv.getNombreArchivoEntrada(), mpv.getNombreArchivoSalida(), 
 							mpv.getDireccionFTP(), mpv.getActivo() ? "Activo" : "Inactivo");

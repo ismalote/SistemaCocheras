@@ -3,7 +3,6 @@ package controlador;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-//import java.util.Random;
 import java.util.Vector;
 
 import modelo.*;
@@ -18,14 +17,14 @@ public class SistemaCocheras {
 	
 	private Vector<Contrato> contratos;
 	private Vector<Cliente> clientes;
-	private Vector<MedioPago> mediosPagos;
+	private Vector<MedioPago> mediosPago;
 	private Vector<Cochera> cocheras;
 	private Vector<Abono> abonos;
 	
 	public SistemaCocheras() {
 		this.contratos = new Vector<Contrato>();
 		this.clientes = new Vector<Cliente>();
-		this.mediosPagos = new Vector<MedioPago>();
+		this.mediosPago = new Vector<MedioPago>();
 		this.cocheras = new Vector<Cochera>();
 		this.abonos = new Vector<Abono>();
 	}
@@ -57,10 +56,8 @@ public class SistemaCocheras {
 		return (dni.length() > 0 && nombre.length() > 0 && 
 				domicilio.length() > 0 && mail.length() > 0 && estado > 0 && estado < 4); 
 	}
-	
-	
-	public int modificarCliente(String dni, String nombre, String domicilio, String mail, 
-			String telefono, int estado) {
+		
+	public int modificarCliente(String dni, String nombre, String domicilio, String mail, String telefono, int estado) {
 		
 		if (this.validarCliente(dni, nombre, domicilio, mail, telefono, estado)) {
 				Cliente cliente = buscarCliente(dni);
@@ -169,15 +166,14 @@ public class SistemaCocheras {
 	
 	/*********** Region: MEDIOS DE PAGO ***********/ 
 	
-	public int crearMedioPago(String nombreEntidad, String nombreArchivoEntrada,
-			String nombreArchivoSalida, String direccionFTP) {
+	public int crearMedioPago(String nombreEntidad, String nombreArchivoEntrada, String nombreArchivoSalida, String direccionFTP) {
 		if (this.validarMedioPago(nombreEntidad, nombreArchivoEntrada, nombreArchivoSalida, direccionFTP)) {
 			
 			MedioPago medioPago = buscarMedioPago(nombreEntidad);
 			
 			if(medioPago == null){
 				medioPago = new MedioPago(nombreEntidad, nombreArchivoEntrada, nombreArchivoSalida, direccionFTP);
-				this.mediosPagos.add(medioPago);
+				this.mediosPago.add(medioPago);
 				return ExitCodes.OK;
 			} else {
 				return ExitCodes.YA_EXISTE_ENTIDAD;
@@ -187,8 +183,7 @@ public class SistemaCocheras {
 		}
 	}
 	
-	private boolean validarMedioPago(String nombreEntidad, String nombreArchivoEntrada,
-			String nombreArchivoSalida, String direccionFTP) {
+	private boolean validarMedioPago(String nombreEntidad, String nombreArchivoEntrada, String nombreArchivoSalida, String direccionFTP) {
 		return (nombreEntidad.length() > 0 && nombreArchivoEntrada.length() > 0 && 
 				nombreArchivoSalida.length() > 0 && direccionFTP.length() > 0); 
 	}
@@ -196,8 +191,8 @@ public class SistemaCocheras {
 	private MedioPago buscarMedioPago(String nombreEntidad) {
 		MedioPago medioPago = null;
 		
-		if (this.mediosPagos != null && this.mediosPagos.size() > 0) {
-			for (MedioPago m: this.mediosPagos) {
+		if (this.mediosPago != null && this.mediosPago.size() > 0) {
+			for (MedioPago m: this.mediosPago) {
 				if (m.sosMedioPago(nombreEntidad)) {
 					medioPago = m;
 				}
@@ -220,11 +215,11 @@ public class SistemaCocheras {
 		}
 	}
 	
-	public Vector<MedioPagoView> listarMediosPagos(){
+	public Vector<MedioPagoView> listarMediosPago(){
 		Vector<MedioPagoView> mediosPagoView = new Vector<MedioPagoView>();
 
-		if(this.mediosPagos != null && this.mediosPagos.size() > 0){
-			for (MedioPago mp: this.mediosPagos) {
+		if(this.mediosPago != null && this.mediosPago.size() > 0){
+			for (MedioPago mp: this.mediosPago) {
 				mediosPagoView.add(mp.getView());
 			}
 		}
@@ -243,7 +238,7 @@ public class SistemaCocheras {
 			Abono abono = buscarAbono(nombre);
 			
 			if(abono == null){
-				abono = new Abono(descuento, nombre, tamanioCochera, cantidadDias, precioBase, true);
+				abono = new Abono(descuento, nombre, tamanioCochera, cantidadDias, precioBase);
 				this.abonos.add(abono);
 				return ExitCodes.OK;
 			} else {
@@ -254,13 +249,11 @@ public class SistemaCocheras {
 		}
 	}
 	
-	private boolean validarAbono(String nombre, int cantidadDias, float precioBase, 
-			float descuento, int tamanioCochera) {
+	private boolean validarAbono(String nombre, int cantidadDias, float precioBase, float descuento, int tamanioCochera) {
 		return (nombre.length() > 0 && cantidadDias > 0 && precioBase > 0 &&
 				descuento >= 0 && (tamanioCochera > 0 && tamanioCochera < 4)); 
 	}
-	
-	
+		
 	public int modificarAbono(String nombre, int cantidadDias, float precioBase, float descuento, int tamanioCochera) {
 
 		if (this.validarAbono(nombre, cantidadDias, precioBase, descuento, tamanioCochera)) {
@@ -273,10 +266,10 @@ public class SistemaCocheras {
 				abono.setDescuento(descuento);
 				return ExitCodes.OK;
 			} else {
-				return ExitCodes.ARGUMENTOS_INVALIDOS;
+				return ExitCodes.NO_EXISTE_ENTIDAD;
 			}
 		} else {
-			return ExitCodes.NO_EXISTE_ENTIDAD;
+			return ExitCodes.ARGUMENTOS_INVALIDOS;
 		}
 	}
 	
@@ -359,7 +352,7 @@ public class SistemaCocheras {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
 			}
 		} else {
-			return ExitCodes.ARGUMENTOS_INVALIDOS;
+			return ExitCodes.NO_EXISTE_ENTIDAD;
 		}
 	}
 	
@@ -374,7 +367,7 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);
 			if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
-					contrato = new ContratoCheque(cliente, auto, cochera, abono, nroCuentaCorriente, entidadBancaria, fecha);
+					contrato = new ContratoCheque(cliente, auto, cochera, abono, fecha, nroCuentaCorriente, entidadBancaria);
 					this.contratos.add(contrato);
 					cochera.setEstado(EstadosCochera.OCUPADA);
 					return ExitCodes.OK;
@@ -385,7 +378,7 @@ public class SistemaCocheras {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
 			}
 		} else {
-			return ExitCodes.ARGUMENTOS_INVALIDOS;
+			return ExitCodes.NO_EXISTE_ENTIDAD;
 		}  
 	}
 	
@@ -398,8 +391,8 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);			
 			if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
-					contrato = new ContratoTarjetaCredito(cliente, auto, cochera, abono, 
-					nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta, fecha);
+					contrato = new ContratoTarjetaCredito(cliente, auto, cochera, abono, fecha, 
+					nroTarjeta, vencimientoTarjeta, entidadEmisoraTarjeta);
 					this.contratos.add(contrato);
 					cochera.setEstado(EstadosCochera.OCUPADA);
 					return ExitCodes.OK;
@@ -410,12 +403,11 @@ public class SistemaCocheras {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
 			}
 		} else {
-			return ExitCodes.ARGUMENTOS_INVALIDOS;
+			return ExitCodes.NO_EXISTE_ENTIDAD;
 		}  
 	}
 	
-	public int crearContratoDebitoAutomatico(String dni, String patente, int nroCochera, String nombreAbono,
-			Date fecha, String cbu, String entidadBancaria) {
+	public int crearContratoDebitoAutomatico(String dni, String patente, int nroCochera, String nombreAbono, Date fecha, String cbu, String entidadBancaria) {
 		ContratoDebitoAutomatico contrato = null;		
 		Cliente cliente = buscarCliente(dni);		
 		if (cliente != null) {
@@ -424,7 +416,7 @@ public class SistemaCocheras {
 			Abono abono = this.buscarAbono(nombreAbono);			
 			if (auto != null && cochera != null && abono != null && verificarPatenteEnContrato(cliente, patente) && abono.getTamanioCochera() == cochera.getTamanioVehiculoAdmitido()) {
 				if (cochera.getEstado() == EstadosCochera.LIBRE) {
-					contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, cbu, entidadBancaria, fecha);
+					contrato = new ContratoDebitoAutomatico(cliente, auto, cochera, abono, fecha, cbu, entidadBancaria);
 					this.contratos.add(contrato);
 					cochera.setEstado(EstadosCochera.OCUPADA);
 					return ExitCodes.OK;
@@ -435,7 +427,7 @@ public class SistemaCocheras {
 				return ExitCodes.ARGUMENTOS_INVALIDOS;
 			}
 		} else {
-			return ExitCodes.ARGUMENTOS_INVALIDOS;
+			return ExitCodes.NO_EXISTE_ENTIDAD;
 		}  
 	}	
 	
@@ -681,8 +673,7 @@ public class SistemaCocheras {
 	
 	/*********** Region: AUTOS ***********/ 
 	
-	public int crearAuto(String dniCliente, String patente, String marca,
-			Date fechaEntrada, String modelo) {
+	public int crearAuto(String dniCliente, String patente, String marca, Date fechaEntrada, String modelo) {
 		if (this.validarAuto(patente, marca, fechaEntrada, modelo, true)) {
 
 			Cliente cliente = buscarCliente(dniCliente);
@@ -705,13 +696,11 @@ public class SistemaCocheras {
 		}
 	}
 	
-	private boolean validarAuto(String patente, String marca, Date fechaEntrada, 
-			String modelo, boolean activo) {
+	private boolean validarAuto(String patente, String marca, Date fechaEntrada, String modelo, boolean activo) {
 		return (patente.length() > 0 && marca.length() > 0 &&  fechaEntrada != null && modelo.length() > 0); 
 	}
 	
-	public int modificarAuto(String dniCliente, String patente, String marca,
-			Date fechaEntrada, String modelo, boolean activo) {
+	public int modificarAuto(String dniCliente, String patente, String marca, Date fechaEntrada, String modelo, boolean activo) {
 		
 		if (this.validarAuto(patente, marca, fechaEntrada, modelo, activo)) {
 			Cliente cliente = buscarCliente(dniCliente);
@@ -793,13 +782,10 @@ public class SistemaCocheras {
 	
 	public void generarDatosPrueba(int cantidadDatosAGenerar) {
 		DatosPrueba datosPrueba = new DatosPrueba(cantidadDatosAGenerar);
-		//Calendar fecha = Calendar.getInstance();
-		//fecha.setTime(FechaUtils.getFechaActual());
-		//fecha.add(Calendar.DAY_OF_YEAR, -4);
-		
+
 		this.abonos.addAll(datosPrueba.generarAbonos());		
 		this.cocheras.addAll(datosPrueba.generarCocheras());
-		this.mediosPagos.addAll(datosPrueba.generarMediosPagos());
+		this.mediosPago.addAll(datosPrueba.generarMediosPago());
 		this.clientes.addAll(datosPrueba.generarClientes());
 		
 		int j = 0, k = 0;
@@ -825,9 +811,9 @@ public class SistemaCocheras {
 						this.clientes.elementAt(i).getAutos().elementAt(j),
 						this.cocheras.elementAt(k),
 						this.abonos.elementAt(k),
+						FechaUtils.getFechaActual(),
 						Integer.toString(j),
-						String.format("Entidad %d", j),
-						FechaUtils.getFechaActual()
+						String.format("Entidad %d", j)						
 						);
 				this.contratos.add(contratoC);
 				j++;
@@ -840,10 +826,10 @@ public class SistemaCocheras {
 						this.clientes.elementAt(i).getAutos().elementAt(j),
 						this.cocheras.elementAt(k),
 						this.abonos.elementAt(k),
+						FechaUtils.getFechaActual(),
 						Integer.toString(j),
 						FechaUtils.getFechaActual(),
-						String.format("Entidad %d", j),
-						FechaUtils.getFechaActual()
+						String.format("Entidad %d", j)						
 						);
 				this.contratos.add(contratoTC);
 				j++;
@@ -856,9 +842,9 @@ public class SistemaCocheras {
 						this.clientes.elementAt(i).getAutos().elementAt(j),
 						this.cocheras.elementAt(k),
 						this.abonos.elementAt(k),
+						FechaUtils.getFechaActual(),
 						Integer.toString(j),
-						String.format("Entidad %d", j),
-						FechaUtils.getFechaActual()
+						String.format("Entidad %d", j)						
 						);
 				this.contratos.add(contratoDA);	
 				j++;
@@ -866,66 +852,6 @@ public class SistemaCocheras {
 			}					
 		}
 		
-		
-		/*	
-		int min = 0;
-		int max = cantidadDatosAGenerar - 1;
-		Random random = new Random();
-		
-		int i = random.nextInt(max - min + 1) + min;
-		
-		ContratoEfectivo contratoE = new ContratoEfectivo(
-				this.clientes.elementAt(i),
-				this.clientes.elementAt(i).getAutos().firstElement(),
-				this.cocheras.elementAt(i),
-				this.abonos.elementAt(i),
-				fecha.getTime()
-				);
-		
-		this.contratos.add(contratoE);
-		
-		i = random.nextInt(max - min + 1) + min;
-		
-		ContratoCheque contratoC = new ContratoCheque(
-				this.clientes.elementAt(i),
-				this.clientes.elementAt(i).getAutos().firstElement(),
-				this.cocheras.elementAt(i),
-				this.abonos.elementAt(i),
-				Integer.toString(i),
-				String.format("Entidad %d", i),
-				FechaUtils.getFechaActual()
-				);
-		
-		this.contratos.add(contratoC);
-		
-		i = random.nextInt(max - min + 1) + min;
-		
-		ContratoTarjetaCredito contratoTC = new ContratoTarjetaCredito(
-				this.clientes.elementAt(i),
-				this.clientes.elementAt(i).getAutos().firstElement(),
-				this.cocheras.elementAt(i),
-				this.abonos.elementAt(i),
-				Integer.toString(i),
-				FechaUtils.getFechaActual(),
-				String.format("Entidad %d", i),
-				fecha.getTime()
-				);
-		
-		this.contratos.add(contratoTC);
-		
-		i = random.nextInt(max - min + 1) + min;
-		
-		ContratoDebitoAutomatico contratoDA = new ContratoDebitoAutomatico(
-				this.clientes.elementAt(i),
-				this.clientes.elementAt(i).getAutos().firstElement(),
-				this.cocheras.elementAt(i),
-				this.abonos.elementAt(i),
-				Integer.toString(i),
-				String.format("Entidad %d", i),
-				FechaUtils.getFechaActual()
-				);
-		
-		this.contratos.add(contratoDA);*/
 	}
 	
 	/*********** Fin Region: DATOS PRUEBA ***********/ 

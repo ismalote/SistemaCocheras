@@ -7,8 +7,8 @@ public class ContratoCheque extends Contrato {
 	private String nroCuentaCorriente;
 	private String entidadBancaria;
 	
-	public ContratoCheque(Cliente cliente, Auto auto, Cochera cochera, Abono abono, 
-			String nroCuentaCorriente, String entidadBancaria, Date fecha) {
+	public ContratoCheque(Cliente cliente, Auto auto, Cochera cochera, Abono abono, Date fecha,
+			String nroCuentaCorriente, String entidadBancaria) {
 		super(cliente, auto, cochera, abono, fecha);
 		this.setNroCuentaCorriente(nroCuentaCorriente);
 		this.setEntidadBancaria(entidadBancaria);

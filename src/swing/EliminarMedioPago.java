@@ -173,7 +173,7 @@ public class EliminarMedioPago extends javax.swing.JFrame {
 				buscar.setBounds(260, 69, 87, 28);
 				buscar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						Vector<MedioPagoView> mediosPago = sistemaCocheras.listarMediosPagos();										
+						Vector<MedioPagoView> mediosPago = sistemaCocheras.listarMediosPago();										
 						MedioPagoView medioPago = null;
 						for(int i = 0; i < mediosPago.size() && medioPago == null; i++){
 							if(mediosPago.elementAt(i).getNombreEntidad().equalsIgnoreCase(nombreEntidad.getText())){								

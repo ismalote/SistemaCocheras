@@ -34,31 +34,25 @@ public class MedioPago {
 		this.nombreEntidad = nombreEntidad;
 	}
 
-
 	public String getNombreArchivoEntrada() {
 		return this.nombreArchivoEntrada;
 	}
-
 
 	public void setNombreArchivoEntrada(String nombreArchivoEntrada) {
 		this.nombreArchivoEntrada = nombreArchivoEntrada;
 	}
 
-
 	public String getNombreArchivoSalida() {
 		return this.nombreArchivoSalida;
 	}
-
 
 	public void setNombreArchivoSalida(String nombreArchivoSalida) {
 		this.nombreArchivoSalida = nombreArchivoSalida;
 	}
 
-
 	public String getDireccionFTP() {
 		return this.direccionFTP;
 	}
-
 
 	public void setDireccionFTP(String direccionFTP) {
 		this.direccionFTP = direccionFTP;

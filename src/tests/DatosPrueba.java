@@ -15,7 +15,7 @@ public class DatosPrueba {
 		if (cantidadDatosAGenerar > 0) {
 			this.cantidadDatosAGenerar = cantidadDatosAGenerar;
 		} else {
-			throw new IllegalArgumentException("La cantidad de datos a generar es inválida.");
+			throw new IllegalArgumentException("La cantidad de datos a generar es invï¿½lida.");
 		}
 		
 	}
@@ -42,24 +42,21 @@ public class DatosPrueba {
 					String.format("(%d) " + tipo + " - " + Tamanios.getDescripcion(Tamanios.PEQUENIA), cont),
 					Tamanios.PEQUENIA,
 					cantDias,
-					2.5f,
-					true);
+					2.5f);
 			cont++;
 			Abono abonoMediano = new Abono(
 					descuento,
 					String.format("(%d) " + tipo + " - " + Tamanios.getDescripcion(Tamanios.MEDIANA), cont),
 					Tamanios.MEDIANA,
 					cantDias,
-					3.0f,
-					true);
+					3.0f);
 			cont++;
 			Abono abonoGrande = new Abono(
 					descuento,
 					String.format("(%d) " + tipo + " - " + Tamanios.getDescripcion(Tamanios.GRANDE), cont),
 					Tamanios.GRANDE,
 					cantDias,
-					3.5f,
-					true);
+					3.5f);
 			cont++;
 			i++;
 			abonos.add(abonoPequenio);
@@ -144,7 +141,7 @@ public class DatosPrueba {
 		return cocheras;
 	}
 	
-	public Vector<MedioPago> generarMediosPagos() {
+	public Vector<MedioPago> generarMediosPago() {
 		Vector<MedioPago> mediosPagos = new Vector<MedioPago>();
 		
 		for (int i = 1; i <= this.cantidadDatosAGenerar; i++) {
@@ -177,14 +174,14 @@ public class DatosPrueba {
 					fecha
 					);
 		} else {
-			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");
+			throw new IllegalArgumentException("Algun argumento es nulo, vacio o invalido.");
 		}
 		
 		return contrato;
 	}
 	
-	public ContratoDebitoAutomatico generarContratoDebitoAutomatico(Cliente cliente, Auto auto, Cochera cochera, Abono abono,
-			String cbu, String entidadBancaria, Date fecha) 
+	public ContratoDebitoAutomatico generarContratoDebitoAutomatico(Cliente cliente, Auto auto, Cochera cochera, Abono abono, Date fecha,
+			String cbu, String entidadBancaria) 
 			throws IllegalArgumentException {
 
 		ContratoDebitoAutomatico contrato = null;
@@ -197,19 +194,19 @@ public class DatosPrueba {
 					auto,
 					cochera,
 					abono,
+					fecha,
 					cbu,
-					entidadBancaria,
-					fecha
+					entidadBancaria					
 					);
 		} else {
-			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");
+			throw new IllegalArgumentException("Algun argumento es nulo, vacio o invalido.");
 		}
 		
 		return contrato;
 	}
 	
-	public ContratoTarjetaCredito generarContratoTarjetaCredito(Cliente cliente, Auto auto, Cochera cochera, Abono abono,
-			String nroTarjeta, Date vencimientoTarjeta, String entidadTarjeta, Date fecha) 
+	public ContratoTarjetaCredito generarContratoTarjetaCredito(Cliente cliente, Auto auto, Cochera cochera, Abono abono, Date fecha,
+			String nroTarjeta, Date vencimientoTarjeta, String entidadTarjeta) 
 			throws IllegalArgumentException {
 
 		ContratoTarjetaCredito contrato = null;
@@ -222,20 +219,20 @@ public class DatosPrueba {
 					auto,
 					cochera,
 					abono,
+					fecha,
 					nroTarjeta,
 					vencimientoTarjeta,
-					entidadTarjeta,
-					fecha
+					entidadTarjeta					
 					);
 		} else {
-			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");
+			throw new IllegalArgumentException("Algun argumento es nulo, vacio o invalido.");
 		}
 		
 		return contrato;
 	}
 	
-	public ContratoCheque generarContratoCheque(Cliente cliente, Auto auto, Cochera cochera, Abono abono,
-			String nroCuentaCorriente, String entidadBancaria, Date fecha) 
+	public ContratoCheque generarContratoCheque(Cliente cliente, Auto auto, Cochera cochera, Abono abono, Date fecha,
+			String nroCuentaCorriente, String entidadBancaria ) 
 			throws IllegalArgumentException {
 
 		ContratoCheque contrato = null;
@@ -248,12 +245,12 @@ public class DatosPrueba {
 					auto,
 					cochera,
 					abono,
+					fecha,
 					nroCuentaCorriente,
-					entidadBancaria,
-					fecha
+					entidadBancaria
 					);
 		} else {
-			throw new IllegalArgumentException("Algún argumento es nulo, vacío o inválido.");
+			throw new IllegalArgumentException("Algun argumento es nulo, vacio o invalido.");
 		}
 		
 		return contrato;

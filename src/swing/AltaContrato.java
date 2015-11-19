@@ -259,12 +259,16 @@ public class AltaContrato extends javax.swing.JFrame {
 								mensaje = "El contrato se ha creado con exito.";
 								break;
 							}
+							case ExitCodes.COCHERA_NO_DISPONIBLE: {
+								mensaje = "La cochera no esta disponible.";
+								break;
+							}
 							case ExitCodes.ARGUMENTOS_INVALIDOS: {
 								mensaje = "Alguno de los argumentos es invalido.";
 								break;
 							}
-							case ExitCodes.COCHERA_NO_DISPONIBLE: {
-								mensaje = "La cochera no esta disponible.";
+							case ExitCodes.NO_EXISTE_ENTIDAD: {
+								mensaje = "El cliente no existe.";
 								break;
 							}
 							default: {
@@ -347,12 +351,16 @@ public class AltaContrato extends javax.swing.JFrame {
 								mensaje = "El contrato se ha creado con exito.";
 								break;
 							}
+							case ExitCodes.COCHERA_NO_DISPONIBLE: {
+								mensaje = "La cochera no esta disponible.";
+								break;
+							}
 							case ExitCodes.ARGUMENTOS_INVALIDOS: {
 								mensaje = "Alguno de los argumentos es invalido.";
 								break;
 							}
-							case ExitCodes.COCHERA_NO_DISPONIBLE: {
-								mensaje = "La cochera no esta disponible.";
+							case ExitCodes.NO_EXISTE_ENTIDAD: {
+								mensaje = "El cliente no existe.";
 								break;
 							}
 							default: {
@@ -452,12 +460,16 @@ public class AltaContrato extends javax.swing.JFrame {
 								mensaje = "El contrato se ha creado con exito.";
 								break;
 							}
+							case ExitCodes.COCHERA_NO_DISPONIBLE: {
+								mensaje = "La cochera no esta disponible.";
+								break;
+							}
 							case ExitCodes.ARGUMENTOS_INVALIDOS: {
 								mensaje = "Alguno de los argumentos es invalido.";
 								break;
 							}
-							case ExitCodes.COCHERA_NO_DISPONIBLE: {
-								mensaje = "La cochera no esta disponible.";
+							case ExitCodes.NO_EXISTE_ENTIDAD: {
+								mensaje = "El cliente no existe.";
 								break;
 							}
 							default: {
@@ -557,12 +569,16 @@ public class AltaContrato extends javax.swing.JFrame {
 								mensaje = "El contrato se ha creado con exito.";
 								break;
 							}
+							case ExitCodes.COCHERA_NO_DISPONIBLE: {
+								mensaje = "La cochera no esta disponible.";
+								break;
+							}
 							case ExitCodes.ARGUMENTOS_INVALIDOS: {
 								mensaje = "Alguno de los argumentos es invalido.";
 								break;
 							}
-							case ExitCodes.COCHERA_NO_DISPONIBLE: {
-								mensaje = "La cochera no esta disponible.";
+							case ExitCodes.NO_EXISTE_ENTIDAD: {
+								mensaje = "El cliente no existe.";
 								break;
 							}
 							default: {

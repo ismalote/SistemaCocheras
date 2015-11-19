@@ -11,14 +11,13 @@ public class Abono {
 	private float precioBase;
 	private boolean activo;
 	
-	public Abono(float descuento, String nombre, int tamanioCochera,
-			int cantidadDias, float precioBase, boolean activo) {
+	public Abono(float descuento, String nombre, int tamanioCochera, int cantidadDias, float precioBase) {
 		this.descuento = descuento;
 		this.nombre = nombre;
 		this.tamanioCochera = tamanioCochera;
 		this.cantidadDias = cantidadDias;
 		this.precioBase = precioBase;
-		this.activo = activo;
+		this.activo = true;
 	}
 	
 	public AbonoView getView()
@@ -70,8 +69,8 @@ public class Abono {
 	
 	public float calcularPrecio(){
 		// Precio base es por hora
-		// 24 son las horas de 1 día
-		// cantidadDias es la cantidad de días que dura el abono
+		// 24 son las horas de 1 dï¿½a
+		// cantidadDias es la cantidad de dï¿½as que dura el abono
 		float precio = this.precioBase * 24 * this.cantidadDias;
 		// Menos el descuento
 		return precio - ((precio * this.descuento)/100);

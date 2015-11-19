@@ -35,7 +35,7 @@ public class ListarMedioPago extends javax.swing.JFrame {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{				
-				Vector<MedioPagoView> mediosPagoView = sistemaCocheras.listarMediosPagos();
+				Vector<MedioPagoView> mediosPagoView = sistemaCocheras.listarMediosPago();
 				Vector<Object> vectorOfVectors = new Vector<Object>();
 				for (int i= 0; i < mediosPagoView.size(); i++)
 				{

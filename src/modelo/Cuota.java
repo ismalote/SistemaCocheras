@@ -33,11 +33,7 @@ public class Cuota {
 	public Date getFechaGeneracion() {
 		return this.fechaGeneracion;
 	}
-	
-	/*public void setFechaGeneracion(Date fechaGeneracion) {
-		this.fechaGeneracion = fechaGeneracion;
-	}*/
-	
+
 	public Date getFechaVencimiento() {
 		return this.fechaVencimiento;
 	}
