@@ -48,7 +48,14 @@ public class ListarAbono extends javax.swing.JFrame {
 				columnas.add("Descuento");									
 				columnas.add("Cochera");
 				columnas.add("Estado");				
-				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas);
+				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas){
+					
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int row, int column){
+						return false;
+					}
+				};
 				abonos = new JTable();				
 				abonos.setModel(jTable1Model);				
 				

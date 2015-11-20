@@ -133,7 +133,7 @@ public class AltaAuto extends javax.swing.JFrame {
 							patente.setText("");
 							marca.setText("");
 							modelo.setText("");
-							fecha.setText("");							
+							fecha.setText(FechaUtils.formatearFecha(Calendar.getInstance().getTime()));							
 						}
 						
 					}

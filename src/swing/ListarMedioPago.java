@@ -48,7 +48,14 @@ public class ListarMedioPago extends javax.swing.JFrame {
 				columnas.add("Direccion FTP");					
 				columnas.add("Estado");
 				
-				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas);
+				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas){
+					
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int row, int column){
+						return false;
+					}
+				};
 				mediosPago = new JTable();				
 				mediosPago.setModel(jTable1Model);				
 								

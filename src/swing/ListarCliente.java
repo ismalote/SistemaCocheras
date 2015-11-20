@@ -50,7 +50,14 @@ public class ListarCliente extends javax.swing.JFrame {
 				columnas.add("Mail");
 				columnas.add("Estado");
 				
-				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas);
+				jTable1Model = new DefaultTableModel(vectorOfVectors, columnas){
+					
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int row, int column){
+						return false;
+					}
+				};
 				clientes = new JTable();				
 				clientes.setModel(jTable1Model);				
 				
