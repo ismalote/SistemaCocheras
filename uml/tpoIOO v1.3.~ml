@@ -1156,7 +1156,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">4</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">1468</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">611</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">657</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">251</XPD:ATTR>
 <XPD:REF name="Model">/4YxYIlBIUC9niCIhF+kiQAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="lsQ8jnObKEy2biIHvgCdqwAA">
@@ -1185,7 +1185,7 @@
 <XPD:OBJ name="OwnedViews[24]" type="UMLAssociationView" guid="J6ho9ib1ekOuQju5q/XVqAAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">264,1249;248,1268;286,1468</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">264,1249;248,1268;300,1468</XPD:ATTR>
 <XPD:REF name="Model">hhU/oJ1PJ0S2bhDslFRTwAAA</XPD:REF>
 <XPD:REF name="Head">JMQ6he7zY0+efQ8W7JXmLAAA</XPD:REF>
 <XPD:REF name="Tail">GoC7KUw0XkqJT5xzRdwK6wAA</XPD:REF>
@@ -2069,7 +2069,7 @@
 <XPD:OBJ name="OwnedViews[39]" type="UMLAssociationView" guid="HvUGIe3ehEGqWGtSKFLvgQAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">94,486;64,500;44,640;56,1408;138,1468</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">94,486;64,500;44,640;56,1408;146,1468</XPD:ATTR>
 <XPD:REF name="Model">pC2ZJDUcO0eoBbH/x/ViZwAA</XPD:REF>
 <XPD:REF name="Head">JMQ6he7zY0+efQ8W7JXmLAAA</XPD:REF>
 <XPD:REF name="Tail">hPLQw3U+QUO0kJpT4PAmvAAA</XPD:REF>
@@ -3670,37 +3670,37 @@
 <XPD:ATTR name="Name" type="string">ClienteView</XPD:ATTR>
 <XPD:REF name="Owner">/4YxYIlBIUC9niCIhF+kiQAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">8</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="raZhsPgGdUeUpvcQrqKcYgAA">
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="V2/1buyiwECIPFPTbvwSIQAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">9pRKiIs0NUOU/NF7IOnwhQAA</XPD:REF>
 <XPD:REF name="Type_">/4YxYIlBIUC9niCIhF+kiQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="jeNF7cpb2UexoditO2prUAAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="SxMUUFuePEGh9BHyL/MSjAAA">
 <XPD:ATTR name="Name" type="string">String dni</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">9pRKiIs0NUOU/NF7IOnwhQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="5t7Dn47n1kyvoLlzG2idPwAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="SlkZbtGIWEGsH/+N8IMufgAA">
 <XPD:ATTR name="Name" type="string">String nombre</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">9pRKiIs0NUOU/NF7IOnwhQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="l4AnBLRsLUiUDC4G1yLp7QAA">
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="9PpKee9tekaAYH9CRsvlMgAA">
 <XPD:ATTR name="Name" type="string">String domicilio</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">9pRKiIs0NUOU/NF7IOnwhQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[4]" type="UMLParameter" guid="thy7QXxGAE63IUmzhwLjugAA">
+<XPD:OBJ name="Parameters[4]" type="UMLParameter" guid="q3MVFYTbtU66opjljvoqLgAA">
 <XPD:ATTR name="Name" type="string">String mail</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">9pRKiIs0NUOU/NF7IOnwhQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[5]" type="UMLParameter" guid="l4ND/LKBsUaITBGeTpHIHgAA">
+<XPD:OBJ name="Parameters[5]" type="UMLParameter" guid="+CaEMjjngUK05l6G4CZUNAAA">
 <XPD:ATTR name="Name" type="string">String telefono</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">9pRKiIs0NUOU/NF7IOnwhQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[6]" type="UMLParameter" guid="Zr+h4PxxUkK+c4edhICqpAAA">
+<XPD:OBJ name="Parameters[6]" type="UMLParameter" guid="805TtfcYdUOQOU8N3hdmzQAA">
 <XPD:ATTR name="Name" type="string">int estado</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">9pRKiIs0NUOU/NF7IOnwhQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[7]" type="UMLParameter" guid="kbXnNu577E+NUWpTO0PNbwAA">
-<XPD:ATTR name="Name" type="string">Collection autos</XPD:ATTR>
+<XPD:OBJ name="Parameters[7]" type="UMLParameter" guid="rHWlmrGf9kqQ2zQZ8cFUqAAA">
+<XPD:ATTR name="Name" type="string">Vector&lt;AutoView&gt; autos</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">9pRKiIs0NUOU/NF7IOnwhQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:ATTR name="#CallActions" type="integer">2</XPD:ATTR>
@@ -3787,9 +3787,10 @@
 <XPD:REF name="BehavioralFeature">RRkqJZomOkikNG659c11KgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#TypedParameters" type="integer">2</XPD:ATTR>
+<XPD:ATTR name="#TypedParameters" type="integer">3</XPD:ATTR>
 <XPD:REF name="TypedParameters[0]">XX62UzacVEems+6g6YPvEQAA</XPD:REF>
 <XPD:REF name="TypedParameters[1]">raZhsPgGdUeUpvcQrqKcYgAA</XPD:REF>
+<XPD:REF name="TypedParameters[2]">V2/1buyiwECIPFPTbvwSIQAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">3</XPD:ATTR>
 <XPD:REF name="Associations[0]">2KS3wuRju0Kp3DIMZ7esmgAA</XPD:REF>
 <XPD:REF name="Associations[1]">fqoNMaJ/XU+VxiQyF7zpEQAA</XPD:REF>
@@ -3828,7 +3829,7 @@
 <XPD:OBJ name="Attributes[5]" type="UMLAttribute" guid="kl39Yd4z5EyOtb6L3tE08gAA">
 <XPD:ATTR name="Name" type="string">autos</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">Collection</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">Vector&lt;AutoView&gt;</XPD:ATTR>
 <XPD:REF name="Owner">/4YxYIlBIUC9niCIhF+kiQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[6]" type="UMLAttribute" guid="A2B2E22MmkuvslvdHRxiMwAA">
@@ -10189,7 +10190,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="X0KYSkNRNUO6IZjRX4X2tgAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">ClienteView(dni, nombre, domicilio, mail, telefono, estado): void</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">ClienteView(dni, nombre, domicilio, mail, telefono, estado,autos): void</XPD:ATTR>
 <XPD:REF name="Model">tl44n2jIBE+tjmRL29GkEQAA</XPD:REF>
 <XPD:REF name="HostEdge">cETpdXCuikCK1fc8VdlZaAAA</XPD:REF>
 </XPD:OBJ>
@@ -10298,7 +10299,7 @@
 <XPD:REF name="Views[3]">hr3yGjudR0a2rBa2YKr78AAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[3]" type="UMLStimulus" guid="tl44n2jIBE+tjmRL29GkEQAA">
-<XPD:ATTR name="Arguments" type="string">dni, nombre, domicilio, mail, telefono, estado</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">dni, nombre, domicilio, mail, telefono, estado,autos</XPD:ATTR>
 <XPD:REF name="Sender">+yTS2Gjtm0K0YIWgn0ALLAAA</XPD:REF>
 <XPD:REF name="Receiver">ktGO1UIk602ONKk6wE8MPwAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="ZehRmGjo3UyQT+AZZbzCSQAA">
@@ -26949,7 +26950,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="PgttsuPFJkCjtzzNGxsNpQAA">
 <XPD:ATTR name="Alpha" type="real">1,58908596863668</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">164,027436729347</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">flag = validarAuto(patente, marca, fechaEntrada, modelo, true)</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">flag = validarAuto(patente, marca, fechaEntrada, modelo, activo)</XPD:ATTR>
 <XPD:REF name="Model">zWm+31TlGkyNNMBekj6oFwAA</XPD:REF>
 <XPD:REF name="HostEdge">kZ+bAicszkW5ssldiv7I4gAA</XPD:REF>
 </XPD:OBJ>
@@ -27021,7 +27022,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="7nEyU+sGXkGFc+e81mYGhQAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">auto = buscarAuto()</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">auto = buscarAuto(patente)</XPD:ATTR>
 <XPD:REF name="Model">KpD03fuEF0KFKDv8v4/vdQAA</XPD:REF>
 <XPD:REF name="HostEdge">qJRSbCgTaESrHQfcTARGNwAA</XPD:REF>
 </XPD:OBJ>
@@ -27093,7 +27094,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="vPfYlZmG4k6GJiNdUiRM0QAA">
 <XPD:ATTR name="Alpha" type="real">-3,62607014595685</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">21,4709105535839</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">setActivo(true): void</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">setActivo(activo): void</XPD:ATTR>
 <XPD:REF name="Model">7TSOKeF/60+r5B5SCPJa5AAA</XPD:REF>
 <XPD:REF name="HostEdge">TJFqFbCja0GNijMeikiUKgAA</XPD:REF>
 </XPD:OBJ>
@@ -27357,7 +27358,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[1]" type="UMLStimulus" guid="zWm+31TlGkyNNMBekj6oFwAA">
 <XPD:ATTR name="Name" type="string">flag = validarAuto</XPD:ATTR>
-<XPD:ATTR name="Arguments" type="string">patente, marca, fechaEntrada, modelo, true</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">patente, marca, fechaEntrada, modelo, activo</XPD:ATTR>
 <XPD:REF name="Sender">5n6zNHKGx0aY5v0fe3dCyQAA</XPD:REF>
 <XPD:REF name="Receiver">5n6zNHKGx0aY5v0fe3dCyQAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="8cUY1Jk91UWcmMwvweCE3wAA">
@@ -27387,6 +27388,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[3]" type="UMLStimulus" guid="KpD03fuEF0KFKDv8v4/vdQAA">
 <XPD:ATTR name="Name" type="string">auto = buscarAuto</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">patente</XPD:ATTR>
 <XPD:REF name="Sender">5n6zNHKGx0aY5v0fe3dCyQAA</XPD:REF>
 <XPD:REF name="Receiver">zcsHk/V9ika/YonzOfwUuwAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="sBIVmJLyOEq+uCEDy5yz4gAA">
@@ -27415,7 +27417,7 @@
 <XPD:REF name="Views[3]">8u1PI2YEtUumGHQGnl2zsQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[5]" type="UMLStimulus" guid="7TSOKeF/60+r5B5SCPJa5AAA">
-<XPD:ATTR name="Arguments" type="string">true</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">activo</XPD:ATTR>
 <XPD:REF name="Sender">5n6zNHKGx0aY5v0fe3dCyQAA</XPD:REF>
 <XPD:REF name="Receiver">KEVwIlEsrUWpUj4IFGyDwQAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="lsmo+qvkrESQW/kTrJI2RgAA">
