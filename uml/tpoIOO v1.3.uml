@@ -3787,12 +3787,9 @@
 <XPD:REF name="BehavioralFeature">RRkqJZomOkikNG659c11KgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#TypedParameters" type="integer">5</XPD:ATTR>
+<XPD:ATTR name="#TypedParameters" type="integer">2</XPD:ATTR>
 <XPD:REF name="TypedParameters[0]">XX62UzacVEems+6g6YPvEQAA</XPD:REF>
-<XPD:REF name="TypedParameters[1]">raZhsPgGdUeUpvcQrqKcYgAA</XPD:REF>
-<XPD:REF name="TypedParameters[2]">V2/1buyiwECIPFPTbvwSIQAA</XPD:REF>
-<XPD:REF name="TypedParameters[3]">ujuvMT4QLEiB/Q8uk/lssgAA</XPD:REF>
-<XPD:REF name="TypedParameters[4]">U+ttmpT3ckO/xG2EvhvD5AAA</XPD:REF>
+<XPD:REF name="TypedParameters[1]">U+ttmpT3ckO/xG2EvhvD5AAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">3</XPD:ATTR>
 <XPD:REF name="Associations[0]">2KS3wuRju0Kp3DIMZ7esmgAA</XPD:REF>
 <XPD:REF name="Associations[1]">fqoNMaJ/XU+VxiQyF7zpEQAA</XPD:REF>
@@ -10192,7 +10189,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="X0KYSkNRNUO6IZjRX4X2tgAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">ClienteView(dni, nombre, domicilio, mail, telefono, estado,autos): void</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">ClienteView(dni, nombre, domicilio, mail, telefono, estado, autos): void</XPD:ATTR>
 <XPD:REF name="Model">tl44n2jIBE+tjmRL29GkEQAA</XPD:REF>
 <XPD:REF name="HostEdge">cETpdXCuikCK1fc8VdlZaAAA</XPD:REF>
 </XPD:OBJ>
@@ -10301,7 +10298,7 @@
 <XPD:REF name="Views[3]">hr3yGjudR0a2rBa2YKr78AAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[3]" type="UMLStimulus" guid="tl44n2jIBE+tjmRL29GkEQAA">
-<XPD:ATTR name="Arguments" type="string">dni, nombre, domicilio, mail, telefono, estado,autos</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">dni, nombre, domicilio, mail, telefono, estado, autos</XPD:ATTR>
 <XPD:REF name="Sender">+yTS2Gjtm0K0YIWgn0ALLAAA</XPD:REF>
 <XPD:REF name="Receiver">ktGO1UIk602ONKk6wE8MPwAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="ZehRmGjo3UyQT+AZZbzCSQAA">
